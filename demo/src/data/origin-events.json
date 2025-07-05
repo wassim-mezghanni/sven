@@ -1,207 +1,184 @@
 [
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Marek Tannhaus",
     "activity": "Argument",
-    "hour": 10,
     "description": "Marek argue with his father H.G. Tannhaus because he doesn't pay him enough attention.",
     "important": false,
     "death": false
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Marek Tannhaus",
     "activity": "Departure",
-    "hour": 14,
     "description": "Marek, Sonja and their daugther Charlotte leave tannhaus shop and take the car although it's raining.",
     "important": false,
     "death": false
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Sonja Tannhaus",
     "activity": "Departure",
-    "hour": 14,
     "description": "Marek, Sonja and their daugther Charlotte leave tannhaus shop and take the car although it's raining.",
     "important": false,
     "death": false
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Charlotte Tannhaus",
     "activity": "Departure",
-    "hour": 14,
     "description": "Marek, Sonja and their daugther Charlotte leave tannhaus shop and take the car although it's raining.",
     "important": false,
     "death": false
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Marek Tannhaus",
     "activity": "Accident",
-    "hour": 15,
     "description": "Marek, Sonja and little charlotte die in a car accident.",
     "important": false,
     "death": true
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Sonja Tannhaus",
     "activity": "Accident",
-    "hour": 15,
     "description": "Marek, Sonja and little charlotte die in a car accident.",
     "important": false,
     "death": true
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Charlotte Tannhaus",
     "activity": "Accident",
-    "hour": 15,
     "description": "Marek, Sonja and little charlotte die in a car accident.",
     "important": false,
     "death": true
   },
   {
-    "date": "1976-06-21 00:00:00",
+    "date": "1976",
     "name": "H.G. Tannhaus",
     "activity": "Memory",
-    "hour": 9,
     "description": "Adult H.G. Tannhaus remembers his family.",
     "important": false,
     "death": false
   },
   {
-    "date": "1976-06-21 00:00:00",
+    "date": "1976",
     "name": "H.G. Tannhaus",
     "activity": "Decision",
-    "hour": 12,
     "description": "He wants to create a time machine to undo it all.",
     "important": true,
     "death": false
   },
   {
-    "date": "1976-06-21 00:00:00",
+    "date": "1976",
     "name": "H.G. Tannhaus",
     "activity": "Construction",
-    "hour": 14,
     "description": "He spends the next years building a time machine in the bunker.",
     "important": false,
     "death": false
   },
   {
-    "date": "1986-06-21 00:00:00",
+    "date": "1986",
     "name": "H.G. Tannhaus",
     "activity": "Completion",
-    "hour": 16,
     "description": "Old H.G. Tannhaus finishes his machine...",
     "important": false,
     "death": false
   },
   {
-    "date": "1986-06-21 00:00:00",
+    "date": "1986",
     "name": "H.G. Tannhaus",
     "activity": "Activation",
-    "hour": 18,
     "description": "... and activates it.",
     "important": true,
     "death": false
   },
   {
-    "date": "1986-06-22 00:00:00",
+    "date": "1986",
     "name": "H.G. Tannhaus",
     "activity": "World Split",
-    "hour": 0,
     "description": "Instead of saving his family, he splits and destroys his world, thus creating both Adam and Eve worlds.",
     "important": false,
     "death": false
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Jonas Kahnwald / Adam (J)",
     "activity": "Arrival",
-    "hour": 20,
     "description": "Jonas and Martha arrive in the origin world.",
     "important": false,
     "death": false
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Martha Nielsen / Eve (M)",
     "activity": "Arrival",
-    "hour": 20,
     "description": "Jonas and Martha arrive in the origin world.",
     "important": false,
     "death": false
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Jonas Kahnwald / Adam (J)",
     "activity": "Intervention",
-    "hour": 21,
     "description": "Jonas and Martha persuade Marek not to drive over the bridge where the fatal accident would have occurred.",
     "important": true,
     "death": false
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Martha Nielsen / Eve (M)",
     "activity": "Intervention",
-    "hour": 21,
     "description": "Jonas and Martha persuade Marek not to drive over the bridge where the fatal accident would have occurred.",
     "important": true,
     "death": false
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Marek Tannhaus",
     "activity": "Return",
-    "hour": 22,
     "description": "Marek and his family return to Tannhaus' house. They live so H.G. Tannhaus never builds the time machine.",
     "important": false,
     "death": false
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Sonja Tannhaus",
     "activity": "Return",
-    "hour": 22,
     "description": "Marek and his family return to Tannhaus' house. They live so H.G. Tannhaus never builds the time machine.",
     "important": false,
     "death": false
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Charlotte Tannhaus",
     "activity": "Return",
-    "hour": 22,
     "description": "Marek and his family return to Tannhaus' house. They live so H.G. Tannhaus never builds the time machine.",
     "important": false,
     "death": false
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "H.G. Tannhaus",
     "activity": "Saved",
-    "hour": 23,
     "description": "H.G. Tannhaus world remains, but Adam and Eve's worlds - and all of their inhabitants - cease to exist.",
     "important": false,
     "death": false
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Jonas Kahnwald / Adam (J)",
     "activity": "Disappearance",
-    "hour": 23,
     "description": "Jonas and Martha hold hands as they watch each other disappear.",
     "important": true,
     "death": false
   },
   {
-    "date": "1971-11-08 00:00:00",
+    "date": "1971",
     "name": "Martha Nielsen / Eve (M)",
     "activity": "Disappearance",
-    "hour": 23,
     "description": "Jonas and Martha hold hands as they watch each other disappear.",
     "important": true,
     "death": false

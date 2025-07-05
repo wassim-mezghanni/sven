@@ -71,9 +71,9 @@ import StorylineChart, {SvenLayout} from '../../src';
 import './App.css';
 
 const layout = SvenLayout()
-  .time(d => d.hour)
+  .time(d => parseInt(d.date))
   .id(d => String([d.name, d.date]))
-  .group(d => d.activity);
+  .group(d => d.name);
 
 const color = scaleOrdinal(schemeCategory10);
 
@@ -119,18 +119,20 @@ const DatesSelect = ({data, onChange}) =>
           onClick={e => onChange(k, !data.get(k), e.shiftKey)}
           className={'date' + (data.get(k) ? ' selected' : '')}
         >
-          { moment(k).format('dd') }
+          Year {k}
         </div>
       )
     }
   </div>
 
-const dates = Map(events.map(d => [d.date, false]));
+// Include only the specific years that have events
+const specificYears = ['1971', '1976', '1986'];
+const dates = Map(specificYears.map(year => [year, false]));
 
 class App extends Component {
   state = {
     people: employees.map(() => false),
-    dates: dates.set(dates.keySeq().sort().first(), true)
+    dates: dates.map(() => true) // Select all years by default
   };
 
   handleCharacterTypeClick = (k, v, append) => {
@@ -181,7 +183,7 @@ class App extends Component {
       <Grid container>
         <Grid item xs={12} sm={3}>
           <Card>
-            <CardHeader title='Timeline Dates' subheader='click to include data from one or more days'/>
+            <CardHeader title='Timeline Years' subheader='click to include data from specific years (1971, 1976, 1986)'/>
             <CardContent>
               <DatesSelect data={this.state.dates} onChange={this.handleDateChage}/>
             </CardContent>
@@ -208,9 +210,9 @@ class App extends Component {
               data={storylines}
               height={Math.max(10*(ymax - ymin), 50)}
               color={d => color(employeesData[d.values[0].data.name])}
-              lineLabel={d => d.values[0].data.name}
-              lineTitle={d => moment(d.values[0].data.date).format('MMM D YYYY') + ' - ' + d.values[0].data.description}
-              groupLabel={d => d.activity}
+              lineLabel={d => d.values[0].data.activity}
+              lineTitle={d => d.values[0].data.date + ' - ' + d.values[0].data.description}
+              groupLabel={d => d.name}
               onClick={this.handleCharacterClick}
             />
           </Paper>
