@@ -63,8 +63,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Select from 'react-select-2';
 import 'react-select-2/dist/css/react-select-2.css';
 
-import events from './data/origin-events.json';
-import employeesData from './data/origin-characters.json';
+import marthaEvents from './data/martha-events.json';
+import marthaCharacters from './data/martha-characters.json';
 
 import StorylineChart, {SvenLayout} from '../../src';
 
@@ -77,7 +77,9 @@ const layout = SvenLayout()
 
 const color = scaleOrdinal(schemeCategory10);
 
-const employees = Map(employeesData);
+const employees = Map(marthaCharacters);
+
+const events = marthaEvents;
 
 const employeesByType = Map().withMutations(map =>
   employees.map((v,k) => map.setIn([v,k], true))
@@ -126,8 +128,8 @@ const DatesSelect = ({data, onChange}) =>
   </div>
 
 // Include only the specific years that have events
-const specificYears = ['1971', '1976', '1986'];
-const dates = Map(specificYears.map(year => [year, false]));
+const specificYears = ['1971', '1976', '1986', '2019', '2052']; // Updated to include Martha's timeline
+const dates = Map(specificYears.map((year) => [year, false]));
 
 class App extends Component {
   state = {
