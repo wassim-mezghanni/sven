@@ -38,189 +38,160 @@
      
 */
 
-import React, { Component } from 'react';
+import React from 'react';
+import {Set} from 'immutable';
 
-import {Map, Set} from 'immutable';
+import ChartComponent from './ReactD3Chart';
 
-import {scaleOrdinal, schemeCategory10} from 'd3-scale';
-import {min, max} from 'd3-array';
+import './Storyline.css';
 
-import moment from 'moment';
+import {scaleLinear} from 'd3-scale';
+import {min, max, merge} from 'd3-array';
+import {line, curveMonotoneX} from 'd3-shape';
+import {axisBottom} from 'd3-axis';
 
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/List';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
+const storylinesInit = ({data={}, width, height, groupLabel}) => {
+  let {interactions=[], events=[]} = data;
 
-import Select from 'react-select-2';
-import 'react-select-2/dist/css/react-select-2.css';
+  if (interactions.length === 0) {
+    return {layers: []};
+  } else {
+    const xAxisData = Set(events.map(d => +d.x))
+      .sort()
+      .toArray();
 
-import events from './data/origin-events.json';
-import employeesData from './data/origin-characters.json';
+    const padding = width/xAxisData.length/3;
 
-import StorylineChart, {SvenLayout} from '../../src';
+    const x = scaleLinear()
+      .domain([1971, 1986]) // Explicitly set domain to only include our three years
+      .range([padding, width - padding]);
 
-import './App.css';
+    const ymax = max(interactions, d => d.y1);
+    const ymin = min(interactions, d => d.y0);
 
-const layout = SvenLayout()
-  .time(d => parseInt(d.date))
-  .id(d => String([d.name, d.date]))
-  .group(d => d.name);
+    const actualHeight = Math.min(height, (ymax - ymin)*20);
 
-const color = scaleOrdinal(schemeCategory10);
+    const y = scaleLinear()
+      .domain([ymin, ymax])
+      .range([actualHeight - height, -height]);
 
-const employees = Map(employeesData);
+    const yAxisData = interactions.map(({values, y0, y1}) => ({
+      group: groupLabel && groupLabel(values[0].values[0].data),
+      values: merge(values.map(d => d.values.map(d => d.data))),
+      y: (y0 + y1)/2,
+      y0, y1
+    }));
 
-const employeesByType = Map().withMutations(map =>
-  employees.map((v,k) => map.setIn([v,k], true))
-);
+    return {x, y, xAxisData, yAxisData, padding};
+  }
+};
 
-const CharacterList = ({data, onClick}) =>
-  <List>
-    { data.keySeq().sort().map(k =>
-        <ListItem button dense key={k} onClick={e => onClick(k, data.get(k), e.shiftKey)}>
-          <Avatar style={{backgroundColor: color(k)}}>
-            {data.get(k).size}
-          </Avatar>
-          <ListItemText primary={k}/>
-        </ListItem>
-      )
+const storylineLayers = [
+  {
+    name: 'groups',
+    callback: (selection, {yAxisData, width, y, onClick=Object}) => {
+      const groups = selection.selectAll('rect')
+          .data(yAxisData, d => d.group);
+
+      groups.enter()
+        .append('rect')
+        .on('click', d => onClick(d.values))
+        .merge(groups)
+          .attr('x', 0)
+          .attr('width', width)
+          .attr('y', d => y(d.y1))
+          .attr('height', d => Math.abs(y(d.y1) - y(d.y0)));
+
+      groups.exit()
+        .remove();
+
+      const labels = selection.selectAll('text')
+        .data(yAxisData, d => d.group);
+
+      labels.enter()
+        .append('text')
+        .merge(labels)
+          .attr('x', 0)
+          .attr('y', d => y(d.y1))
+          .text(d => d.group);
+
+      labels.exit()
+        .remove();
     }
-  </List>
+  },
+  {
+    name: 'storylines',
+    callback: (selection, {data, x, y, color, padding, highlights, onClick=Object, lineLabel, lineTitle}) => {
 
-const asSelectList = map =>
-  map.keySeq()
-    .sort()
-    .map(value => ({value, label: value}))
-    .toArray();
+      const storyline = line()
+        .curve(curveMonotoneX);
 
-const DELIIMTER = ';';
+      function getPoints (d) {
+        const points = [];
 
-const CharacterSelect = ({data, onChange}) =>
-  <Select simpleValue multi delimiter={DELIIMTER}
-    options={asSelectList(data.filter(v => !v))}
-    value={asSelectList(data.filter(v => v))}
-    onChange={onChange}
-  />
+        d.values.forEach(d => {
+          points.push([
+            x(d.x) - padding,
+            y(d.y)
+          ]);
 
-const DatesSelect = ({data, onChange}) =>
-  <div className='dates-component noselect'>
-    { data.keySeq().sort().map(k =>
-        <div
-          key={k}
-          onClick={e => onChange(k, !data.get(k), e.shiftKey)}
-          className={'date' + (data.get(k) ? ' selected' : '')}
-        >
-          Year {k}
-        </div>
-      )
+          points.push([
+            x(d.x) + padding,
+            y(d.y)
+          ]);
+        });
+
+        return points;
+      }
+
+      const paths = selection.selectAll('g')
+        .data(data.storylines, d => d.key);
+
+      const paths_enter = paths.enter()
+        .append('g')
+          .on('click', d => onClick(d.values.map(d => d.data)));
+
+      paths_enter.append('path');
+      paths_enter.append('text');
+      paths_enter.append('title')
+
+      const paths_merge = paths_enter.merge(paths)
+        .classed('highlighted', d => highlights && highlights.has(d.key));
+
+      paths_merge.select('title')
+        .text(lineTitle);
+
+      paths_merge.select('path')
+        .style('stroke', d => color && color(d))
+        .attr('d', d => storyline(getPoints(d)));
+
+      paths_merge.select('text')
+        .style('fill', d => color && color(d))
+        .text(d => lineLabel ? lineLabel(d) : d.key)
+        .attr('x', d => x(d.values[d.values.length - 1].x) + padding)
+        .attr('y', d => y(d.values[d.values.length - 1].y));
+
+      paths.exit()
+        .remove();
     }
-  </div>
-
-// Include only the specific years that have events
-const specificYears = ['1971', '1976', '1986'];
-const dates = Map(specificYears.map(year => [year, false]));
-
-class App extends Component {
-  state = {
-    people: employees.map(() => false),
-    dates: dates.map(() => true) // Select all years by default
-  };
-
-  handleCharacterTypeClick = (k, v, append) => {
-    if (append) {
-      this.setState({people: this.state.people.merge(v)});
-    } else {
-      this.setState({people: this.state.people.map((_,k) => v.has(k))});
+  },
+  {
+    name: 'x-axis',
+    callback: (selection, {data, x}) => {
+      selection.call(axisBottom(x)
+        .tickValues([1971, 1976, 1986])
+        .tickFormat(d => 'Year ' + d));
     }
-  }
+  }      
+];
 
-  handleCharacterChange = value => {
-    const selection =  Set(value.split(DELIIMTER));
-    this.setState({
-      people: this.state.people.map((_,k) => selection.has(k))
-    });
-  }
+const StorylineChart = props =>
+  <ChartComponent
+    init={storylinesInit}
+    layers={storylineLayers}
+    {...props}
+    margin={{top: 30, right: 135, bottom: 25, left: 20}}
+    className='storylines-chart'
+  />;
 
-  handleCharacterClick = values => {
-    const selection = Set(values.map(d => d.name));
-    this.setState({
-      people: this.state.people.map((v, k) => selection.has(k))
-    });
-  }
-
-  handleDateChage = (k, v, append) => {
-    this.setState({
-      dates: append
-        ? this.state.dates.set(k, v)
-        : this.state.dates.map((_,k2) => k === k2)
-    });
-  }
-
-  render() {
-    const {people, dates} = this.state;
-
-    const nFiltered = people.valueSeq()
-      .reduce((v, sum) => v + sum, 0);
-
-    const data = events
-      .filter(d => nFiltered === 0 || people.get(d.name))
-      .filter(d => dates.get(d.date));
-
-    const storylines = layout(data);
-    const ymin = min(storylines.interactions, d => d.y0);
-    const ymax = max(storylines.interactions, d => d.y1);
-    
-    return (
-      <Grid container>
-        <Grid item xs={12} sm={3}>
-          <Card>
-            <CardHeader title='Timeline Years' subheader='click to include data from specific years (1971, 1976, 1986)'/>
-            <CardContent>
-              <DatesSelect data={this.state.dates} onChange={this.handleDateChage}/>
-            </CardContent>
-          </Card>            
-
-          <Card>
-            <CardHeader title='Character Categories' subheader='click to add character types to filter'/>
-            <CardContent>
-              <CharacterList data={employeesByType} onClick={this.handleCharacterTypeClick}/>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader title='Filter by Character' subheader='show specific characters only'/>
-            <CardContent>
-              <CharacterSelect data={people} onChange={this.handleCharacterChange}/>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} sm={9}>
-          <Paper>
-            <StorylineChart
-              data={storylines}
-              height={Math.max(10*(ymax - ymin), 50)}
-              color={d => color(employeesData[d.values[0].data.name])}
-              lineLabel={d => d.values[0].data.activity}
-              lineTitle={d => d.values[0].data.date + ' - ' + d.values[0].data.description}
-              groupLabel={d => d.name}
-              onClick={this.handleCharacterClick}
-            />
-          </Paper>
-        </Grid>
-
-      </Grid>
-    );
-	}
-}
-
-export default App;
+export default StorylineChart;
