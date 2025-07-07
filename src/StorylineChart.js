@@ -63,7 +63,7 @@ const storylinesInit = ({data = marthaEvents, width, height, groupLabel}) => {
     const padding = width / xAxisData.length / 3;
 
     const x = scaleLinear()
-      .domain([1971, 2052]) // Updated domain to include Martha's timeline
+      .domain([1920, 2052]) // Updated domain to include the full range of years
       .range([padding, width - padding]);
 
     const ymax = max(interactions, (d) => d.y1);
@@ -180,7 +180,7 @@ const storylineLayers = [
     name: 'x-axis',
     callback: (selection, {data, x}) => {
       selection.call(axisBottom(x)
-        .tickValues([1971, 1976, 1986])
+        .tickValues([1920, 1986, 2019, 2052])
         .tickFormat(d => 'Year ' + d));
     }
   }      
