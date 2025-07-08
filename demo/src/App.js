@@ -63,8 +63,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Select from 'react-select-2';
 import 'react-select-2/dist/css/react-select-2.css';
 
-import marthaEvents from './data/martha-events.json';
 import marthaCharacters from './data/martha-characters.json';
+import marthaEvents from './data/martha-events.json';
 
 import StorylineChart, {SvenLayout} from '../../src';
 
@@ -78,57 +78,14 @@ const layout = SvenLayout()
 const color = scaleOrdinal(schemeCategory10);
 
 const employees = Map(marthaCharacters);
-
 const events = marthaEvents;
 
 const employeesByType = Map().withMutations(map =>
-  employees.map((v,k) => map.setIn([v,k], true))
+  employees.map((v, k) => map.setIn([v, k], true))
 );
 
-const CharacterList = ({data, onClick}) =>
-  <List>
-    { data.keySeq().sort().map(k =>
-        <ListItem button dense key={k} onClick={e => onClick(k, data.get(k), e.shiftKey)}>
-          <Avatar style={{backgroundColor: color(k)}}>
-            {data.get(k).size}
-          </Avatar>
-          <ListItemText primary={k}/>
-        </ListItem>
-      )
-    }
-  </List>
-
-const asSelectList = map =>
-  map.keySeq()
-    .sort()
-    .map(value => ({value, label: value}))
-    .toArray();
-
-const DELIIMTER = ';';
-
-const CharacterSelect = ({data, onChange}) =>
-  <Select simpleValue multi delimiter={DELIIMTER}
-    options={asSelectList(data.filter(v => !v))}
-    value={asSelectList(data.filter(v => v))}
-    onChange={onChange}
-  />
-
-const DatesSelect = ({data, onChange}) =>
-  <div className='dates-component noselect'>
-    { data.keySeq().sort().map(k =>
-        <div
-          key={k}
-          onClick={e => onChange(k, !data.get(k), e.shiftKey)}
-          className={'date' + (data.get(k) ? ' selected' : '')}
-        >
-          Year {k}
-        </div>
-      )
-    }
-  </div>
-
 // Include only the specific years that have events
-const specificYears = ['1971', '1976', '1986', '2019', '2052']; // Updated to include Martha's timeline
+const specificYears = ['1920', '1986', '2019', '2052']; // Updated to include all relevant years
 const dates = Map(specificYears.map((year) => [year, false]));
 
 class App extends Component {
@@ -139,25 +96,28 @@ class App extends Component {
 
   handleCharacterTypeClick = (k, v, append) => {
     if (append) {
-      this.setState({people: this.state.people.merge(v)});
+      this.setState(({ people }) => ({
+        people: people.set(k, !people.get(k)),
+      }));
     } else {
-      this.setState({people: this.state.people.map((_,k) => v.has(k))});
+      this.setState(({ people }) => ({
+        people: people.map((value, key) => (key === k ? !value : value)),
+      }));
     }
-  }
+  };
 
   handleCharacterChange = value => {
-    const selection =  Set(value.split(DELIIMTER));
-    this.setState({
-      people: this.state.people.map((_,k) => selection.has(k))
-    });
-  }
+    const selection =  Set(value.split(';'));
+    this.setState(({ people }) => ({
+      people: people.map((v, k) => selection.has(k)),
+    }));
+  };
 
   handleCharacterClick = values => {
-    const selection = Set(values.map(d => d.name));
-    this.setState({
-      people: this.state.people.map((v, k) => selection.has(k))
-    });
-  }
+    this.setState(({ people }) => ({
+      people: people.map((v, k) => values.includes(k)),
+    }));
+  };
 
   handleDateChage = (k, v, append) => {
     this.setState({
