@@ -1,0 +1,1378 @@
+[
+  {
+    "date": "2020",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Rescue",
+    "description": "Adam saves Jonas from the apocalypse.",
+    "important": true,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Mission",
+    "description": "They must use it to break the cycle. Martha and Jonas must travel to the origin world.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Revelation",
+    "description": "During the Apocalypse, time stands still for a fraction of a second, breaking the chain of cause and effect. For a moment, there is a gap through which reality can proceed in two different directions: a switch at the knot of the time loop.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Realization",
+    "description": "Old Claudia realized that they're not all part of the knot. They must remove the knot to destroy all that was born on it and keeping everything alive that already existed in the origin world.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Arrival",
+    "description": "Adam and old Claudia arrive to sic mundus' headquarters.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Martha Nielsen / Eve (M)",
+    "activity": "Meeting",
+    "description": "Martha meets Adam and tells him that she has fulfilled the mission.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Agnes Nielsen (J)",
+    "activity": "Joining",
+    "description": "Agnes joins sic mundus again.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Agnes Nielsen (J)",
+    "activity": "Information",
+    "description": "Adam gives her the newspaper that shows old claudia's death.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Agnes Nielsen (J)",
+    "activity": "Departure",
+    "description": "Agnes say goodbye to Silja.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Agnes Nielsen (J)",
+    "activity": "Travel",
+    "description": "Agnes leaves through the God Particle.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Explanation",
+    "description": "Adam explains adult Charlotte that in just one day they are going to unravel the knot. He wants to save his world, not Eve's.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Charlotte Doppler (J)",
+    "activity": "Travel",
+    "description": "Adult charlotte and adult Elisabeth leave through the God Particle to 2041.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Martha Nielsen / Eve (M)",
+    "activity": "Reminder",
+    "description": "Martha reminds Adam that she has kept her end of the bargain. Now she wants to know what is the origin and how to destroy it.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Revelation",
+    "description": "Adam reveals to teen Martha that the female stranger didn't send teen Jonas and her to stop the apocalypse. Instead they created the seed: the beginning of the knot, and also its end.",
+    "important": true,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Confinement",
+    "description": "Adam encloses Martha.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Plan",
+    "description": "Adam wants to create a \"paradise\". Unending darkness in which nothing exists.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Silja Tiedemann (J)",
+    "activity": "Rescue",
+    "description": "Silja frees Martha and takes her with Adam.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Franziska Doppler (J)",
+    "activity": "Search",
+    "description": "Adult Franziska and adult Magnus travel to find Martha.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Silja Tiedemann (J)",
+    "activity": "Travel",
+    "description": "Teen Silja travel to 1890 to meet Bartosz.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Attempt",
+    "description": "Adam ties Martha up in the former cooling bash. he wants to destroy her and her unborn child, putting an end to both worlds.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Action",
+    "description": "Adam takes the St. Christopher medallion ...",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Activation",
+    "description": "... and activates the machine.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Martha Nielsen / Eve (M)",
+    "activity": "Death",
+    "description": "Martha dies ...",
+    "important": false,
+    "death": true
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Outcome",
+    "description": "... but nothing happens.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Claudia Tiedemann (J)",
+    "activity": "Explanation",
+    "description": "Old Claudia arrives and explains to Adam that his attempt has failed due to quantum entanglement. Eve found a way to change the course of events, meaning there is a second pregnant Martha out there that will give birth and preserve the knot.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Claudia Tiedemann (J)",
+    "activity": "Revelation",
+    "description": "Old claudia reveals that the origin doesn't lies in the connection between both worlds but in reality it lies outside both of those worlds.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Claudia Tiedemann (J)",
+    "activity": "Discovery",
+    "description": "There is a third world: the origin world.",
+    "important": true,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Claudia Tiedemann (J)",
+    "activity": "Explanation",
+    "description": "Tannhaus, in the origin world, lost someone and he tried to bring them back from the death, but instead, he split and destroyed his world, thus creating both adam and eve worlds.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Claudia Tiedemann (J)",
+    "activity": "Solution",
+    "description": "There is a way to destroy the knot by preventing the invention of travel through space and time in the origin world.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Claudia Tiedemann (J)",
+    "activity": "Discovery",
+    "description": "Old Claudia has discovered quantum entanglement and the origin world.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2052",
+    "name": "Claudia Tiedemann (J)",
+    "activity": "Guidance",
+    "description": "Old Claudia explains adult Jonas his next steps. he have to set the course, no matter how hard it may seem.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2052",
+    "name": "Claudia Tiedemann (J)",
+    "activity": "Destruction",
+    "description": "Old Claudia tears the last pages.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2052",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Learning",
+    "description": "Jonas learns from Claudia in the bunker/base of operations.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2052",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Capture",
+    "description": "Teen Jonas arrives from 1986 and is taken captive by Adult Elisabeth's people.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Discovery",
+    "description": "Teen Jonas discovers the God Particle in the power plant ruins but it doesn't have enough fuel.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Theft",
+    "description": "Jonas steals some fuel.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Capture",
+    "description": "Teen Jonas is caught going into the dead zone and is sentenced to death by adult Elisabeth.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Rescue",
+    "description": "Teen Jonas is hanged but adult Elisabeth saves his life at the last second.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Silja Tiedemann (J)",
+    "activity": "Escape",
+    "description": "Silja breaks teen Jonas out of his cell and demands he show her what's really in the dead zone.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Demonstration",
+    "description": "Teen Jonas shows the young girl the god particle, temporarily stabilizes it, and goes through the portal.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Elisabeth Doppler (J)",
+    "activity": "Execution",
+    "description": "Adult Elisabeth executes three men for entering the dead zone.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Elisabeth Doppler (J)",
+    "activity": "Confrontation",
+    "description": "Adult Elisabeth catches the young girl leaving the power plant and they have a confrontation.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Elisabeth Doppler (J)",
+    "activity": "Discovery",
+    "description": "Adult Elisabeth digs up a box of personal belongings.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Elisabeth Doppler (J)",
+    "activity": "Activation",
+    "description": "Adult Elisabeth goes to the power plant and activates the god particle.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Elisabeth Doppler (J)",
+    "activity": "Contact",
+    "description": "Adult Elisabeth makes contact with Charlotte when the wormhole is created allowing her to see into 2020.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2053",
+    "name": "Charlotte Doppler (J)",
+    "activity": "Joining",
+    "description": "Adult Charlotte and adult Elisabeth join sic mundus in 2053.",
+    "important": false,
+    "death": false
+  }
+  {
+    "date": "2019",
+    "name": "Torben Wöller (J)",
+    "activity": "Injury",
+    "description": "Wöller loses his eye.",
+    "important": true,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Lake Visit",
+    "description": "Jonas, Magnus, Martha, and Bartosz go to the lake.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Discovery",
+    "description": "Jonas finds the St. Christopher medallion in the sand.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Martha Nielsen (J)",
+    "activity": "Gift",
+    "description": "Martha gives Jonas the St. Christopher pendant that she made for him.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Arrival",
+    "description": "Jonas arrives from 1921.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Intervention",
+    "description": "Jonas tells Adult Mikkel/Michael not to kill himself and shows him the suicide letter.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Claudia Tiedemann (J)",
+    "activity": "Warning",
+    "description": "Old Claudia interrupts and tells Teen Jonas they all must make sacrifices.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Claudia Tiedemann (J)",
+    "activity": "Guidance",
+    "description": "Old Claudia brings Jonas to the caves.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Mikkel Nielsen / Michael Kahnwald (J)",
+    "activity": "Writing",
+    "description": "Adult Mikkel/Michael writes the suicide letter.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Mikkel Nielsen / Michael Kahnwald (J)",
+    "activity": "Suicide",
+    "description": "Michael kahnwald hangs himself.",
+    "important": true,
+    "death": true
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Confinement",
+    "description": "Jonas spends two months in a psychiatric facility while everyone else thinks he's in France.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Discovery",
+    "description": "Jonas returns to school and finds out that Martha and Bartosz are dating.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Cave Exploration",
+    "description": "Jonas, Martha, Bartosz, Magnus, Mikkel and Franziska go to the caves to take erik's drug stash.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Mikkel Nielsen / Michael Kahnwald (J)",
+    "activity": "Disappearance",
+    "description": "Mikkel nielsen goes missing.",
+    "important": true,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Discovery",
+    "description": "Jonas finds a map of the caves in his father's room.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Receipt",
+    "description": "Jonas recieves a package from his future self containing a very aged version of his father's suicide note.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Reading",
+    "description": "Jonas reads his father's letter.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Travel",
+    "description": "Jonas finds the portal in the cave and travels to 1986.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Erik Obendorf (J)",
+    "activity": "Drug Trafficking",
+    "description": "Jürgen and Erik Obendorf traffic drugs in high school. They hide the stash in the caves.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Erik Obendorf (J)",
+    "activity": "Disappearance",
+    "description": "Erik obendorf goes missing.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Mads Nielsen (J)",
+    "activity": "Appearance",
+    "description": "Mads Nielsen's body appears in the bunker, being witnessed by Peter and Tronte.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Claudia Tiedemann (J)",
+    "activity": "Instruction",
+    "description": "Old Claudia tells them to dispose of the body and gives them the Triquetra notebook.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Mads Nielsen (J)",
+    "activity": "Discovery",
+    "description": "Mads is found dead in the forest.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Ulrich Nielsen (J)",
+    "activity": "Discovery",
+    "description": "Ulrich finds a locked door in the caves.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Ulrich Nielsen (J)",
+    "activity": "Investigation",
+    "description": "Ulrich tries to investigate the nuclear plant but aleksander doesn't let him.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Ulrich Nielsen (J)",
+    "activity": "Investigation",
+    "description": "Ulrich starts investigating Jürgen Obendorf due to his truck's tracks.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Ulrich Nielsen (J)",
+    "activity": "Discovery",
+    "description": "Ulrich discovers Jürgen Obendorf and Erik Obendorf's drug stash.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Police",
+    "activity": "Investigation",
+    "description": "The police start investigating the caves.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Aleksander Tiedemann / Boris Niewald (J)",
+    "activity": "Relocation",
+    "description": "Aleksander has the radioactive barrels moved from the cave into a truck.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Charlotte Doppler (J)",
+    "activity": "Theft",
+    "description": "Charlotte steals the records of the road camera and finds out Peter's car.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Charlotte Doppler (J)",
+    "activity": "Discovery",
+    "description": "charlotte discovers that the red sand is from peter's cabin. she discovers the bunker",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Elisabeth Doppler (J)",
+    "activity": "Meeting",
+    "description": "No one goes looking for Elisabeth at school and walks home. She meets Noah and gives him a Charlotte watch.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Charlotte Doppler (J)",
+    "activity": "Discussion",
+    "description": "Charlotte talks with Ulrich about the 33 year cycle.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Ulrich Nielsen (J)",
+    "activity": "Investigation",
+    "description": "Ulrich investigates the Mads' case.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Ulrich Nielsen (J)",
+    "activity": "Inquiry",
+    "description": "Ulrich asks Jana about Mads. She says that he had a wound on his chin. She also tells him that Regina was the last person who saw Mads.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Ulrich Nielsen (J)",
+    "activity": "Confrontation",
+    "description": "Ulrich asks Regina about Mads and she blames him for dating with Khatarina. She also says that she didn't accuses him for raping Khatarina.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Ulrich Nielsen (J)",
+    "activity": "Discovery",
+    "description": "Ulrich discovers that Hannah accusesed him for raping Khatarina.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Ulrich Nielsen (J)",
+    "activity": "Threat",
+    "description": "Ulrich threatens Hannah.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Peter Doppler (J)",
+    "activity": "Waiting",
+    "description": "Peter and Tronte wait in the bunker",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Ulrich Nielsen (J)",
+    "activity": "Discovery",
+    "description": "Ulrich finds out that the dead boy found is Mads",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Ulrich Nielsen (J)",
+    "activity": "Suspicion",
+    "description": "Ulrich reads Egon's notebook and suspects Helge.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Ulrich Nielsen (J)",
+    "activity": "Visit",
+    "description": "Ulrich visits Helge and tries to extract information from him.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Helge Doppler (J)",
+    "activity": "Escape",
+    "description": "Helge runs away to try to stop his past self. He travels to 1986.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Ulrich Nielsen (J)",
+    "activity": "Pursuit",
+    "description": "Ulrich follows Helge into the caves and travels to 1953.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Return",
+    "description": "Jonas returns home but keeps his discovery a secret.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Destruction",
+    "description": "Jonas burns his father's suicide note.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Confrontation",
+    "description": "Teen Jonas confronts Old Ines about Michael/Mikkel's identity. She gives him the letter.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Travel",
+    "description": "Jonas travels to 1986 to bring back Mikkel.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Appearance",
+    "description": "The stranger comes out of the caves.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Arrival",
+    "description": "The Stranger checks into the Waldhotel.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Police",
+    "activity": "Permission",
+    "description": "The police finally get the permits to register the power plant.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Charlotte Doppler (J)",
+    "activity": "Discovery",
+    "description": "Charlotte discovers the hide cave but they have already move the barrels.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Charlotte Doppler (J)",
+    "activity": "Discovery",
+    "description": "Charlotte discovers the locked door.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Bartosz Tiedemann (J)",
+    "activity": "Theft",
+    "description": "Bartosz takes Erik's drugs bag.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Noah / Hanno Tauber (J)",
+    "activity": "Contact",
+    "description": "Noah calls Bartosz on the cellphone inside Erik's drugs bag.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Bartosz Tiedemann (J)",
+    "activity": "Meeting",
+    "description": "Bartosz meets adult Noah.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Bartosz Tiedemann (J)",
+    "activity": "Agreement",
+    "description": "Bartosz agrees to work with adult Noah.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Noah / Hanno Tauber (J)",
+    "activity": "Gift",
+    "description": "Adult Noah gives Bartosz the Triquetra notebook and warns him to never trust Claudia.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Ines Kahnwald (J)",
+    "activity": "Reading",
+    "description": "Old Ines reads Adult Michael/Mikkel's letter at 22:13.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2019",
+    "name": "Regina Tiedemann (J)",
+    "activity": "Discovery",
+    "description": "Adult Regina sees the files in adult Jonas' hotel room.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Hannah Kahnwald (J)",
+    "activity": "Intervention",
+    "description": "Adult Hannah is going to kill herself but Adult Jonas shows up",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Demonstration",
+    "description": "Adult Jonas shows adult Hannah the time machine and takes adult Hannah to 1987.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1987",
+    "name": "Hannah Kahnwald (J)",
+    "activity": "Arrival",
+    "description": "Adult Hannah and adult Jonas arrive in 1987 and see adult Ines and Mikkel/Michael.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Martha Nielsen (J)",
+    "activity": "Discovery",
+    "description": "Martha finds Adult Ulrich's police files in Child Mikkel/Michael's room and shows Teen Magnus.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Noah / Hanno Tauber (J)",
+    "activity": "Gift",
+    "description": "Adult Noah gives Bartosz his time machine.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "W. Clausen (J)",
+    "activity": "Investigation",
+    "description": "Clausen takes over the missing persons case after requesting it.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Power Plant",
+    "activity": "Decommission",
+    "description": "In light of the nuclear phase-out, the winden power plant is scheduled for decommission.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Torben Wöller (J)",
+    "activity": "Transport",
+    "description": "Wöller brings the radioactive waste back to the power plant.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Aleksander Tiedemann / Boris Niewald (J)",
+    "activity": "Cover-up",
+    "description": "Aleksander has the waste covered in concrete.",
+    "important": true,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "W. Clausen (J)",
+    "activity": "Interview",
+    "description": "Clausen and adult Charlotte interview adult Regina, who tells them about adult Jonas and shows them his files from the hotel room.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Charlotte Doppler (J)",
+    "activity": "Relocation",
+    "description": "Charlotte and Peter move all investigation's files to the bunker.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Magnus Nielsen (J)",
+    "activity": "Cave Exploration",
+    "description": "Magnus, Martha, Franziska, and Child Elisabeth go to the caves where they run into Bartosz.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Magnus Nielsen (J)",
+    "activity": "Theft",
+    "description": "They leave Bartosz tied up and take the time machine from him.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Discovery",
+    "description": "Adult Jonas finds Adult Hannah's gun.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Charlotte Doppler (J)",
+    "activity": "Revelation",
+    "description": "Adult Charlotte takes adult Hannah and adult Jonas to the bunker and shows them all the files she's collected.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Charlotte Doppler (J)",
+    "activity": "Explanation",
+    "description": "Charlotte brings Katharina to the bunker and they explain everything to her but she doesn't believe them.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Katharina Nielsen (J)",
+    "activity": "Discovery",
+    "description": "Katharina goes to the school records to look up Michael and finds the picture of child Mikkel in a class photo.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "W. Clausen (J)",
+    "activity": "Interview",
+    "description": "Clausen and Wöller interview adult Aleksander, with most questions being about his past.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Magnus Nielsen (J)",
+    "activity": "Time Travel",
+    "description": "They go into the caves to get answers from Bartosz, who tells them about the time machine. Bartosz takes them to 1987.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Gift",
+    "description": "Adult Jonas goes to Martha's bedroom and leaves the St. Christopher necklace for her.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Martha Nielsen (J)",
+    "activity": "Discovery",
+    "description": "Martha finds the necklace Adult Jonas left for her.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Confrontation",
+    "description": "Adult Jonas confronts Adult Hannah about not loving Michael/Mikkel and her affair with adult Ulrich.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Noah / Hanno Tauber (J)",
+    "activity": "Revelation",
+    "description": "Adult Noah tells Charlotte that he's her father and that he plans on killing Adam so that everyone will survive.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Charlotte Doppler (J)",
+    "activity": "Confession",
+    "description": "Charlotte tells adult Peter about adult Noah and the apocalypse.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Martha Nielsen (J)",
+    "activity": "Revelation",
+    "description": "Martha meets adult Jonas, who reveals his true identity to her.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Hannah Kahnwald (J)",
+    "activity": "Theft",
+    "description": "Adult Hannah steals adult Jonas' time machine and leaves for 1954.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Magnus Nielsen (J)",
+    "activity": "Delivery",
+    "description": "Teen Magnus brings the time machine to Martha and Adult Katharina.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "W. Clausen (J)",
+    "activity": "Arrest",
+    "description": "Clausen arrests adult Aleksander for identity theft.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "W. Clausen (J)",
+    "activity": "Revelation",
+    "description": "Clausen reveals that his brother, Aleksander Köhler, disappeared in 1986 and that's whose identity Aleksander stole.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "W. Clausen (J)",
+    "activity": "Explanation",
+    "description": "Clausen says he knew to go to Winden to look for him because he had received a letter from an anonymous source.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "W. Clausen (J)",
+    "activity": "Search",
+    "description": "Clausen gets a search warrant for the power plant and has them dig up the radioactive waste.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "God Particle",
+    "activity": "Creation",
+    "description": "The God Particle is created and stabilized.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Charlotte Doppler (J)",
+    "activity": "Contact",
+    "description": "A wormhole between 2020 and 2053 opens up and allows Charlotte to make contact with adult Elisabeth.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Katharina Nielsen (J)",
+    "activity": "Discovery",
+    "description": "Katharina finds the maps of the cave and flashlight in teen Jonas' room.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Katharina Nielsen (J)",
+    "activity": "Journey",
+    "description": "Adult Katharina heads to the caves.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Katharina Nielsen (J)",
+    "activity": "Opening",
+    "description": "Adult Katharina heads to the caves and opens the passage.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Katharina Nielsen (J)",
+    "activity": "Leaving",
+    "description": "Katharina leaves the time machine for Jonas.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Rescue",
+    "description": "Adult Jonas finds Bartosz, Magnus, and Franziska and uses the time machine to bring them to safety.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Confinement",
+    "description": "Adult Jonas pulls Alseksander's gun on Martha and forces her into the bunker.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Promise",
+    "description": "Adult jonas tells martha teen Jonas will return.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Peter Doppler (J)",
+    "activity": "Protection",
+    "description": "Adult Peter takes child Elisabeth into the bunker. When they open it Martha escapes.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Noah / Hanno Tauber (J)",
+    "activity": "Arrival",
+    "description": "Teen Noah arrives from 1921.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Noah / Hanno Tauber (J)",
+    "activity": "Delivery",
+    "description": "Teen Noah gives adult Jonas a letter from Martha saying he must save Bartosz, Magnus, Franziska, Agnes, and Noah so that Martha will live.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Noah / Hanno Tauber (J)",
+    "activity": "Arrival",
+    "description": "Teen Noah arrives at the bunker and joins adult Claudia, Regina, Peter, and young Elisabeth.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Arrival",
+    "description": "Teen Jonas and adult Claudia arrive from 1987.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Instruction",
+    "description": "Teen Jonas instructs adult Claudia to bring the time machine to the bunker.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Claudia Tiedemann (J)",
+    "activity": "Assistance",
+    "description": "Adult claudia brings adult regina to the bunker.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Martha Nielsen (J)",
+    "activity": "Escape",
+    "description": "Martha leaves the bunker and returns to the Kahnwald house where she finds teen Jonas.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Arrival",
+    "description": "Adam arrives from 1921.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Murder",
+    "description": "Adam kills Martha to ensure that Teen Jonas will eventually turn into Adam.",
+    "important": true,
+    "death": true
+  },
+  {
+    "date": "2020",
+    "name": "Bartosz Tiedemann (M)",
+    "activity": "Arrival",
+    "description": "Bartosz arrives to Jonas' world.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Martha Nielsen / Eve (M)",
+    "activity": "Arrival",
+    "description": "Martha arrives to Jonas' world.",
+    "important": true,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Escape",
+    "description": "At the last possible moment Jonas saves himself by jumping down the basement stairs in his house. Jonas will become Adam and Martha will become Eve.",
+    "important": true,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Martha Nielsen / Eve (M)",
+    "activity": "Rescue",
+    "description": "Martha arrives at the Kahnwald house and uses a new device to bring Jonas to safety to her universe. Adam will kill this Martha and Eve will kill this Jonas.",
+    "important": true,
+    "death": false
+  },
+  {
+    "date": "2020",
+    "name": "Martha Nielsen / Eve (M)",
+    "activity": "Escape",
+    "description": "Martha and Bartosz escape from the apocalypse.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Martha Nielsen / Eve (M)",
+    "activity": "Arrival",
+    "description": "Martha arrives to Tannhaus factory in 1888.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Testing",
+    "description": "Adult Jonas is testing a machine. Martha tells him that they must find the origin of their worlds.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Martha Nielsen / Eve (M)",
+    "activity": "Meeting",
+    "description": "Martha meets adult Jonas, Bartosz, Magnus, and Frankiska. She tells them that she is going to fix everything so none of them will die.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Martha Nielsen / Eve (M)",
+    "activity": "Claim",
+    "description": "Martha says that teen Jonas told her where to find them but adult Jonas doesn't believe her as he has never travelled to her world.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Gustav Tannhaus (J)",
+    "activity": "Introduction",
+    "description": "Gustav Tannhaus, who seems to be the owner of the factory, introduces himself to Martha.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Bartosz Tiedemann (J)",
+    "activity": "Explanation",
+    "description": "Teen Bartosz explains to Martha that they have run out of fuel and the machine stops working.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Bartosz Tiedemann (J)",
+    "activity": "Revelation",
+    "description": "Teen Bartosz shows to Martha the secret society of sic mundus. Old Tannhaus is the only one of them left.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Construction",
+    "description": "Adult Jonas is trying to rebuild the time machine he saw in 1921.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Martha Nielsen / Eve (M)",
+    "activity": "Revelation",
+    "description": "Martha reveals to teen Bartosz that Jonas is Adam.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Bartosz Tiedemann (J)",
+    "activity": "Confrontation",
+    "description": "Teen Bartosz confronts adult Jonas and he reveals his true identity.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Explanation",
+    "description": "Adult Jonas explains to Martha that old Tannhaus's father formed sic mundus because he wanted",
+    "important": false,
+    "death": false
+  }
+]
