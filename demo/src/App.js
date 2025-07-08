@@ -4,12 +4,12 @@
 
   SVEN: Storyline Visualization Library and Demonstration
 
-  Copyright © 2017, Battelle Memorial Institute
+  Copyright ©️ 2017, Battelle Memorial Institute
   All rights reserved.
 
   1. Battelle Memorial Institute (hereinafter Battelle) hereby grants permission
      to any person or entity lawfully obtaining a copy of this software and
-     associated documentation files (hereinafter “the Software”) to redistribute
+     associated documentation files (hereinafter "the Software") to redistribute
      and use the Software in source and binary forms, with or without 
      modification.  Such person or entity may use, copy, modify, merge, publish,
      distribute, sublicense, and/or sell copies of the Software, and may permit
@@ -63,30 +63,73 @@ import CardContent from '@material-ui/core/CardContent';
 import Select from 'react-select-2';
 import 'react-select-2/dist/css/react-select-2.css';
 
-import marthaCharacters from './data/martha-characters.json';
-import marthaEvents from './data/martha-events.json';
+import eventsRaw from './data/martha-events.json';
+import employeesData from './data/martha-characters.json';
 
 import StorylineChart, {SvenLayout} from '../../src';
 
 import './App.css';
 
+const allowedYears = ['1920', '1985', '1986', '2019', '2040', '2052'];
+const events = eventsRaw.filter(d => allowedYears.includes(d.date.split('-')[2]));
+
+const specificYears = allowedYears;
+const dates = Map(specificYears.map(year => [year, true]));
+
 const layout = SvenLayout()
-  .time(d => parseInt(d.date))
+  .time(d => parseInt(d.date.split('-')[2]))
   .id(d => String([d.name, d.date]))
   .group(d => d.name);
 
 const color = scaleOrdinal(schemeCategory10);
 
-const employees = Map(marthaCharacters);
-const events = marthaEvents;
+const employees = Map(employeesData);
 
 const employeesByType = Map().withMutations(map =>
-  employees.map((v, k) => map.setIn([v, k], true))
+  employees.map((v,k) => map.setIn([v,k], true))
 );
 
-// Include only the specific years that have events
-const specificYears = ['1920', '1986', '2019', '2052']; // Updated to include all relevant years
-const dates = Map(specificYears.map((year) => [year, false]));
+const CharacterList = ({data, onClick}) =>
+  <List>
+    { data.keySeq().sort().map(k =>
+        <ListItem button dense key={k} onClick={e => onClick(k, data.get(k), e.shiftKey)}>
+          <Avatar style={{backgroundColor: color(k)}}>
+            {data.get(k).size}
+          </Avatar>
+          <ListItemText primary={k}/>
+        </ListItem>
+      )
+    }
+  </List>
+
+const asSelectList = map =>
+  map.keySeq()
+    .sort()
+    .map(value => ({value, label: value}))
+    .toArray();
+
+const DELIIMTER = ';';
+
+const CharacterSelect = ({data, onChange}) =>
+  <Select simpleValue multi delimiter={DELIIMTER}
+    options={asSelectList(data.filter(v => !v))}
+    value={asSelectList(data.filter(v => v))}
+    onChange={onChange}
+  />
+
+const DatesSelect = ({data, onChange}) =>
+  <div className='dates-component noselect'>
+    { data.keySeq().sort().map(k =>
+        <div
+          key={k}
+          onClick={e => onChange(k, !data.get(k), e.shiftKey)}
+          className={'date' + (data.get(k) ? ' selected' : '')}
+        >
+          Year {k}
+        </div>
+      )
+    }
+  </div>
 
 class App extends Component {
   state = {
@@ -96,30 +139,27 @@ class App extends Component {
 
   handleCharacterTypeClick = (k, v, append) => {
     if (append) {
-      this.setState(({ people }) => ({
-        people: people.set(k, !people.get(k)),
-      }));
+      this.setState({people: this.state.people.merge(v)});
     } else {
-      this.setState(({ people }) => ({
-        people: people.map((value, key) => (key === k ? !value : value)),
-      }));
+      this.setState({people: this.state.people.map((_,k) => v.has(k))});
     }
-  };
+  }
 
   handleCharacterChange = value => {
-    const selection =  Set(value.split(';'));
-    this.setState(({ people }) => ({
-      people: people.map((v, k) => selection.has(k)),
-    }));
-  };
+    const selection =  Set(value.split(DELIIMTER));
+    this.setState({
+      people: this.state.people.map((_,k) => selection.has(k))
+    });
+  }
 
   handleCharacterClick = values => {
-    this.setState(({ people }) => ({
-      people: people.map((v, k) => values.includes(k)),
-    }));
-  };
+    const selection = Set(values.map(d => d.name));
+    this.setState({
+      people: this.state.people.map((v, k) => selection.has(k))
+    });
+  }
 
-  handleDateChage = (k, v, append) => {
+  handleDateChange = (k, v, append) => {
     this.setState({
       dates: append
         ? this.state.dates.set(k, v)
@@ -135,7 +175,7 @@ class App extends Component {
 
     const data = events
       .filter(d => nFiltered === 0 || people.get(d.name))
-      .filter(d => dates.get(d.date));
+      .filter(d => dates.get(d.date.split('-')[2]));
 
     const storylines = layout(data);
     const ymin = min(storylines.interactions, d => d.y0);
@@ -145,9 +185,9 @@ class App extends Component {
       <Grid container>
         <Grid item xs={12} sm={3}>
           <Card>
-            <CardHeader title='Timeline Years' subheader='click to include data from specific years (1971, 1976, 1986)'/>
+            <CardHeader title='Timeline Years' subheader='click to include data from specific years (1920, 1985, 1986, 2019, 2040, 2052)'/>
             <CardContent>
-              <DatesSelect data={this.state.dates} onChange={this.handleDateChage}/>
+              <DatesSelect data={this.state.dates} onChange={this.handleDateChange}/>
             </CardContent>
           </Card>            
 
@@ -173,7 +213,7 @@ class App extends Component {
               height={Math.max(10*(ymax - ymin), 50)}
               color={d => color(employeesData[d.values[0].data.name])}
               lineLabel={d => d.values[0].data.activity}
-              lineTitle={d => d.values[0].data.date + ' - ' + d.values[0].data.description}
+              lineTitle={d => d.values[0].data.date + ' - ' + d.values[0].data.activity}
               groupLabel={d => d.name}
               onClick={this.handleCharacterClick}
             />

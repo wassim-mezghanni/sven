@@ -4,12 +4,12 @@
 
   SVEN: Storyline Visualization Library and Demonstration
 
-  Copyright © 2017, Battelle Memorial Institute
+  Copyright ©️ 2017, Battelle Memorial Institute
   All rights reserved.
 
   1. Battelle Memorial Institute (hereinafter Battelle) hereby grants permission
      to any person or entity lawfully obtaining a copy of this software and
-     associated documentation files (hereinafter “the Software”) to redistribute
+     associated documentation files (hereinafter "the Software") to redistribute
      and use the Software in source and binary forms, with or without 
      modification.  Such person or entity may use, copy, modify, merge, publish,
      distribute, sublicense, and/or sell copies of the Software, and may permit
@@ -45,129 +45,150 @@ import ChartComponent from './ReactD3Chart';
 
 import './Storyline.css';
 
-import {scaleLinear} from 'd3-scale';
+import {scaleLinear, scalePoint} from 'd3-scale';
 import {min, max, merge} from 'd3-array';
 import {line, curveMonotoneX} from 'd3-shape';
 import {axisBottom} from 'd3-axis';
-import marthaEvents from '../demo/src/data/martha-events.json';
-import marthaCharacters from '../demo/src/data/martha-characters.json';
 
-const storylinesInit = ({ data = marthaEvents, width, height, groupLabel }) => {
-  const xAxisData = Array.from(new Set(data.map((d) => +d.date))).sort();
+const storylinesInit = ({data={}, width, height, groupLabel}) => {
+  let {interactions=[], events=[]} = data;
 
-  const padding = width / xAxisData.length / 3;
+  if (interactions.length === 0) {
+    return {layers: []};
+  } else {
+    const xAxisData = [1920, 1985, 1986, 2019, 2040, 2052];
+    const padding = width/xAxisData.length/3;
 
-  const x = scaleLinear()
-    .domain([1920, 2052]) // Updated domain to include the full range of years
-    .range([padding, width - padding]);
+    const x = scalePoint()
+      .domain(xAxisData)
+      .range([padding, width - padding]);
 
-  const ymax = max(data, (d) => d.y1 || 0);
-  const ymin = min(data, (d) => d.y0 || 0);
+    const ymax = max(interactions, d => d.y1);
+    const ymin = min(interactions, d => d.y0);
 
-  const actualHeight = Math.min(height, (ymax - ymin) * 20);
+    const actualHeight = Math.min(height, (ymax - ymin)*20);
 
-  const y = scaleLinear()
-    .domain([ymin, ymax])
-    .range([actualHeight - height, -height]);
+    const y = scaleLinear()
+      .domain([ymin, ymax])
+      .range([actualHeight - height, -height]);
 
-  const yAxisData = data.map(({ name, date, description, death }) => ({
-    group: groupLabel && groupLabel(name),
-    values: [{ x: +date, y: death ? 1 : 0, data: description }],
-    y: death ? 1 : 0,
-    y0: 0,
-    y1: death ? 1 : 0,
-  }));
+    const yAxisData = interactions.map(({values, y0, y1}) => ({
+      group: groupLabel && groupLabel(values[0].values[0].data),
+      values: merge(values.map(d => d.values.map(d => d.data))),
+      y: (y0 + y1)/2,
+      y0, y1
+    }));
 
-  return { x, y, xAxisData, yAxisData, padding };
+    return {x, y, xAxisData, yAxisData, padding};
+  }
 };
 
 const storylineLayers = [
   {
     name: 'groups',
-    callback: (selection, { yAxisData, width, y, onClick = Object }) => {
-      const groups = selection.selectAll('rect').data(yAxisData, (d) => d.group);
+    callback: (selection, {yAxisData, width, y, onClick=Object}) => {
+      const groups = selection.selectAll('rect')
+          .data(yAxisData, d => d.group);
 
-      groups
-        .enter()
+      groups.enter()
         .append('rect')
-        .on('click', (d) => onClick(d.values))
+        .on('click', d => onClick(d.values))
         .merge(groups)
-        .attr('x', 0)
-        .attr('width', width)
-        .attr('y', (d) => y(d.y1))
-        .attr('height', (d) => Math.abs(y(d.y1) - y(d.y0)));
+          .attr('x', 0)
+          .attr('width', width)
+          .attr('y', d => y(d.y1))
+          .attr('height', d => Math.abs(y(d.y1) - y(d.y0)));
 
-      groups.exit().remove();
+      groups.exit()
+        .remove();
 
-      const labels = selection.selectAll('text').data(yAxisData, (d) => d.group);
+      const labels = selection.selectAll('text')
+        .data(yAxisData, d => d.group);
 
-      labels
-        .enter()
+      labels.enter()
         .append('text')
         .merge(labels)
-        .attr('x', 0)
-        .attr('y', (d) => y(d.y1))
-        .text((d) => d.group);
+          .attr('x', 0)
+          .attr('y', d => y(d.y1))
+          .text(d => d.group);
 
-      labels.exit().remove();
-    },
+      labels.exit()
+        .remove();
+    }
   },
   {
     name: 'storylines',
-    callback: (selection, { data, x, y, color, padding, highlights, onClick = Object, lineLabel, lineTitle }) => {
-      const storyline = line().curve(curveMonotoneX);
+    callback: (selection, {data, x, y, color, padding, highlights, onClick=Object, lineLabel, lineTitle}) => {
 
-      function getPoints(d) {
-        return d.values.map((v) => [x(v.x), y(v.y)]);
+      const storyline = line()
+        .curve(curveMonotoneX);
+
+      function getPoints (d) {
+        const points = [];
+
+        d.values.forEach(d => {
+          points.push([
+            x(d.x) - padding,
+            y(d.y)
+          ]);
+
+          points.push([
+            x(d.x) + padding,
+            y(d.y)
+          ]);
+        });
+
+        return points;
       }
 
-      const paths = selection.selectAll('g').data(data.storylines, (d) => d.key);
+      const paths = selection.selectAll('g')
+        .data(data.storylines, d => d.key);
 
-      const pathsEnter = paths.enter().append('g').on('click', (d) => onClick(d.values.map((d) => d.data)));
+      const paths_enter = paths.enter()
+        .append('g')
+          .on('click', d => onClick(d.values.map(d => d.data)));
 
-      pathsEnter.append('path');
-      pathsEnter.append('text');
-      pathsEnter.append('title');
+      paths_enter.append('path');
+      paths_enter.append('text');
+      paths_enter.append('title')
 
-      const pathsMerge = pathsEnter.merge(paths).classed('highlighted', (d) => highlights && highlights.has(d.key));
+      const paths_merge = paths_enter.merge(paths)
+        .classed('highlighted', d => highlights && highlights.has(d.key));
 
-      pathsMerge.select('title').text(lineTitle);
+      paths_merge.select('title')
+        .text(lineTitle);
 
-      pathsMerge
-        .select('path')
-        .style('stroke', (d) => color && color(d))
-        .attr('d', (d) => storyline(getPoints(d)));
+      paths_merge.select('path')
+        .style('stroke', d => color && color(d))
+        .attr('d', d => storyline(getPoints(d)));
 
-      pathsMerge
-        .select('text')
-        .style('fill', (d) => color && color(d))
-        .text((d) => (lineLabel ? lineLabel(d) : d.key))
-        .attr('x', (d) => x(d.values[d.values.length - 1].x) + padding)
-        .attr('y', (d) => y(d.values[d.values.length - 1].y));
+      paths_merge.select('text')
+        .style('fill', d => color && color(d))
+        .text(d => lineLabel ? lineLabel(d) : d.key)
+        .attr('x', d => x(d.values[d.values.length - 1].x) + padding)
+        .attr('y', d => y(d.values[d.values.length - 1].y));
 
-      paths.exit().remove();
-    },
+      paths.exit()
+        .remove();
+    }
   },
   {
     name: 'x-axis',
-    callback: (selection, { data, x }) => {
-      selection.call(
-        axisBottom(x)
-          .tickValues([1920, 1986, 2019, 2052])
-          .tickFormat((d) => 'Year ' + d)
-      );
-    },
-  },
+    callback: (selection, {data, x}) => {
+      selection.call(axisBottom(x)
+        .tickValues([1920, 1985, 1986, 2019, 2040, 2052])
+        .tickFormat(d => d));
+    }
+  }      
 ];
 
-const StorylineChart = (props) => (
+const StorylineChart = props =>
   <ChartComponent
     init={storylinesInit}
     layers={storylineLayers}
     {...props}
-    margin={{ top: 30, right: 135, bottom: 25, left: 20 }}
-    className="storylines-chart"
-  />
-);
+    margin={{top: 30, right: 135, bottom: 25, left: 20}}
+    className='storylines-chart'
+  />;
 
 export default StorylineChart;
