@@ -1375,4 +1375,180 @@
     "important": false,
     "death": false
   }
+  {
+    "date": "1888",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Action",
+    "description": "Martha tries to gain Jonas' trust by giving him her last capsule with black matter.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Action",
+    "description": "Adult Jonas' uses the black matter in the Tannhaus machine but something fails.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Martha Nielsen / Eve (M)",
+    "activity": "Travel",
+    "description": "Martha escapes from Tannhaus' factory using another black matter ball.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Gustav Tannhaus (J)",
+    "activity": "Explanation",
+    "description": "Gustav Tannhaus reminds Jonas that they are going to create a perfect world, a paradise, where every pain will be destroyed before it even exists.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Gustav Tannhaus (J)",
+    "activity": "Event",
+    "description": "\"Sic Mundus creatus est\"",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Gustav Tannhaus (J)",
+    "activity": "Action",
+    "description": "Gustav Tannahus owns Ariadne's book (her mother's favourite book) and a pocket watch that has written \"For Charlotte\".",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Gustav Tannhaus (J)",
+    "activity": "Death",
+    "description": "Adult Unknown man kills Gustav Tannhaus, because he wants to reveal the existence of time travelers.",
+    "important": false,
+    "death": true
+  },
+  {
+    "date": "1888",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Action",
+    "description": "Adult Jonas reads  Martha's letter ...",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Action",
+    "description": "... and burns it.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "1888",
+    "name": "Martha Nielsen / Eve (M)",
+    "activity": "Action",
+    "description": "Female stranger leaves Martha's letter again and Charlotte's pocket watch.",
+    "important": false,
+    "death": false
+  }
+  {
+    "date": "26-09-1888",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Action",
+    "description": "Adult Jonas tries to make the machine work.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "01-01-1890",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Action",
+    "description": "Adult Jonas gets injured trying to make it work the time machine.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "01-01-1890",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Explanation",
+    "description": "Adult jonas explains to teen Bartosz that he is trying to fix the time machine in order to find and destroy the origin.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "01-01-1890",
+    "name": "Silja Tiedemann (J)",
+    "activity": "Communication",
+    "description": "Teen Silja meets teen Bartosz.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "01-01-1890",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Explanation",
+    "description": "Adult Jonas is no longer worried about preventing the apocalypse. He wants to destroy the knot and wipe out the world. Jonas has become Adam.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "01-01-1890",
+    "name": "Silja Tiedemann (J)",
+    "activity": "Travel",
+    "description": "Silja arrives to 1890.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "01-01-1904",
+    "name": "Silja Tiedemann (J)",
+    "activity": "Personal",
+    "description": "Silja has a son with Bartosz and calls him Hanno.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "01-01-1910",
+    "name": "Silja Tiedemann (J)",
+    "activity": "Death",
+    "description": "Silja dies giving birth to Agnes.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "01-01-1911",
+    "name": "Hannah Kahnwald (J)",
+    "activity": "Travel",
+    "description": "Adult Hannah arrives to Tannahus' factory in 1911 with her daughter Silja. Eve told her where she could find her son.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "01-01-1911",
+    "name": "Hannah Kahnwald (J)",
+    "activity": "Communication",
+    "description": "Adult Hannah meets old Jonas.",
+    "important": false,
+    "death": false
+  },
+  {
+    "date": "01-01-1911",
+    "name": "Hannah Kahnwald (J)",
+    "activity": "Death",
+    "description": "Old jonas kills Hannah because she is not in the \"correct position\" ...",
+    "important": false,
+    "death": true
+  },
+  {
+    "date": "01-01-1911",
+    "name": "Jonas Kahnwald / Adam (J)",
+    "activity": "Action",
+    "description": "... and sends Silja into the future.",
+    "important": false,
+    "death": false
+  }
 ]
