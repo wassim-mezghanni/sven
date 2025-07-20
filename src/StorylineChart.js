@@ -4,12 +4,12 @@
 
   SVEN: Storyline Visualization Library and Demonstration
 
-  Copyright © 2017, Battelle Memorial Institute
+  Copyright ©️ 2017, Battelle Memorial Institute
   All rights reserved.
 
   1. Battelle Memorial Institute (hereinafter Battelle) hereby grants permission
      to any person or entity lawfully obtaining a copy of this software and
-     associated documentation files (hereinafter “the Software”) to redistribute
+     associated documentation files (hereinafter "the Software") to redistribute
      and use the Software in source and binary forms, with or without 
      modification.  Such person or entity may use, copy, modify, merge, publish,
      distribute, sublicense, and/or sell copies of the Software, and may permit
@@ -45,25 +45,23 @@ import ChartComponent from './ReactD3Chart';
 
 import './Storyline.css';
 
-import {scaleLinear} from 'd3-scale';
+import {scaleLinear, scalePoint} from 'd3-scale';
 import {min, max, merge} from 'd3-array';
 import {line, curveMonotoneX} from 'd3-shape';
 import {axisBottom} from 'd3-axis';
 
-const storylinesInit = ({data={}, width, height, groupLabel}) => {
+const storylinesInit = ({data={}, width, height, groupLabel, xAxisData}) => {
   let {interactions=[], events=[]} = data;
 
   if (interactions.length === 0) {
     return {layers: []};
   } else {
-    const xAxisData = Set(events.map(d => +d.x))
-      .sort()
-      .toArray();
+    const defaultXAxisData = [1920, 1985, 1986, 2019, 2040, 2052];
+    const axisData = xAxisData || defaultXAxisData;
+    const padding = width/axisData.length/3;
 
-    const padding = width/xAxisData.length/3;
-
-    const x = scaleLinear()
-      .domain([xAxisData[0] || 0, xAxisData[xAxisData.length - 1] || 1])
+    const x = scalePoint()
+      .domain(axisData)
       .range([padding, width - padding]);
 
     const ymax = max(interactions, d => d.y1);
@@ -82,7 +80,7 @@ const storylinesInit = ({data={}, width, height, groupLabel}) => {
       y0, y1
     }));
 
-    return {x, y, xAxisData, yAxisData, padding};
+    return {x, y, xAxisData: axisData, yAxisData, padding};
   }
 };
 
@@ -117,6 +115,47 @@ const storylineLayers = [
 
       labels.exit()
         .remove();
+    }
+  },
+  {
+    name: 'interactions',
+    callback: (selection, {data, x, y}) => {
+      const eventsByTime = {};
+      data.events.forEach(event => {
+        const time = event.x;
+        if (!eventsByTime[time]) eventsByTime[time] = [];
+        eventsByTime[time].push(event);
+      });
+      const interactionPairs = [];
+      Object.values(eventsByTime).forEach(eventsAtTime => {
+        for (let i = 0; i < eventsAtTime.length; i++) {
+          for (let j = i + 1; j < eventsAtTime.length; j++) {
+            const e1 = eventsAtTime[i];
+            const e2 = eventsAtTime[j];
+            if (e1.data.name !== e2.data.name) {
+              interactionPairs.push({
+                x: e1.x,
+                y1: e1.y,
+                y2: e2.y
+              });
+            }
+          }
+        }
+      });
+      const lines = selection.selectAll('line.interaction')
+        .data(interactionPairs);
+      lines.enter()
+        .append('line')
+        .attr('class', 'interaction')
+        .merge(lines)
+        .attr('x1', d => x(d.x))
+        .attr('x2', d => x(d.x))
+        .attr('y1', d => y((d.y1 + d.y2) / 2))
+        .attr('y2', d => y((d.y1 + d.y2) / 2))
+        .attr('stroke', '#bbb')
+        .attr('stroke-width', 2)
+        .attr('opacity', 0.7);
+      lines.exit().remove();
     }
   },
   {
@@ -177,8 +216,12 @@ const storylineLayers = [
   },
   {
     name: 'x-axis',
-    callback: (selection, {data, x}) => {
-      selection.call(axisBottom(x));
+    callback: (selection, state) => {
+      const {x, xAxisData} = state;
+      selection.call(axisBottom(x)
+        .tickValues(xAxisData)
+        .tickFormat(d => d)
+        .tickSize(5));
     }
   }      
 ];
