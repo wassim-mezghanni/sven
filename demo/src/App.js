@@ -63,8 +63,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Select from 'react-select-2';
 import 'react-select-2/dist/css/react-select-2.css';
 
-import events from './data/origin-events.json';
-import employeesData from './data/origin-characters.json';
+import events from './data/martha-events.json';
+import employeesData from './data/martha-characters.json';
 
 import StorylineChart, {SvenLayout} from '../../src';
 
@@ -125,9 +125,9 @@ const DatesSelect = ({data, onChange}) =>
     }
   </div>
 
-// Include only the specific years that have events
-const specificYears = ['1971', '1976', '1986'];
-const dates = Map(specificYears.map(year => [year, false]));
+// Get unique years from martha-events.json
+const allYearsFromData = Array.from(new Set(events.map(d => d.date))).sort();
+const dates = Map(allYearsFromData.map(year => [year, true])); // Select all years by default
 
 class App extends Component {
   state = {
@@ -175,10 +175,11 @@ class App extends Component {
       .filter(d => nFiltered === 0 || people.get(d.name))
       .filter(d => dates.get(d.date));
 
-    // Use all characters from origin-characters.json
+    // Use all characters from martha-characters.json
     const allCharacters = Object.keys(employeesData);
-    // Get all years from the data
-    const allYears = Array.from(new Set(events.map(d => d.date)));
+    // Get all years from the martha events data
+    const allYears = allYearsFromData;
+    
     // Ensure each character has a data point for every year
     const filledData = [];
     allCharacters.forEach(name => {
@@ -243,22 +244,8 @@ class App extends Component {
       d._customY = customY[d.date][d.name];
     });
 
-    // Use custom group accessor (for color/label)
-    const storylines = layout
-      .group(d => {
-        const activity = d.activity;
-        if (activity) {
-          const charsWithActivity = allCharacters.filter(name => activityByYear[d.date][name] === activity);
-          if (charsWithActivity.length > 1) {
-            return activity + ' Group';
-          } else {
-            return d.name;
-          }
-        } else {
-          return d.name;
-        }
-      })
-      (filledData);
+    // Use actual years from the data for the x-axis
+    const storylines = layout(filledData);
     const ymin = min(storylines.interactions, d => d.y0);
     const ymax = max(storylines.interactions, d => d.y1);
     
@@ -266,7 +253,7 @@ class App extends Component {
       <Grid container>
         <Grid item xs={12} sm={3}>
           <Card>
-            <CardHeader title='Timeline Years' subheader='click to include data from specific years (1971, 1976, 1986)'/>
+            <CardHeader title='Timeline Years' subheader={`click to include data from specific years (${allYears.join(', ')})`}/>
             <CardContent>
               <DatesSelect data={this.state.dates} onChange={this.handleDateChage}/>
             </CardContent>
@@ -290,7 +277,7 @@ class App extends Component {
         <Grid item xs={12} sm={9}>
           <Paper>
             <StorylineChart
-              xAxisData={['1971', '1976', '1986']}
+              xAxisData={allYears}
               data={storylines}
               height={Math.max(10*(ymax - ymin), 50)}
               color={d => color(d.key)}
