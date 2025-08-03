@@ -4,7 +4,7 @@
 
   SVEN: Storyline Visualization Library and Demonstration
 
-  Copyright © 2017, Battelle Memorial Institute
+  Copyright ©️ 2017, Battelle Memorial Institute
   All rights reserved.
 
   1. Battelle Memorial Institute (hereinafter Battelle) hereby grants permission
@@ -63,17 +63,17 @@ import CardContent from '@material-ui/core/CardContent';
 import Select from 'react-select-2';
 import 'react-select-2/dist/css/react-select-2.css';
 
-import events from './data/events.json';
-import employeesData from './data/employees.json';
+import events from './data/origin-events.json';
+import employeesData from './data/origin-characters.json';
 
 import StorylineChart, {SvenLayout} from '../../src';
 
 import './App.css';
 
 const layout = SvenLayout()
-  .time(d => d.hour)
-  .id(d => String([d.name, d.date]))
-  .group(d => d.activity);
+  .time(d => parseInt(d.date))
+  .id(d => d.name)
+  .group(d => d.name);
 
 const color = scaleOrdinal(schemeCategory10);
 
@@ -83,7 +83,7 @@ const employeesByType = Map().withMutations(map =>
   employees.map((v,k) => map.setIn([v,k], true))
 );
 
-const EmployeeList = ({data, onClick}) =>
+const CharacterList = ({data, onClick}) =>
   <List>
     { data.keySeq().sort().map(k =>
         <ListItem button dense key={k} onClick={e => onClick(k, data.get(k), e.shiftKey)}>
@@ -104,7 +104,7 @@ const asSelectList = map =>
 
 const DELIIMTER = ';';
 
-const PersonSelect = ({data, onChange}) =>
+const CharacterSelect = ({data, onChange}) =>
   <Select simpleValue multi delimiter={DELIIMTER}
     options={asSelectList(data.filter(v => !v))}
     value={asSelectList(data.filter(v => v))}
@@ -119,21 +119,23 @@ const DatesSelect = ({data, onChange}) =>
           onClick={e => onChange(k, !data.get(k), e.shiftKey)}
           className={'date' + (data.get(k) ? ' selected' : '')}
         >
-          { moment(k).format('dd') }
+          Year {k}
         </div>
       )
     }
   </div>
 
-const dates = Map(events.map(d => [d.date, false]));
+// Include only the specific years that have events
+const specificYears = ['1971', '1976', '1986'];
+const dates = Map(specificYears.map(year => [year, false]));
 
 class App extends Component {
   state = {
     people: employees.map(() => false),
-    dates: dates.set(dates.keySeq().sort().first(), true)
+    dates: dates.map(() => true) // Select all years by default
   };
 
-  handleEmployeeTypeClick = (k, v, append) => {
+  handleCharacterTypeClick = (k, v, append) => {
     if (append) {
       this.setState({people: this.state.people.merge(v)});
     } else {
@@ -141,14 +143,14 @@ class App extends Component {
     }
   }
 
-  handlePersonChange = value => {
+  handleCharacterChange = value => {
     const selection =  Set(value.split(DELIIMTER));
     this.setState({
       people: this.state.people.map((_,k) => selection.has(k))
     });
   }
 
-  handlePersonClick = values => {
+  handleCharacterClick = values => {
     const selection = Set(values.map(d => d.name));
     this.setState({
       people: this.state.people.map((v, k) => selection.has(k))
@@ -173,7 +175,90 @@ class App extends Component {
       .filter(d => nFiltered === 0 || people.get(d.name))
       .filter(d => dates.get(d.date));
 
-    const storylines = layout(data);
+    // Use all characters from origin-characters.json
+    const allCharacters = Object.keys(employeesData);
+    // Get all years from the data
+    const allYears = Array.from(new Set(events.map(d => d.date)));
+    // Ensure each character has a data point for every year
+    const filledData = [];
+    allCharacters.forEach(name => {
+      allYears.forEach(date => {
+        const event = data.find(d => d.name === name && d.date === date);
+        if (event) {
+          filledData.push(event);
+        } else {
+          filledData.push({
+            name,
+            date,
+            activity: '',
+            description: '',
+            important: false,
+            death: false
+          });
+        }
+      });
+    });
+
+    // Preprocess: for each year, if multiple characters share the same non-empty activity, set group to activity name; else group by character name
+    const activityByYear = {};
+    allYears.forEach(year => {
+      activityByYear[year] = {};
+      allCharacters.forEach(name => {
+        const ev = filledData.find(d => d.name === name && d.date === year);
+        activityByYear[year][name] = ev ? ev.activity : '';
+      });
+    });
+    // Assign default y positions
+    const yPositions = {};
+    allCharacters.forEach((name, i) => {
+      yPositions[name] = i;
+    });
+    // For each year, if multiple characters share the same activity, set their y to midpoint
+    const customY = {};
+    allYears.forEach(year => {
+      const activityCounts = {};
+      allCharacters.forEach(name => {
+        const act = activityByYear[year][name];
+        if (act) {
+          if (!activityCounts[act]) activityCounts[act] = [];
+          activityCounts[act].push(name);
+        }
+      });
+      Object.keys(activityByYear[year]).forEach(name => {
+        let y;
+        const act = activityByYear[year][name];
+        if (act && activityCounts[act] && activityCounts[act].length > 1) {
+          // Set all to the midpoint of their default y's
+          const indices = activityCounts[act].map(n => yPositions[n]);
+          const mid = indices.reduce((a, b) => a + b, 0) / indices.length;
+          y = mid;
+        } else {
+          y = yPositions[name];
+        }
+        if (!customY[year]) customY[year] = {};
+        customY[year][name] = y;
+      });
+    });
+    filledData.forEach(d => {
+      d._customY = customY[d.date][d.name];
+    });
+
+    // Use custom group accessor (for color/label)
+    const storylines = layout
+      .group(d => {
+        const activity = d.activity;
+        if (activity) {
+          const charsWithActivity = allCharacters.filter(name => activityByYear[d.date][name] === activity);
+          if (charsWithActivity.length > 1) {
+            return activity + ' Group';
+          } else {
+            return d.name;
+          }
+        } else {
+          return d.name;
+        }
+      })
+      (filledData);
     const ymin = min(storylines.interactions, d => d.y0);
     const ymax = max(storylines.interactions, d => d.y1);
     
@@ -181,23 +266,23 @@ class App extends Component {
       <Grid container>
         <Grid item xs={12} sm={3}>
           <Card>
-            <CardHeader title='Dates' subheader='click to include data from one or more days'/>
+            <CardHeader title='Timeline Years' subheader='click to include data from specific years (1971, 1976, 1986)'/>
             <CardContent>
               <DatesSelect data={this.state.dates} onChange={this.handleDateChage}/>
             </CardContent>
           </Card>            
 
           <Card>
-            <CardHeader title='Legend' subheader='click to add names to filter'/>
+            <CardHeader title='Character Categories' subheader='click to add character types to filter'/>
             <CardContent>
-              <EmployeeList data={employeesByType} onClick={this.handleEmployeeTypeClick}/>
+              <CharacterList data={employeesByType} onClick={this.handleCharacterTypeClick}/>
             </CardContent>
           </Card>
 
           <Card>
-            <CardHeader title='Filter by name' subheader='show specific people only'/>
+            <CardHeader title='Filter by Character' subheader='show specific characters only'/>
             <CardContent>
-              <PersonSelect data={people} onChange={this.handlePersonChange}/>
+              <CharacterSelect data={people} onChange={this.handleCharacterChange}/>
             </CardContent>
           </Card>
         </Grid>
@@ -205,13 +290,14 @@ class App extends Component {
         <Grid item xs={12} sm={9}>
           <Paper>
             <StorylineChart
+              xAxisData={['1971', '1976', '1986']}
               data={storylines}
               height={Math.max(10*(ymax - ymin), 50)}
-              color={d => color(employeesData[d.values[0].data.name])}
-              lineLabel={d => d.values[0].data.name}
-              lineTitle={d => moment(d.values[0].data.date).format('MMM D YYYY')}
-              groupLabel={d => d.activity}
-              onClick={this.handlePersonClick}
+              color={d => color(d.key)}
+              lineLabel={d => d.key}
+              lineTitle={d => d.key}
+              groupLabel={d => d.key}
+              onClick={this.handleCharacterClick}
             />
           </Paper>
         </Grid>
