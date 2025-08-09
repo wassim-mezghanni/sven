@@ -63,7 +63,7 @@ const storylinesInit = ({data={}, width, height, groupLabel}) => {
     const padding = width/xAxisData.length/3;
 
     const x = scaleLinear()
-      .domain([1971, 1986]) // Explicitly set domain to only include our three years
+      .domain([1971, 1986]) // set domain to only include our three years
       .range([padding, width - padding]);
 
     const ymax = max(interactions, d => d.y1);
