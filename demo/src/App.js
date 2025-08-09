@@ -63,8 +63,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Select from 'react-select-2';
 import 'react-select-2/dist/css/react-select-2.css';
 
-import events from './data/origin-events.json';
-import employeesData from './data/origin-characters.json';
+// Switch to Jonas datasets
+import events from './data/jonas-events.json';
+import employeesData from './data/jonas-characters.json';
 
 import StorylineChart, {SvenLayout} from '../../src';
 
@@ -125,9 +126,9 @@ const DatesSelect = ({data, onChange}) =>
     }
   </div>
 
-// Include only the specific years that have events
-const specificYears = ['1971', '1976', '1986'];
-const dates = Map(specificYears.map(year => [year, false]));
+// Restrict to Jonas timeline years
+const jonasAllowedYears = ['1888', '1890', '1904', '1910', '1911', '1920', '1921', '1953', '1954', '1971', '1986', '1987', '2019', '2020', '2021', '2023', '2040', '2041', '2052', '2053'];
+const dates = Map(jonasAllowedYears.map(year => [year, false]));
 
 class App extends Component {
   state = {
@@ -171,15 +172,20 @@ class App extends Component {
     const nFiltered = people.valueSeq()
       .reduce((v, sum) => v + sum, 0);
 
-    const data = events
+    // Only valid Jonas events within allowed years
+    const validEvents = events
+      .filter(d => d && d.name && d.date && jonasAllowedYears.includes(d.date));
+
+    const data = validEvents
       .filter(d => nFiltered === 0 || people.get(d.name))
       .filter(d => dates.get(d.date));
 
-    // Use all characters from origin-characters.json
+    // Use all characters from jonas-characters.json
     const allCharacters = Object.keys(employeesData);
-    // Get all years from the data
-    const allYears = Array.from(new Set(events.map(d => d.date)));
-    // Ensure each character has a data point for every year
+    // Use only the allowed years (in the given order)
+    const allYears = jonasAllowedYears;
+
+    // Ensure each character has a data point for every allowed year
     const filledData = [];
     allCharacters.forEach(name => {
       allYears.forEach(date => {
@@ -199,7 +205,7 @@ class App extends Component {
       });
     });
 
-    // Preprocess: for each year, if multiple characters share the same non-empty activity, set group to activity name; else group by character name
+    // Preprocess: for each year, capture activity by character
     const activityByYear = {};
     allYears.forEach(year => {
       activityByYear[year] = {};
@@ -266,7 +272,7 @@ class App extends Component {
       <Grid container>
         <Grid item xs={12} sm={3}>
           <Card>
-            <CardHeader title='Timeline Years' subheader='click to include data from specific years (1971, 1976, 1986)'/>
+            <CardHeader title='Timeline Years' subheader='click to include data from selected years'/>
             <CardContent>
               <DatesSelect data={this.state.dates} onChange={this.handleDateChage}/>
             </CardContent>
@@ -290,7 +296,7 @@ class App extends Component {
         <Grid item xs={12} sm={9}>
           <Paper>
             <StorylineChart
-              xAxisData={['1971', '1976', '1986']}
+              xAxisData={jonasAllowedYears}
               data={storylines}
               height={Math.max(10*(ymax - ymin), 50)}
               color={d => color(d.key)}

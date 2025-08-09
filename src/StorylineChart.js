@@ -50,20 +50,20 @@ import {min, max, merge} from 'd3-array';
 import {line, curveMonotoneX} from 'd3-shape';
 import {axisBottom} from 'd3-axis';
 
-const storylinesInit = ({data={}, width, height, groupLabel}) => {
+const storylinesInit = ({data={}, width, height, groupLabel, xAxisData: xAxisProp}) => {
   let {interactions=[], events=[]} = data;
 
   if (interactions.length === 0) {
     return {layers: []};
   } else {
-    const xAxisData = Set(events.map(d => +d.x))
-      .sort()
-      .toArray();
+    // Prefer provided xAxisData from props, else infer from data events
+    const inferred = Set(events.map(d => +d.x)).sort().toArray();
+    const xAxisData = (xAxisProp && xAxisProp.length ? xAxisProp : inferred).map(d => +d);
 
     const padding = width/xAxisData.length/3;
 
     const x = scaleLinear()
-      .domain([1971, 1986]) // Explicitly set domain to only include our three years
+      .domain([min(xAxisData), max(xAxisData)])
       .range([padding, width - padding]);
 
     const ymax = max(interactions, d => d.y1);
@@ -177,9 +177,9 @@ const storylineLayers = [
   },
   {
     name: 'x-axis',
-    callback: (selection, {data, x}) => {
+    callback: (selection, {x, xAxisData}) => {
       selection.call(axisBottom(x)
-        .tickValues([1971, 1976, 1986])
+        .tickValues(xAxisData)
         .tickFormat(d => 'Year ' + d));
     }
   }      
