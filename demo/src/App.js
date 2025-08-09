@@ -120,7 +120,7 @@ const DatesSelect = ({data, onChange}) =>
           onClick={e => onChange(k, !data.get(k), e.shiftKey)}
           className={'date' + (data.get(k) ? ' selected' : '')}
         >
-          Year {k}
+          {k}
         </div>
       )
     }
