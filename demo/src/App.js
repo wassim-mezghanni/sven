@@ -63,8 +63,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Select from 'react-select-2';
 import 'react-select-2/dist/css/react-select-2.css';
 
-import events from './data/origin-events.json';
-import employeesData from './data/origin-characters.json';
+import events from './data/martha-events.json';
+import employeesData from './data/martha-characters.json';
 
 import StorylineChart, {SvenLayout} from '../../src';
 
@@ -126,8 +126,8 @@ const DatesSelect = ({data, onChange}) =>
   </div>
 
 // Include only the specific years that have events
-const specificYears = ['1971', '1976', '1986'];
-const dates = Map(specificYears.map(year => [year, false]));
+const marthaAllowedYears = ['1920', '1985', '1986', '2019', '2040', '2052'];
+const dates = Map(marthaAllowedYears.map(year => [year, false]));
 
 class App extends Component {
   state = {
@@ -266,7 +266,7 @@ class App extends Component {
       <Grid container>
         <Grid item xs={12} sm={3}>
           <Card>
-            <CardHeader title='Timeline Years' subheader='click to include data from specific years (1971, 1976, 1986)'/>
+            <CardHeader title='Timeline Years' subheader='click to include data from specific years (1920, 1985, 1986, 2019, 2040, 2052)'/>
             <CardContent>
               <DatesSelect data={this.state.dates} onChange={this.handleDateChage}/>
             </CardContent>
@@ -290,7 +290,7 @@ class App extends Component {
         <Grid item xs={12} sm={9}>
           <Paper>
             <StorylineChart
-              xAxisData={['1971', '1976', '1986']}
+              xAxisData={marthaAllowedYears}
               data={storylines}
               height={Math.max(10*(ymax - ymin), 50)}
               color={d => color(d.key)}
