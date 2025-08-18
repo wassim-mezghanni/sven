@@ -61,14 +61,36 @@ const storylinesInit = ({data={}, width, height, groupLabel, xAxisData: provided
       ? providedXAxisData.map(d => +d)
       : Set(events.map(d => +d.x)).sort().toArray();
 
-    const padding = width/xAxisData.length/3;
+    // Initial (max) padding guess based on overall width
+    let basePadding = width/xAxisData.length/3;
 
     const minYear = Math.min.apply(null, xAxisData);
     const maxYear = Math.max.apply(null, xAxisData);
 
     const x = scaleLinear()
       .domain([minYear, maxYear])
-      .range([padding, width - padding]);
+      .range([basePadding, width - basePadding]);
+
+    // Recalculate padding so that for any consecutive x positions we guarantee
+    // (x_i + padding) <= (x_{i+1} - padding). This prevents the generated point
+    // sequence (x_i - padding, x_i + padding, x_{i+1} - padding ...) from ever
+    // decreasing in x which caused curves to "bend back" visually.
+    if (xAxisData.length > 1) {
+      let minGap = Infinity;
+      for (let i = 1; i < xAxisData.length; i++) {
+        const gap = x(xAxisData[i]) - x(xAxisData[i-1]);
+        if (gap < minGap) minGap = gap;
+      }
+      // Safe padding: at most half the smallest gap (minus 1 pixel) and no larger than basePadding
+      const safePadding = Math.max(0, Math.min(basePadding, (minGap/2) - 1));
+      if (safePadding !== basePadding) {
+        // Update scale range to use the new (possibly smaller) padding
+        x.range([safePadding, width - safePadding]);
+        basePadding = safePadding;
+      }
+    }
+
+    const padding = basePadding;
 
     const ymax = max(interactions, d => d.y1);
     const ymin = min(interactions, d => d.y0);
@@ -131,21 +153,53 @@ const storylineLayers = [
         .curve(curveMonotoneX);
 
       function getPoints (d) {
-        const points = [];
-
-        d.values.forEach(d => {
-          points.push([
-            x(d.x) - padding,
-            y(d.y)
-          ]);
-
-          points.push([
-            x(d.x) + padding,
-            y(d.y)
-          ]);
-        });
-
-        return points;
+        const pts = [];
+        const vals = d.values;
+        const n = vals.length;
+        const eps = 0.25;
+        for (let i=0; i<n; i++) {
+          const cur = vals[i];
+          const xCur = x(cur.x);
+          const yCur = y(cur.y);
+          const xLeft = xCur - padding;
+          let xRight = xCur + padding;
+          if (i < n - 1) {
+            const nxt = vals[i+1];
+            const xNext = x(nxt.x);
+            // Maximum allowed right extension so we don't intrude into next event's left padding
+            const maxRight = xNext - padding - eps;
+            if (xRight > maxRight) {
+              // Clamp to either maxRight or midpoint (whichever is smaller) for smoother shape
+              const mid = (xCur + xNext)/2 - eps;
+              xRight = Math.min(maxRight, mid);
+            }
+          }
+          // Ensure monotonicity vs previous appended point
+            if (pts.length) {
+              const lastX = pts[pts.length - 1][0];
+              if (xLeft <= lastX) {
+                // shift slightly forward
+                const shift = lastX + eps;
+                // keep symmetry if possible
+                const delta = (xRight - xLeft);
+                const newLeft = shift;
+                let newRight = newLeft + delta;
+                if (i < n - 1) {
+                  // Re-apply clamping for newRight
+                  const nxt = vals[i+1];
+                  const xNext = x(nxt.x);
+                  const maxRight2 = xNext - padding - eps;
+                  if (newRight > maxRight2) newRight = maxRight2;
+                }
+                pts.push([newLeft, yCur]);
+                pts.push([Math.max(newRight, newLeft + eps), yCur]);
+                continue;
+              }
+            }
+          pts.push([xLeft, yCur]);
+          pts.push([Math.max(xRight, xLeft + eps), yCur]);
+        }
+        return pts;
       }
 
       const paths = selection.selectAll('g')
