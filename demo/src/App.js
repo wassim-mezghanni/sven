@@ -157,68 +157,6 @@ class App extends Component {
     dates: dates.map(() => true) // Select all years by default
   };
 
-  // --- Added: SVG export helpers (Option 1) ---
-  inlineStyles = (svg) => {
-    // svg here is the clone we will serialize. We need computed styles from the on-screen original
-    const original = document.querySelector('svg.storylines-chart');
-    if (!original) return;
-
-    // If the passed svg IS the original (fallback), use it directly
-    const getSourceElement = el => {
-      if (svg === original) return el; // same reference
-      // Match by index order
-      // Build a map only once
-      if (!this._origElements) {
-        this._origElements = Array.from(original.querySelectorAll('*'));
-        this._cloneElements = Array.from(svg.querySelectorAll('*'));
-      }
-      const idx = this._cloneElements.indexOf(el);
-      return this._origElements[idx] || el; // fallback
-    };
-
-    const PROPS = [
-      'fill','fill-opacity','stroke','stroke-width','stroke-opacity',
-      'font','font-size','font-family','font-weight','opacity',
-      'stroke-linecap','stroke-linejoin','stroke-dasharray'
-    ];
-
-    svg.querySelectorAll('*').forEach(el => {
-      const source = getSourceElement(el);
-      const cs = window.getComputedStyle(source);
-      const decls = [];
-      PROPS.forEach(p => {
-        let val = cs.getPropertyValue(p);
-        if (!val || val === 'initial') return; // skip empty
-        // Some browsers return rgb(...), keep as-is
-        decls.push(`${p}:${val.trim()}`);
-        // Also set attribute for fill/stroke so tools that ignore style still work
-        if (p === 'fill' && val) el.setAttribute('fill', val.trim());
-        if (p === 'stroke' && val) el.setAttribute('stroke', val.trim());
-      });
-      if (decls.length) el.setAttribute('style', decls.join(';')); else el.removeAttribute('style');
-    });
-  }
-
-  handleDownloadSVG = () => {
-    const svg = document.querySelector('svg.storylines-chart');
-    if (!svg) return;
-    const clone = svg.cloneNode(true);
-    if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
-    const bb = svg.getBBox();
-    if (!clone.getAttribute('viewBox')) clone.setAttribute('viewBox', `${bb.x} ${bb.y} ${bb.width} ${bb.height}`);
-    // Inline styles using original as reference
-    this.inlineStyles(clone);
-    const blob = new Blob([clone.outerHTML], {type:'image/svg+xml;charset=utf-8'});
-    const a = document.createElement('a');
-    a.download = 'storylines.svg';
-    a.href = URL.createObjectURL(blob);
-    document.body.appendChild(a);
-    a.click();
-    URL.revokeObjectURL(a.href);
-    a.remove();
-  }
-  // --- End added code ---
-
   handleCharacterTypeClick = (k, v, append) => {
     if (append) {
       this.setState({people: this.state.people.merge(v)});
@@ -373,12 +311,8 @@ class App extends Component {
 
         <Grid item xs={12} sm={9}>
           <Paper>
-            <div style={{display:'flex', justifyContent:'flex-end', padding:'8px'}}>
-              <button onClick={this.handleDownloadSVG}>Download SVG</button>
-            </div>
             <StorylineChart
-              xAxisData={jonasAllowedYears}
-              data={storylines}
+              xAxisData={marthaAllowe    data={storjylines}
               height={Math.max(10*(ymax - ymin), 50)}
               color={d => familyColorScale(familyColorKey(d.key))}
               lineLabel={d => d.key}
