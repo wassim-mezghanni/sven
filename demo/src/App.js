@@ -77,6 +77,26 @@ const layout = SvenLayout()
 
 const color = scaleOrdinal(schemeCategory10);
 
+// Family-based color key helper: same family (last name) shares a color
+// EXCEPT Jonas and Martha who each get unique colors not shared with others.
+const familyColorKey = key => {
+  if (key.includes(' Group')) return key; // activity grouping keeps distinct color
+  if (key.startsWith('Jonas Kahnwald')) return 'JonasUnique';
+  if (key.startsWith('Martha Nielsen')) return 'MarthaUnique';
+  // Take first segment before slash (alias separator)
+  let base = key.split(' / ')[0];
+  base = base.replace(/\(.*?\)/g, '').trim();
+  const parts = base.split(/\s+/);
+  const last = parts[parts.length - 1];
+  if (last === 'Kahnwald') return 'KahnwaldFamily'; // group all Kahnwald except Jonas
+  if (last === 'Nielsen') return 'NielsenFamily';   // group all Nielsens except Martha
+  return last; // other families map directly
+};
+
+const familyColorScale = scaleOrdinal()
+  .domain([]) // will grow as needed
+  .range(schemeCategory10);
+
 const employees = Map(employeesData);
 
 const employeesByType = Map().withMutations(map =>
@@ -87,7 +107,7 @@ const CharacterList = ({data, onClick}) =>
   <List>
     { data.keySeq().sort().map(k =>
         <ListItem button dense key={k} onClick={e => onClick(k, data.get(k), e.shiftKey)}>
-          <Avatar style={{backgroundColor: color(k)}}>
+          <Avatar style={{backgroundColor: familyColorScale(familyColorKey(k))}}>
             {data.get(k).size}
           </Avatar>
           <ListItemText primary={k}/>
@@ -126,7 +146,7 @@ const DatesSelect = ({data, onChange}) =>
   </div>
 
 // Include only the specific years that have events
-const marthaAllowedYears = ['1920',,'1986', '2019', '2040', '2052'];
+const marthaAllowedYears = ['1920', '1985', '1986', '2019', '2040', '2052'];
 const dates = Map(marthaAllowedYears.map(year => [year, false]));
 
 class App extends Component {
@@ -293,7 +313,7 @@ class App extends Component {
               xAxisData={marthaAllowedYears}
               data={storylines}
               height={Math.max(10*(ymax - ymin), 50)}
-              color={d => color(d.key)}
+              color={d => familyColorScale(familyColorKey(d.key))}
               lineLabel={d => d.key}
               lineTitle={d => d.key}
               groupLabel={d => d.key}
