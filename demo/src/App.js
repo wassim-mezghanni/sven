@@ -63,8 +63,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Select from 'react-select-2';
 import 'react-select-2/dist/css/react-select-2.css';
 
-import events from './data/martha-events.json';
-import employeesData from './data/martha-characters.json';
+import events from './data/jonas-events.json';
+import employeesData from './data/jonas-characters.json';
 
 import StorylineChart, {SvenLayout} from '../../src';
 
