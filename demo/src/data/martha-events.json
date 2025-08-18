@@ -1,858 +1,858 @@
 [
-  {
-    "date": "2019",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Travel",
-    "description": "Teen Jonas and Martha travel to 1986.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Investigation",
-    "description": "Teen Jonas finds Martha.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Travel",
-    "description": "Adam and teen Jonas arrives to martha's world. Adam gives Jonas the time machine and explains his next step.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Travel",
-    "description": "Adam visits Eve headquarters.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Death",
-    "description": "Eve expects Adam to kill her but Adam has removed the cartidges from his gun.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Death",
-    "description": "Instead of killing her, Adam takes Eve's hand. they hope that Jonas and Martha fulfill their mission.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1985",
-    "name": "Unknown",
-    "activity": "Event",
-    "description": "The unknown trio break into the power plant.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1985",
-    "name": "Unknown",
-    "activity": "Event",
-    "description": "They enter the volume control room in both worlds and simultaneously open a valve, triggering an accident.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1985",
-    "name": "Unknown",
-    "activity": "Event",
-    "description": "An explosion at the power plant causes the leak of radioactive material.",
-    "important": true,
-    "death": false
-  },
-  {
-    "date": "1986",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "Martha and Jonas enter the bridge.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1986",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Travel",
-    "description": "Teen Jonas and Martha arrive to 1986.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1986",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Communication",
-    "description": "Teen Jonas explains Martha that they are the glitch in the matrix.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1986",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Action",
-    "description": "Teen Jonas and Martha enter the caves and wait for the bridge that will lead them to the origin world.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1986",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Event",
-    "description": "The bridge opens.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1986",
-    "name": "Mads Nielsen (M)",
-    "activity": "Travel",
-    "description": "Mads Nielsen goes missing.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1986",
-    "name": "Mads Nielsen (M)",
-    "activity": "Travel",
-    "description": "Mad's attempt to travel with Noah's machine.",
-    "important": false,
-    "death": true
-  },
-  {
-    "date": "1986",
-    "name": "Ulrich Nielsen (M)",
-    "activity": "Travel",
-    "description": "Adult Ulrich arrives to 1986 and visits Helge's cabin.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1986",
-    "name": "Ulrich Nielsen (M)",
-    "activity": "Death",
-    "description": "Adult Ulrich tries to kill adult Helge so that he could prevent all the kids' murders.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1986",
-    "name": "Ulrich Nielsen (M)",
-    "activity": "Death",
-    "description": "Old Helge kills adult Ulrich.",
-    "important": false,
-    "death": true
-  },
-  {
-    "date": "2019",
-    "name": "Mads Nielsen (M)",
-    "activity": "Action",
-    "description": "Mads nielsen's body appears in the bunker, being witnessed by them.",
-    "important": true,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Erik Obendorf (M)",
-    "activity": "Travel",
-    "description": "Erik Obendorf goes missing.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Unknown",
-    "activity": "Action",
-    "description": "The police continue investigating Erik's missing.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Charlotte Doppler (M)",
-    "activity": "Communication",
-    "description": "Charlotte asks Aleksander to view the schedules of his employees to compare their tire tracks with the tracks they found.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Aleksander Tiedemann / Boris Niewald (M)",
-    "activity": "Action",
-    "description": "Aleksander has the radioactive barrels moved from the cave into a truck.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Investigation",
-    "description": "Martha, Kilian, Bartosz, Magnus, and Franziska go to the caves to investigate Erik's missing.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "They hear a strange sound in the caves and flee to hide in the bunker.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Travel",
-    "description": "Martha use the time travel machine again.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Travel",
-    "description": "Jonas and Martha arrive to Martha's world and Martha says that is the beginning of everything.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Travel",
-    "description": "Jonas visits the Kahnwald house and discovers that the Nielsen's family live there.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Travel",
-    "description": "Jonas visits the school Martha doesn't recognize him and she is dating with Kilian Obendorf.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Travel",
-    "description": "Jonas visits the cemetery and discovers that Michael's grave is missing. Instead, he sees Regina's grave.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Action",
-    "description": "Jonas talks with Martha and she has a d\u00e9j\u00e0 vu (or a glitch in the matrix).",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Travel",
-    "description": "Eve, old Martha, explains to Jonas that he doesn't exists in her world because Mikkel didn't travel to 1986. and yet, both worlds are damned.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Travel",
-    "description": "Teen Jonas comes back to 2019.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Ulrich Nielsen (M)",
-    "activity": "Death",
-    "description": "Ulrich thinks that someone has killed a child and put the clothes that Mads was wearing when he disappeared 33 years ago.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Charlotte Doppler (M)",
-    "activity": "Investigation",
-    "description": "Adult Charlotte investigates the bunker and finds a coin that belong to Helge.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Helge Doppler (M)",
-    "activity": "Death",
-    "description": "Adult Helge confesses that he killed the kid and adult Ulrich confronts him.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Hannah Nielsen (M)",
-    "activity": "Action",
-    "description": "Hannah blackmails Alexsander Tiedemann since she has proof is an impostor.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Communication",
-    "description": "Teen Jonas explains teen Martha that their lives are connected. He is going to show her future.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Travel",
-    "description": "Teen Jonas and teen Martha travel to the future.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Action",
-    "description": "Teen Jonas and teen Martha return to Kanhwald's house.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Personal",
-    "description": "They have sex and Martha gets pregnant with a son that will be the origin of everyone else in winden.",
-    "important": true,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Communication",
-    "description": "Martha says goodbye to her mother.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Action",
-    "description": "Teen Jonas and teen Martha are going to intercept the truck with the barrels.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "Teen Martha gets injured. Teen Jonas recognizes the wound on her face: the Martha who brought him to Eve's world had the same scar. He stops in his tracks, unsure of who he can trust.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Travel",
-    "description": "Teen Jonas and teen Martha travel to Eve's base.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Aleksander Tiedemann / Boris Niewald (M)",
-    "activity": "Communication",
-    "description": "Aleksander explains Charlotte that the power plant is scheduled for decommission.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Aleksander Tiedemann / Boris Niewald (M)",
-    "activity": "Communication",
-    "description": "Charlotte asks Aleksander to view the schedules of his employees in 1986.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Charlotte Doppler (M)",
-    "activity": "Action",
-    "description": "Adult charlotte accuses Helge because he finished working in 1986 20 minutes before the disappearance of Mads.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Charlotte Doppler (M)",
-    "activity": "Action",
-    "description": "Adult charlotte shows adult Ulrich that Helge's penny is exactly the same penny founded in the little boy.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Ulrich Nielsen (M)",
-    "activity": "Death",
-    "description": "Adult Ulrich finds out that the dead boy found is mads.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Ulrich Nielsen (M)",
-    "activity": "Travel",
-    "description": "Adult Ulrich visits Helge and tries to extract information from him.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Ulrich Nielsen (M)",
-    "activity": "Travel",
-    "description": "Helge runs away to try to stop his past self. He travels to 1986. Ulrich follows him into the caves and travels to 1986.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Aleksander Tiedemann / Boris Niewald (M)",
-    "activity": "Action",
-    "description": "Alexsander tiedemann reveals his true identity to Bartoszk.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Aleksander Tiedemann / Boris Niewald (M)",
-    "activity": "Action",
-    "description": "Alexsander Tiedemann wants to clear things up with the police, so he invites police officer adult Charlotte to the power site.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Aleksander Tiedemann / Boris Niewald (M)",
-    "activity": "Event",
-    "description": "Adult Alexsander and adult Charlotte open the barrel and release the god particle.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Unknown",
-    "activity": "Event",
-    "description": "The apocalypse erupts in Winden.",
-    "important": true,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Noah / Hanno Tauber (M)",
-    "activity": "Action",
-    "description": "Noah saves teen Elisabeth.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Hannah Nielsen (M)",
-    "activity": "Event",
-    "description": "Hannah's water breaks and old Egon saves her.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Bartosz Tiedemann (M)",
-    "activity": "Action",
-    "description": "Adult Bartosz saves his younger version.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "They convince Martha to go with them, save teen Jonas and bring him back to her universe.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Travel",
-    "description": "Teen Martha arrives to 2019.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "Teen Martha cut her hair ...",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Communication",
-    "description": "... and says goodbye (again) to her mother.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Communication",
-    "description": "Martha asks Bartosz for help to stop the apocalypse.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2019",
-    "name": "Franziska Doppler (J)",
-    "activity": "Action",
-    "description": "Adult Franziska and adult Magnus stop Martha and Bartosz.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1920",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Communication",
-    "description": "Eve explains to Jonas that both worlds converge in the same moment and the apocalypse will happen also in her world, in just 3 days.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1920",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Communication",
-    "description": "Eve explains to Jonas that they are adam and eve, and they must save all of them.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1920",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Communication",
-    "description": "Eve explains to Jonas that they are connected by an invisible ribbon and show him the saint christopher medallion that he gave to her.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1920",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "Eve ask teen Jonas to help teen martha to see her future.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1920",
-    "name": "Unknown",
-    "activity": "Action",
-    "description": "The unknow trio bring to Eve the pocket clock and the Ariadne's book from old Tannhaus and the master key and the book of the power plant.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1920",
-    "name": "Unknown",
-    "activity": "Action",
-    "description": "In the Eve's headquarters, the adult Unkwon fills out the last page of the notebook.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1920",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "Teen Martha chooses the light side.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1920",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "Female stranger and the other teen Martha appear.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1920",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Communication",
-    "description": "Teen Jonas confronts Eve and she repeats the same words Adam said time ago: a man has three lives ...",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1920",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Travel",
-    "description": "Teen Martha and teen Jonas arrive to Eve's base.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1920",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Death",
-    "description": "Teen Martha from the future kills teen Jonas to ensure that Teen Martha will eventually turn into Eve.",
-    "important": true,
-    "death": true
-  },
-  {
-    "date": "1920",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Travel",
-    "description": "Marthas travel to the future.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1920",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Action",
-    "description": "Adam burns eve base ...",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "1920",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Travel",
-    "description": "... and travels to the future.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Travel",
-    "description": "Teen Martha and teen Jonas arrive to the future.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "They meet the female stranger.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Communication",
-    "description": "Female stranger explains to Martha that an apocalypse will happen in 2 days and everyone will die. They must stop it.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Communication",
-    "description": "Female stranger explains to Jonas there is no way to save both worlds. He must choose one of them. If he wants Mikkel to live he must sacrifice his Martha, his world.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Communication",
-    "description": "Teen Martha runs away. Jonas explains to her that he just wants to make all of this right again.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "Teen Martha and Jonas come back to 2019.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Noah / Hanno Tauber (M)",
-    "activity": "Travel",
-    "description": "Noah enters in the bunker and says that Jonas and Martha will have a son that represents the origin of everyone.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Travel",
-    "description": "Teen Martha travels forward to 2019.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "Female stranger consuels future teen Martha.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "Female stranger writes again Martha's letter.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Communication",
-    "description": "Eve explains that there is a there is a switch point in the loop of time. The moment when she decides to takes jonas to her world or not.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "It creates two overlapping realities. Both realities repet endless in the loop. One triggers the other.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Jonas Kahnwald / Adam (J)",
-    "activity": "Action",
-    "description": "Adam is trying to destroy this loop so the \"origin\" will never born.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "Eve moves each of her tokens into position.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "Female stranger must send Martha's letter again to adult Jonas.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Bartosz Tiedemann (M)",
-    "activity": "Action",
-    "description": "Adult Bartosz must save himself.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Claudia Tiedemann (M)",
-    "activity": "Action",
-    "description": "Adult Claudia must guide herself to be their eyes in the other universe.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Egon Tiedemann (M)",
-    "activity": "Action",
-    "description": "Old Egon must create his past, to preserve the family tree.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Noah / Hanno Tauber (M)",
-    "activity": "Action",
-    "description": "Noah must bring love to make everything new.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Unknown",
-    "activity": "Travel",
-    "description": "Young Unknown and old Unknow travel to 1986 (Martha's world) and adult Unknown travels to 1986 (Jonas' world).",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Travel",
-    "description": "Martha and Bartosz arrive to Martha's world.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Communication",
-    "description": "Martha confronts Eve.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "Eve cut Martha's face so she will never forget which side she belong on.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Communication",
-    "description": "Eve explains to Martha that she is pregnant with the origin of all life.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Travel",
-    "description": "The unknown enter the room and the boy goes to hug Martha. His son will only live if the knot is preserved.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2052",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "Everything must occur as it always. Martha must do what has always been done.",
-    "important": false,
-    "death": false
-  },
-  {
-    "date": "2040",
-    "name": "Martha Nielsen / Eve (M)",
-    "activity": "Action",
-    "description": "Old Claudia, impersonated as old Claudia (Martha's world), meets Eve and she gives her the time machine's blueprints for H.G. Tannhaus.",
-    "important": false,
-    "death": false
-  }
+	{
+		"date": "2019",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Travel",
+		"description": "Teen Jonas and Martha travel to 1986.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Investigation",
+		"description": "Teen Jonas finds Martha.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Travel",
+		"description": "Adam and teen Jonas arrives to martha's world. Adam gives Jonas the time machine and explains his next step.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Travel",
+		"description": "Adam visits Eve headquarters.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Death",
+		"description": "Eve expects Adam to kill her but Adam has removed the cartidges from his gun.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Death",
+		"description": "Instead of killing her, Adam takes Eve's hand. they hope that Jonas and Martha fulfill their mission.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1985",
+		"name": "Unknown",
+		"activity": "Event",
+		"description": "The unknown trio break into the power plant.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1985",
+		"name": "Unknown",
+		"activity": "Event",
+		"description": "They enter the volume control room in both worlds and simultaneously open a valve, triggering an accident.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1985",
+		"name": "Unknown",
+		"activity": "Event",
+		"description": "An explosion at the power plant causes the leak of radioactive material.",
+		"important": true,
+		"death": false
+	},
+	{
+		"date": "1986",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "Martha and Jonas enter the bridge.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1986",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Travel",
+		"description": "Teen Jonas and Martha arrive to 1986.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1986",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Communication",
+		"description": "Teen Jonas explains Martha that they are the glitch in the matrix.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1986",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Action",
+		"description": "Teen Jonas and Martha enter the caves and wait for the bridge that will lead them to the origin world.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1986",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Event",
+		"description": "The bridge opens.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1986",
+		"name": "Mads Nielsen (M)",
+		"activity": "Travel",
+		"description": "Mads Nielsen goes missing.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1986",
+		"name": "Mads Nielsen (M)",
+		"activity": "Travel",
+		"description": "Mad's attempt to travel with Noah's machine.",
+		"important": false,
+		"death": true
+	},
+	{
+		"date": "1986",
+		"name": "Ulrich Nielsen (M)",
+		"activity": "Travel",
+		"description": "Adult Ulrich arrives to 1986 and visits Helge's cabin.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1986",
+		"name": "Ulrich Nielsen (M)",
+		"activity": "Death",
+		"description": "Adult Ulrich tries to kill adult Helge so that he could prevent all the kids' murders.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1986",
+		"name": "Ulrich Nielsen (M)",
+		"activity": "Death",
+		"description": "Old Helge kills adult Ulrich.",
+		"important": false,
+		"death": true
+	},
+	{
+		"date": "2019",
+		"name": "Mads Nielsen (M)",
+		"activity": "Action",
+		"description": "Mads nielsen's body appears in the bunker, being witnessed by them.",
+		"important": true,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Erik Obendorf (M)",
+		"activity": "Travel",
+		"description": "Erik Obendorf goes missing.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Unknown",
+		"activity": "Action",
+		"description": "The police continue investigating Erik's missing.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Charlotte Doppler (M)",
+		"activity": "Communication",
+		"description": "Charlotte asks Aleksander to view the schedules of his employees to compare their tire tracks with the tracks they found.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Aleksander Tiedemann / Boris Niewald (M)",
+		"activity": "Action",
+		"description": "Aleksander has the radioactive barrels moved from the cave into a truck.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Investigation",
+		"description": "Martha, Kilian, Bartosz, Magnus, and Franziska go to the caves to investigate Erik's missing.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "They hear a strange sound in the caves and flee to hide in the bunker.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Travel",
+		"description": "Martha use the time travel machine again.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Travel",
+		"description": "Jonas and Martha arrive to Martha's world and Martha says that is the beginning of everything.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Travel",
+		"description": "Jonas visits the Kahnwald house and discovers that the Nielsen's family live there.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Travel",
+		"description": "Jonas visits the school Martha doesn't recognize him and she is dating with Kilian Obendorf.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Travel",
+		"description": "Jonas visits the cemetery and discovers that Michael's grave is missing. Instead, he sees Regina's grave.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Action",
+		"description": "Jonas talks with Martha and she has a déjà vu (or a glitch in the matrix).",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Travel",
+		"description": "Eve, old Martha, explains to Jonas that he doesn't exists in her world because Mikkel didn't travel to 1986. and yet, both worlds are damned.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Travel",
+		"description": "Teen Jonas comes back to 2019.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Ulrich Nielsen (M)",
+		"activity": "Death",
+		"description": "Ulrich thinks that someone has killed a child and put the clothes that Mads was wearing when he disappeared 33 years ago.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Charlotte Doppler (M)",
+		"activity": "Investigation",
+		"description": "Adult Charlotte investigates the bunker and finds a coin that belong to Helge.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Helge Doppler (M)",
+		"activity": "Death",
+		"description": "Adult Helge confesses that he killed the kid and adult Ulrich confronts him.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Hannah Nielsen (M)",
+		"activity": "Action",
+		"description": "Hannah blackmails Alexsander Tiedemann since she has proof is an impostor.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Communication",
+		"description": "Teen Jonas explains teen Martha that their lives are connected. He is going to show her future.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Travel",
+		"description": "Teen Jonas and teen Martha travel to the future.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Action",
+		"description": "Teen Jonas and teen Martha return to Kanhwald's house.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Personal",
+		"description": "They have sex and Martha gets pregnant with a son that will be the origin of everyone else in winden.",
+		"important": true,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Communication",
+		"description": "Martha says goodbye to her mother.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Action",
+		"description": "Teen Jonas and teen Martha are going to intercept the truck with the barrels.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "Teen Martha gets injured. Teen Jonas recognizes the wound on her face: the Martha who brought him to Eve's world had the same scar. He stops in his tracks, unsure of who he can trust.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Travel",
+		"description": "Teen Jonas and teen Martha travel to Eve's base.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Aleksander Tiedemann / Boris Niewald (M)",
+		"activity": "Communication",
+		"description": "Aleksander explains Charlotte that the power plant is scheduled for decommission.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Aleksander Tiedemann / Boris Niewald (M)",
+		"activity": "Communication",
+		"description": "Charlotte asks Aleksander to view the schedules of his employees in 1986.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Charlotte Doppler (M)",
+		"activity": "Action",
+		"description": "Adult charlotte accuses Helge because he finished working in 1986 20 minutes before the disappearance of Mads.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Charlotte Doppler (M)",
+		"activity": "Action",
+		"description": "Adult charlotte shows adult Ulrich that Helge's penny is exactly the same penny founded in the little boy.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Ulrich Nielsen (M)",
+		"activity": "Death",
+		"description": "Adult Ulrich finds out that the dead boy found is mads.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Ulrich Nielsen (M)",
+		"activity": "Travel",
+		"description": "Adult Ulrich visits Helge and tries to extract information from him.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Ulrich Nielsen (M)",
+		"activity": "Travel",
+		"description": "Helge runs away to try to stop his past self. He travels to 1986. Ulrich follows him into the caves and travels to 1986.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Aleksander Tiedemann / Boris Niewald (M)",
+		"activity": "Action",
+		"description": "Alexsander tiedemann reveals his true identity to Bartoszk.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Aleksander Tiedemann / Boris Niewald (M)",
+		"activity": "Action",
+		"description": "Alexsander Tiedemann wants to clear things up with the police, so he invites police officer adult Charlotte to the power site.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Aleksander Tiedemann / Boris Niewald (M)",
+		"activity": "Event",
+		"description": "Adult Alexsander and adult Charlotte open the barrel and release the god particle.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Unknown",
+		"activity": "Event",
+		"description": "The apocalypse erupts in Winden.",
+		"important": true,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Noah / Hanno Tauber (M)",
+		"activity": "Action",
+		"description": "Noah saves teen Elisabeth.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Hannah Nielsen (M)",
+		"activity": "Event",
+		"description": "Hannah's water breaks and old Egon saves her.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Bartosz Tiedemann (M)",
+		"activity": "Action",
+		"description": "Adult Bartosz saves his younger version.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "They convince Martha to go with them, save teen Jonas and bring him back to her universe.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Travel",
+		"description": "Teen Martha arrives to 2019.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "Teen Martha cut her hair ...",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Communication",
+		"description": "... and says goodbye (again) to her mother.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Communication",
+		"description": "Martha asks Bartosz for help to stop the apocalypse.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2019",
+		"name": "Franziska Doppler (J)",
+		"activity": "Action",
+		"description": "Adult Franziska and adult Magnus stop Martha and Bartosz.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1920",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Communication",
+		"description": "Eve explains to Jonas that both worlds converge in the same moment and the apocalypse will happen also in her world, in just 3 days.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1920",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Communication",
+		"description": "Eve explains to Jonas that they are adam and eve, and they must save all of them.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1920",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Communication",
+		"description": "Eve explains to Jonas that they are connected by an invisible ribbon and show him the saint christopher medallion that he gave to her.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1920",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "Eve ask teen Jonas to help teen martha to see her future.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1920",
+		"name": "Unknown",
+		"activity": "Action",
+		"description": "The unknow trio bring to Eve the pocket clock and the Ariadne's book from old Tannhaus and the master key and the book of the power plant.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1920",
+		"name": "Unknown",
+		"activity": "Action",
+		"description": "In the Eve's headquarters, the adult Unkwon fills out the last page of the notebook.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1920",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "Teen Martha chooses the light side.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1920",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "Female stranger and the other teen Martha appear.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1920",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Communication",
+		"description": "Teen Jonas confronts Eve and she repeats the same words Adam said time ago: a man has three lives ...",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1920",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Travel",
+		"description": "Teen Martha and teen Jonas arrive to Eve's base.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1920",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Death",
+		"description": "Teen Martha from the future kills teen Jonas to ensure that Teen Martha will eventually turn into Eve.",
+		"important": true,
+		"death": true
+	},
+	{
+		"date": "1920",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Travel",
+		"description": "Marthas travel to the future.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1920",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Action",
+		"description": "Adam burns eve base ...",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "1920",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Travel",
+		"description": "... and travels to the future.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Travel",
+		"description": "Teen Martha and teen Jonas arrive to the future.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "They meet the female stranger.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Communication",
+		"description": "Female stranger explains to Martha that an apocalypse will happen in 2 days and everyone will die. They must stop it.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Communication",
+		"description": "Female stranger explains to Jonas there is no way to save both worlds. He must choose one of them. If he wants Mikkel to live he must sacrifice his Martha, his world.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Communication",
+		"description": "Teen Martha runs away. Jonas explains to her that he just wants to make all of this right again.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "Teen Martha and Jonas come back to 2019.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Noah / Hanno Tauber (M)",
+		"activity": "Travel",
+		"description": "Noah enters in the bunker and says that Jonas and Martha will have a son that represents the origin of everyone.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Travel",
+		"description": "Teen Martha travels forward to 2019.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "Female stranger consuels future teen Martha.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "Female stranger writes again Martha's letter.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Communication",
+		"description": "Eve explains that there is a there is a switch point in the loop of time. The moment when she decides to takes jonas to her world or not.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "It creates two overlapping realities. Both realities repet endless in the loop. One triggers the other.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Jonas Kahnwald / Adam (J)",
+		"activity": "Action",
+		"description": "Adam is trying to destroy this loop so the \"origin\" will never born.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "Eve moves each of her tokens into position.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "Female stranger must send Martha's letter again to adult Jonas.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Bartosz Tiedemann (M)",
+		"activity": "Action",
+		"description": "Adult Bartosz must save himself.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Claudia Tiedemann (M)",
+		"activity": "Action",
+		"description": "Adult Claudia must guide herself to be their eyes in the other universe.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Egon Tiedemann (M)",
+		"activity": "Action",
+		"description": "Old Egon must create his past, to preserve the family tree.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Noah / Hanno Tauber (M)",
+		"activity": "Action",
+		"description": "Noah must bring love to make everything new.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Unknown",
+		"activity": "Travel",
+		"description": "Young Unknown and old Unknow travel to 1986 (Martha's world) and adult Unknown travels to 1986 (Jonas' world).",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Travel",
+		"description": "Martha and Bartosz arrive to Martha's world.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Communication",
+		"description": "Martha confronts Eve.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "Eve cut Martha's face so she will never forget which side she belong on.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Communication",
+		"description": "Eve explains to Martha that she is pregnant with the origin of all life.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Travel",
+		"description": "The unknown enter the room and the boy goes to hug Martha. His son will only live if the knot is preserved.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2052",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "Everything must occur as it always. Martha must do what has always been done.",
+		"important": false,
+		"death": false
+	},
+	{
+		"date": "2040",
+		"name": "Martha Nielsen / Eve (M)",
+		"activity": "Action",
+		"description": "Old Claudia, impersonated as old Claudia (Martha's world), meets Eve and she gives her the time machine's blueprints for H.G. Tannhaus.",
+		"important": false,
+		"death": false
+	}
 ]
