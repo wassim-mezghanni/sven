@@ -145,9 +145,11 @@ const DatesSelect = ({data, onChange}) =>
     }
   </div>
 
-// Include only the specific years that have events
-const marthaAllowedYears = ['1920', '1986', '2019', '2040', '2052'];
-const dates = Map(marthaAllowedYears.map(year => [year, false]));
+// Restrict to Jonas timeline years
+const jonasAllowedYears = ['1888', '1890', '1904', '1910', '1911', '1920', '1921', '1953', '1954', '1971', '1986', '1987', '2019', '2020', '2021', '2023', '2040', '2041', '2052', '2053'];
+const dates = Map(jonasAllowedYears.map(year => [year, false]));
+
+
 
 class App extends Component {
   state = {
@@ -375,7 +377,7 @@ class App extends Component {
               <button onClick={this.handleDownloadSVG}>Download SVG</button>
             </div>
             <StorylineChart
-              xAxisData={marthaAllowedYears}
+              xAxisData={jonasAllowedYears}
               data={storylines}
               height={Math.max(10*(ymax - ymin), 50)}
               color={d => familyColorScale(familyColorKey(d.key))}
