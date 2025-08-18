@@ -119,14 +119,14 @@ const DatesSelect = ({data, onChange}) =>
           onClick={e => onChange(k, !data.get(k), e.shiftKey)}
           className={'date' + (data.get(k) ? ' selected' : '')}
         >
-          Year {k}
+          {k} 
         </div>
       )
     }
   </div>
 
 // Include only the specific years that have events
-const marthaAllowedYears = ['1920', '1985', '1986', '2019', '2040', '2052'];
+const marthaAllowedYears = ['1920',,'1986', '2019', '2040', '2052'];
 const dates = Map(marthaAllowedYears.map(year => [year, false]));
 
 class App extends Component {

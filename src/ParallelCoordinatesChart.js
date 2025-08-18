@@ -180,7 +180,7 @@ const storylineLayers = [
     callback: (selection, {data, x}) => {
       selection.call(axisBottom(x)
         .tickValues([1971, 1976, 1986])
-        .tickFormat(d => 'Year ' + d));
+        .tickFormat(d => d));
     }
   }      
 ];

@@ -130,7 +130,7 @@ const TrueIntersectionStorylineChart = ({ data, width = 900, height = 400 }) => 
       .attr('x', d => xScale(d))
       .attr('y', 30)
       .attr('text-anchor', 'middle')
-      .text(d => 'Year ' + d);
+      .text(d => d);
 
     // 6. Draw lines
     const line = d3.line()
