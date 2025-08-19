@@ -77,6 +77,17 @@ const layout = SvenLayout()
 
 const color = scaleOrdinal(schemeCategory10);
 
+// Family-based color key helper: same family (last name) shares a color
+const familyColorKey = key => {
+  // Take first segment before slash (alias separator)
+  let base = key.split(' / ')[0];
+  // Remove parenthetical qualifiers
+  base = base.replace(/\(.*?\)/g, '').trim();
+  const parts = base.split(/\s+/);
+  return parts[parts.length - 1];
+};
+const familyColorScale = scaleOrdinal(schemeCategory10);
+
 const employees = Map(employeesData);
 
 const employeesByType = Map().withMutations(map =>
@@ -87,7 +98,7 @@ const CharacterList = ({data, onClick}) =>
   <List>
     { data.keySeq().sort().map(k =>
         <ListItem button dense key={k} onClick={e => onClick(k, data.get(k), e.shiftKey)}>
-          <Avatar style={{backgroundColor: color(k)}}>
+          <Avatar style={{backgroundColor: familyColorScale(familyColorKey(k))}}>
             {data.get(k).size}
           </Avatar>
           <ListItemText primary={k}/>
@@ -344,7 +355,7 @@ class App extends Component {
               xAxisData={['1971', '1976', '1986']}
               data={storylines}
               height={Math.max(10*(ymax - ymin), 50)}
-              color={d => color(d.key)}
+              color={d => familyColorScale(familyColorKey(d.key))}
               lineLabel={d => d.key}
               lineTitle={d => d.key}
               groupLabel={d => d.key}
