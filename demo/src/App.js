@@ -146,7 +146,7 @@ const DatesSelect = ({data, onChange}) =>
   </div>
 
 // Jonas timeline years (explicit list)
-const jonasAllowedYears = [ '1920', '1953', '1954', '1971', '1986', '1987', '2019', '2020', '2021', '2052', '2053'];
+const jonasAllowedYears = [ '1921', '1953', '1954', '1971', '1986', '1987', '2019', '2020', '2021', '2052', '2053'];
 const dates = Map(jonasAllowedYears.map(year => [year, false]));
 
 
