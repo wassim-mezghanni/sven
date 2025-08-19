@@ -145,8 +145,8 @@ const DatesSelect = ({data, onChange}) =>
     }
   </div>
 
-// Restrict to Jonas timeline years
-const jonasAllowedYears = ['1920', '1921', '1953', '1954', '1971', '1986', '1987', '2019', '2020', '2021', '2052', '2053'];
+// Jonas timeline years (explicit list)
+const jonasAllowedYears = [ '1920', '1953', '1954', '1971', '1986', '1987', '2019', '2020', '2021', '2052', '2053'];
 const dates = Map(jonasAllowedYears.map(year => [year, false]));
 
 
@@ -156,6 +156,54 @@ class App extends Component {
     people: employees.map(() => false),
     dates: dates.map(() => true) // Select all years by default
   };
+
+  // --- SVG export helpers ---
+  inlineStyles = (svg) => {
+    const original = document.querySelector('svg.storylines-chart');
+    if (!original) return;
+    const getSourceElement = el => {
+      if (svg === original) return el;
+      if (!this._origElements) {
+        this._origElements = Array.from(original.querySelectorAll('*'));
+        this._cloneElements = Array.from(svg.querySelectorAll('*'));
+      }
+      const idx = this._cloneElements.indexOf(el);
+      return this._origElements[idx] || el;
+    };
+    const PROPS = ['fill','fill-opacity','stroke','stroke-width','stroke-opacity','font','font-size','font-family','font-weight','opacity','stroke-linecap','stroke-linejoin','stroke-dasharray'];
+    svg.querySelectorAll('*').forEach(el => {
+      const source = getSourceElement(el);
+      const cs = window.getComputedStyle(source);
+      const decls = [];
+      PROPS.forEach(p => {
+        const val = cs.getPropertyValue(p);
+        if (!val || val === 'initial') return;
+        decls.push(`${p}:${val.trim()}`);
+        if (p === 'fill') el.setAttribute('fill', val.trim());
+        if (p === 'stroke') el.setAttribute('stroke', val.trim());
+      });
+      if (decls.length) el.setAttribute('style', decls.join(';')); else el.removeAttribute('style');
+    });
+  }
+
+  handleDownloadSVG = () => {
+    const svg = document.querySelector('svg.storylines-chart');
+    if (!svg) return;
+    const clone = svg.cloneNode(true);
+    if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+    const bb = svg.getBBox();
+    if (!clone.getAttribute('viewBox')) clone.setAttribute('viewBox', `${bb.x} ${bb.y} ${bb.width} ${bb.height}`);
+    this.inlineStyles(clone);
+    const blob = new Blob([clone.outerHTML], {type:'image/svg+xml;charset=utf-8'});
+    const a = document.createElement('a');
+    a.download = 'storylines-jonas.svg';
+    a.href = URL.createObjectURL(blob);
+    document.body.appendChild(a);
+    a.click();
+    URL.revokeObjectURL(a.href);
+    a.remove();
+  }
+  // --- end export helpers ---
 
   handleCharacterTypeClick = (k, v, append) => {
     if (append) {
@@ -311,6 +359,9 @@ class App extends Component {
 
         <Grid item xs={12} sm={9}>
           <Paper>
+            <div style={{display:'flex', justifyContent:'flex-end', padding:'8px'}}>
+              <button onClick={this.handleDownloadSVG}>Download SVG</button>
+            </div>
             <StorylineChart
               xAxisData={jonasAllowedYears}
               data={storylines}
@@ -330,3 +381,4 @@ class App extends Component {
 }
 
 export default App;
+
