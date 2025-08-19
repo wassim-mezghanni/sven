@@ -146,7 +146,7 @@ const DatesSelect = ({data, onChange}) =>
   </div>
 
 // Restrict to Jonas timeline years
-const jonasAllowedYears = ['1888', '1890', '1904', '1910', '1911', '1920', '1921', '1953', '1954', '1971', '1986', '1987', '2019', '2020', '2021', '2023', '2040', '2041', '2052', '2053'];
+const jonasAllowedYears = ['1920', '1921', '1953', '1954', '1971', '1986', '1987', '2019', '2020', '2021', '2052', '2053'];
 const dates = Map(jonasAllowedYears.map(year => [year, false]));
 
 
@@ -312,7 +312,8 @@ class App extends Component {
         <Grid item xs={12} sm={9}>
           <Paper>
             <StorylineChart
-              xAxisData={marthaAllowe    data={storjylines}
+              xAxisData={jonasAllowedYears}
+              data={storylines}
               height={Math.max(10*(ymax - ymin), 50)}
               color={d => familyColorScale(familyColorKey(d.key))}
               lineLabel={d => d.key}
