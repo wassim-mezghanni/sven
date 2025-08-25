@@ -1,0 +1,97 @@
+\documentclass[a4paper,UKenglish,cleveref, autoref, thm-restate]{lipics-v2021}
+%This is a template for producing LIPIcs articles. 
+%See lipics-v2021-authors-guidelines.pdf for further information.
+%for A4 paper format use option "a4paper", for US-letter use option "letterpaper"
+%for british hyphenation rules use option "UKenglish", for american hyphenation rules use option "USenglish"
+%for section-numbered lemmas etc., use "numberwithinsect"
+%for enabling cleveref support, use "cleveref"
+%for enabling autoref support, use "autoref"
+%for anonymousing the authors (e.g. for double-blind review), add "anonymous"
+%for enabling thm-restate support, use "thm-restate"
+%for enabling a two-column layout for the author/affilation part (only applicable for > 6 authors), use "authorcolumns"
+%for producing a PDF according the PDF/A standard, add "pdfa"
+
+
+%\pdfoutput=1 %uncomment to ensure pdflatex processing (mandatatory e.g. to submit to arXiv)
+%\hideLIPIcs  %uncomment to remove references to LIPIcs series (logo, DOI, ...), e.g. when preparing a pre-final version to be uploaded to arXiv or another public repository
+
+%\graphicspath{{./graphics/}}%helpful if your graphic files are in another directory
+\bibliographystyle{plainurl}% LIPIcs-required bibstyle
+
+\title{Temporal Entanglements in Dark: A 360$^\circ$ Storyline Visualization for GD'25}
+
+\author{Wassim Mezghanni}{Technical University of Munich, Germany}{email}{[orcid]}{}
+
+\authorrunning{W. Mezghanni} % LIPIcs running author
+\titlerunning{Temporal Entanglements in Dark} % LIPIcs running title
+\Copyright{Wassim Mezghanni}
+
+\keywords{storyline visualization, time travel, dynamic network, 360-degree display, Dark, SVEN, causal loops}
+
+\begin{document}
+\maketitle
+
+% No abstract per 2-page limit
+
+\section{Overview and Goals}\label{sec:overview}
+The GD'25 Creative Topic dataset models events (vertices) from \emph{Dark} with typed edges (causality, time travel, world swaps, quantum entanglement) across three worlds (Jonas, Martha, Origin) \cite{DarkGraphReddit}. The visualization is a static ultra-wide image (12288$\times$1200) designed for a 360$^\circ$ cylindrical display and unwrapped to a 10.24:1 poster.
+
+We answer: (Q1) How do causal loops traverse worlds and epochs? (Q2) Which events/characters bridge worlds or initiate apocalypses? (Q3) What minimal trigger backbone sustains the paradox cycle? The design combines classic storyline aesthetics (e.g., movie narrative charts \cite{XKCDMovieNarrative}) with dynamic storyline layout principles and guidance on vertical encodings \cite{TanahashiMa2012Storyline,Arendt2017YMatters} for readable character/event threads under extreme aspect ratio.
+
+\section{Method and Encodings}\label{sec:method}
+Data: we keep all apocalypse/quantum events, deaths, and nodes on causal paths between triggers and apocalypses; optional low-impact events are aggregated into contextual bands to reduce crossings.
+
+Ordering/placement: for each day-world slice we compute a stable order via spectral seriation with local swaps and resolve residual cycles using a feedback-arc heuristic (SVEN-inspired). Vertical positions minimize bends and enforce extra spacing around high-degree trigger/paradox-breaking events; world swaps duplicate character tokens to avoid long diagonals.
+
+Edges and nodes:
+\begin{itemize}
+  \item Nodes: circle (standard), diamond (important trigger), triangle (death); hue encodes world (Jonas=blue, Martha=magenta, Origin=gold); quantum events have a light outline.
+  \item Causality edges: semi-transparent, near-monotone curves; time-travel edges: cyan (successful) / amber (failed) with distinct dash/glow; world swaps: slim double-stroke portals annotated with character IDs; entanglement: haloed strokes.
+\end{itemize}
+
+360$^\circ$ mapping: global ordinal time maps to angle and unwraps linearly to the x-axis; worlds occupy horizontal macro-bands (top: Jonas, mid: Martha, bottom: Origin) with an \emph{Origin Fold} glyph at the bifurcation. Subtle sinusoidal micro-oscillations on character lines improve trackability and reduce moiré.
+
+Guiding questions: Q1 loop clusters appear as knot-like motifs where backward time-travel arcs intersect forward chains; entanglement edges mark creation/resolution of paradoxes. Q2 bridge characters manifest as high-betweenness trajectories crossing world bands via swap portals. Q3 a directed-Steiner extraction highlights a sparse, saturated backbone supporting the overall mesh.
+
+Output: the final poster is a single PNG at 12288$\times$1200. A matching legend band is placed at the far left/right margins to leverage peripheral viewing in the arena.
+
+%\section{Conclusion}\label{sec:conclusion}
+%In brief: a static yet immersion-aware storyline view that reinterprets time as angle and worlds as strata, emphasizing non-linear causality in \emph{Dark} within the contest constraints.
+
+\bibliography{references}
+
+% Sample BibTeX entries (place into references.bib):
+% @inproceedings{Arendt2017YMatters,
+%   author = {Dustin Arendt and Meg Pirrung},
+%   title = {The "y" of it Matters, Even for Storyline Visualization},
+%   booktitle = {IEEE VAST},
+%   year = {2017}
+% }
+% @inproceedings{DesignConsiderationsStoryline,
+%   author = {Author(s)},
+%   title = {Design Considerations for Optimizing Storyline Visualizations},
+%   booktitle = {Proceedings ...},
+%   year = {Year}
+% }
+% @inproceedings{TanahashiMa2012Storyline,
+%   author = {Y. Tanahashi and K.-L. Ma},
+%   title = {Design Considerations for Optimizing Storyline Visualizations},
+%   booktitle = {IEEE TVCG (InfoVis)},
+%   year = {2012}
+% }
+% @misc{XKCDMovieNarrative,
+%   author = {Randall Munroe},
+%   title = {Movie Narrative Charts},
+%   howpublished = {xkcd.com/657},
+%   year = {2009}
+% }
+% @misc{DarkGraphReddit,
+%   author = {aldersonloop59},
+%   title = {Dark Graph Visualization},
+%   howpublished = {Reddit /r/dark},
+%   year = {2023}
+% }
+
+\end{document}
+
+

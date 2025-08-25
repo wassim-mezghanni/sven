@@ -1,0 +1,68 @@
+\documentclass[a4paper,UKenglish]{lipics-v2021}
+
+\title{Temporal Entanglements in \emph{Dark}: A 360° Storyline Visualization for GD'25}
+
+\author{Wassim Mezghanni}{Technical University of Munich, Germany}{email}{[orcid]}{}
+\author{Second Author}{Affiliation, Country}{email}{[orcid]}{}
+
+\Copyright{W. Mezghanni and Second Author}
+\keywords{storyline visualization, time travel, dynamic network, 360-degree display, Dark, causal loops}
+
+\begin{document}
+\maketitle
+
+\section*{Overview}
+The Netflix series \emph{Dark} is a dense web of timelines, family ties, and paradoxes. Its dataset of events and edges provides a rare opportunity to study narrative causality in a graph-theoretic way. Our submission proposes a static visualization designed for the 12288$\times$1200 canvas of the Nörrköping Decision Arena.  
+
+The guiding questions are:  
+(Q1) How do causal loops traverse worlds and epochs?  
+(Q2) Which characters and events act as bridges between worlds?  
+(Q3) What minimal trigger backbone sustains the paradox cycle?  
+
+We present a cylindrical storyline design: time unfolds as a circle (unwrapped for submission), while worlds are separated into horizontal strata. Time travel arcs, swaps, and paradoxes are emphasized with distinct visual encodings that exploit the immersive 360° display.
+
+\section*{Design Concept}
+\textbf{World bands.} Jonas, Martha, and Origin worlds occupy horizontal macro-bands. A central glyph marks the ``Origin Fold'' where bifurcation occurs.  
+
+\textbf{Time as angle.} Events are placed by chronological order around an implicit cylinder, then unwrapped into the wide static image. This layout lets loops and paradoxes appear as visible knots of overlapping arcs.  
+
+\textbf{Characters.} Each variant (e.g.\ Jonas (J), Jonas (M)) is drawn as a polyline across events. Temporal jumps split threads, while world swaps introduce portals between bands.  
+
+\textbf{Event encoding.}  
+\begin{itemize}
+  \item Shape: circle (standard), diamond (trigger), triangle (death).  
+  \item Hue: world identity (blue, magenta, gold).  
+  \item Glow: quantum entanglement events.  
+\end{itemize}
+
+\textbf{Edges.}  
+\begin{itemize}
+  \item Normal causality: transparent Bézier curves following local $y$ structure.  
+  \item Time travel: backward arcs in cyan (successful) or amber (failed).  
+  \item World swap: double-stroked connectors with labels.  
+  \item Entanglement / causality breaks: dashed, glowing strokes.  
+\end{itemize}
+
+\section*{Methodological Notes}
+\textbf{Foundation.} Our design builds on storyline visualization concepts introduced by Tanahashi and Ma \cite{TanahashiMa2012Storyline}, and extends them with SVEN-inspired layout choices from Arendt and Pirrung’s study on the role of the $y$-axis in storyline readability \cite{Arendt2017YMatters}.  
+
+\textbf{Data transformation.} The contest dataset was provided as CSV files. To align with the input requirements of the algorithms, we transformed these into JSON files, one per world (Jonas, Martha, Origin), mirroring the structure of interaction sessions used in prior storyline optimization studies.  
+
+\textbf{Filtering.} We retain all apocalypse, entanglement, and death events, plus causal paths that connect them. Minor filler events are aggregated to reduce crossings.  
+
+\textbf{Ordering.} Within each day-world slice, characters are ordered using seriation heuristics to minimize crossings while preserving continuity.  
+
+\textbf{Vertical placement.} Vertical ($y$) positioning balances straight lines, spacing around high-degree triggers, and clustering of minor events. This is consistent with design guidelines emphasizing wiggle minimization and consistent meaning of the $y$-axis.  
+
+\textbf{Backbone extraction.} A directed Steiner tree identifies the minimal set of edges connecting origin events to apocalypses. These are highlighted with saturated strokes to reveal the ``paradox scaffold.''  
+
+\section*{Answers to Q1--Q3}
+(Q1) Loops emerge as concentric knot-like motifs where forward causality and backward travel intersect.  
+(Q2) Bridge characters, such as Jonas and martha, are visible as trajectories that cross world bands via swap portals.  
+(Q3) The saturated backbone edges form a sparse scaffold: a minimal cycle of triggers sustaining the paradox.  
+
+\section*{Conclusion}
+Our design translates the complexity of \emph{Dark} into a 360° narrative map, exploiting the arena’s panoramic setting while remaining legible as a static wide image. It highlights paradox loops, bridge characters, and the hidden causal backbone. By grounding our approach in storyline visualization research and SVEN-inspired layout optimization, we ensure both narrative fidelity and visual clarity.  
+
+\bibliography{references}
+\end{document}
