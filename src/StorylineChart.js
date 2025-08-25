@@ -226,8 +226,9 @@ const storylineLayers = [
       paths_merge.select('text')
         .style('fill', d => color && color(d))
         .text(d => lineLabel ? lineLabel(d) : d.key)
-        .attr('x', d => x(d.values[d.values.length - 1].x) + padding)
-        .attr('y', d => y(d.values[d.values.length - 1].y));
+        .attr('text-anchor', 'end')
+        .attr('x', 0)
+        .attr('y', d => y(d.values[0].y));
 
       paths.exit()
         .remove();
@@ -248,7 +249,7 @@ const StorylineChart = props =>
     init={storylinesInit}
     layers={storylineLayers}
     {...props}
-    margin={{top: 30, right: 135, bottom: 25, left: 20}}
+    margin={{top: 30, right: 20, bottom: 25, left: 135}}
     className='storylines-chart'
   />;
 
