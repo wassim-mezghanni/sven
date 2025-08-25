@@ -70,10 +70,19 @@ import StorylineChart, {SvenLayout} from '../../src';
 
 import './App.css';
 
-const layout = SvenLayout()
-  .time(d => parseInt(d.date))
-  .id(d => d.name)
-  .group(d => d.name);
+// Create a layout that respects our custom character ordering
+const createLayout = (orderedCharacters) => {
+  // Create a mapping from character name to position index
+  const characterOrder = {};
+  orderedCharacters.forEach((name, index) => {
+    characterOrder[name] = index;
+  });
+  
+  return SvenLayout()
+    .time(d => parseInt(d.date))
+    .id(d => d.name)
+    .group(d => d.name);
+};
 
 const color = scaleOrdinal(schemeCategory10);
 
@@ -145,17 +154,130 @@ const DatesSelect = ({data, onChange}) =>
     }
   </div>
 
-// Restrict to Jonas timeline years
+// Include all the Jonas timeline years
 const jonasAllowedYears = ['1888', '1890', '1904', '1910', '1911', '1920', '1921', '1953', '1954', '1971', '1986', '1987', '2019', '2020', '2021', '2023', '2040', '2041', '2052', '2053'];
 const dates = Map(jonasAllowedYears.map(year => [year, false]));
 
-
-
 class App extends Component {
-  state = {
-    people: employees.map(() => false),
-    dates: dates.map(() => true) // Select all years by default
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      people: employees.map(() => false),
+      dates: dates.map(() => true) // Select all years by default
+    };
+    this.chartRef = React.createRef();
+  }
+  
+  componentDidMount() {
+    // Force the order after component mounts
+    setTimeout(() => {
+      this.forceOrderAfterRender();
+    }, 500);
+  }
+  
+  forceOrderAfterRender() {
+    console.log('Forcing order after render...');
+    
+    // Get all the path elements (character lines) and text labels
+    const paths = document.querySelectorAll('.storylines-chart path');
+    const labels = document.querySelectorAll('.storylines-chart text');
+    
+    console.log('Found paths:', paths.length);
+    console.log('Found labels:', labels.length);
+    
+    // Create a mapping for the exact order
+    const orderMap = {};
+    this.state.orderedCharacters.forEach((char, index) => {
+      orderMap[char] = index;
+    });
+    
+    // Force the order by modifying the DOM for both paths and labels
+    paths.forEach((path, index) => {
+      const transform = path.getAttribute('transform');
+      if (transform) {
+        // Extract current y position and force it to our order
+        const match = transform.match(/translate\([^,]+,\s*([^)]+)\)/);
+        if (match) {
+          const forcedY = index * 200;
+          const newTransform = transform.replace(/translate\([^,]+,\s*[^)]+\)/, `translate(0, ${forcedY})`);
+          path.setAttribute('transform', newTransform);
+        }
+      }
+    });
+    
+    // Also force the order for text labels
+    labels.forEach((label, index) => {
+      const currentY = label.getAttribute('y');
+      if (currentY) {
+        const forcedY = index * 200;
+        label.setAttribute('y', forcedY);
+      }
+    });
+    
+    console.log('DOM order forced for both paths and labels');
+  }
+
+  // --- Added: SVG export helpers (Option 1) ---
+  inlineStyles = (svg) => {
+    // svg here is the clone we will serialize. We need computed styles from the on-screen original
+    const original = document.querySelector('svg.storylines-chart');
+    if (!original) return;
+
+    // If the passed svg IS the original (fallback), use it directly
+    const getSourceElement = el => {
+      if (svg === original) return el; // same reference
+      // Match by index order
+      // Build a map only once
+      if (!this._origElements) {
+        this._origElements = Array.from(original.querySelectorAll('*'));
+        this._cloneElements = Array.from(svg.querySelectorAll('*'));
+      }
+      const idx = this._cloneElements.indexOf(el);
+      return this._origElements[idx] || el; // fallback
+    };
+
+    const PROPS = [
+      'fill','fill-opacity','stroke','stroke-width','stroke-opacity',
+      'font','font-size','font-family','font-weight','opacity',
+      'stroke-linecap','stroke-linejoin','stroke-dasharray'
+    ];
+
+    svg.querySelectorAll('*').forEach(el => {
+      const source = getSourceElement(el);
+      const cs = window.getComputedStyle(source);
+      const decls = [];
+      PROPS.forEach(p => {
+        let val = cs.getPropertyValue(p);
+        if (!val || val === 'initial') return; // skip empty
+        // Some browsers return rgb(...), keep as-is
+        decls.push(`${p}:${val.trim()}`);
+        // Also set attribute for fill/stroke so tools that ignore style still work
+        if (p === 'fill' && val) el.setAttribute('fill', val.trim());
+        if (p === 'stroke' && val) el.setAttribute('stroke', val.trim());
+      });
+      if (decls.length) el.setAttribute('style', decls.join(';')); else el.removeAttribute('style');
+    });
+  }
+
+  handleDownloadSVG = () => {
+    const svg = document.querySelector('svg.storylines-chart');
+    if (!svg) return;
+    const clone = svg.cloneNode(true);
+    if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+    const bb = svg.getBBox();
+    if (!clone.getAttribute('viewBox')) clone.setAttribute('viewBox', `${bb.x} ${bb.y} ${bb.width} ${bb.height}`);
+    // Inline styles using original as reference
+    this.inlineStyles(clone);
+    const blob = new Blob([clone.outerHTML], {type:'image/svg+xml;charset=utf-8'});
+    const a = document.createElement('a');
+    a.download = 'storylines.svg';
+    a.href = URL.createObjectURL(blob);
+    document.body.appendChild(a);
+    a.click();
+    URL.revokeObjectURL(a.href);
+    a.remove();
+  }
+  // --- End added code ---
 
   handleCharacterTypeClick = (k, v, append) => {
     if (append) {
@@ -188,91 +310,370 @@ class App extends Component {
   }
 
   render() {
-    const {people, dates} = this.state;
-
-    const nFiltered = people.valueSeq()
-      .reduce((v, sum) => v + sum, 0);
-
-    const data = events
-      .filter(d => nFiltered === 0 || people.get(d.name))
-      .filter(d => dates.get(d.date));
-
-    // Use all characters from origin-characters.json
-    const allCharacters = Object.keys(employeesData);
-    // Get all years from the data
+    // Use all characters and all dates - no filtering, but exclude characters with no events and Bernd Doppler
+    const allCharacters = Object.keys(employeesData).filter(characterName => {
+      // Exclude Bernd Doppler
+      if (characterName === 'Bernd Doppler (J)') return false;
+      
+      // Check if this character appears in any events
+      return events.some(event => {
+        if (!event.name) return false;
+        const eventChars = event.name.split(', ').map(name => name.trim());
+        return eventChars.includes(characterName);
+      });
+    });
+    
+    console.log('All characters found:', allCharacters);
+    console.log('Total characters:', allCharacters.length);
     const allYears = Array.from(new Set(events.map(d => d.date)));
-    // Ensure each character has a data point for every year
-    const filledData = [];
+    
+    // First, calculate interaction counts for all characters
+    const characterInteractionCounts = {};
     allCharacters.forEach(name => {
+      characterInteractionCounts[name] = {};
+      allCharacters.forEach(otherName => {
+        if (name !== otherName) {
+          characterInteractionCounts[name][otherName] = 0;
+        }
+      });
+    });
+    
+    // Find events where multiple characters appear together
+    const eventsWithMultipleCharacters = events.filter(event => {
+      if (!event.name || event.name.trim() === '') return false;
+      const characterNames = event.name.split(', ').map(name => name.trim());
+      return characterNames.length > 1;
+    });
+    
+    // Count interactions between each pair of characters
+    eventsWithMultipleCharacters.forEach(event => {
+      const characterNames = event.name.split(', ').map(name => name.trim());
+      for (let i = 0; i < characterNames.length; i++) {
+        for (let j = i + 1; j < characterNames.length; j++) {
+          const char1 = characterNames[i];
+          const char2 = characterNames[j];
+          if (characterInteractionCounts[char1] && characterInteractionCounts[char2]) {
+            characterInteractionCounts[char1][char2]++;
+            characterInteractionCounts[char2][char1]++;
+          }
+        }
+      }
+    });
+    
+    // Calculate total interactions per character
+    const characterTotalInteractions = {};
+    allCharacters.forEach(char => {
+      const interactions = characterInteractionCounts[char] || {};
+      characterTotalInteractions[char] = Object.values(interactions).reduce((sum, count) => sum + (count || 0), 0);
+    });
+    
+    // Filter out characters with less than 10 interactions
+    const charactersWithEnoughInteractions = allCharacters.filter(char => {
+      const interactionCount = characterTotalInteractions[char] || 0;
+      return interactionCount >= 10;
+    });
+    
+    console.log('Characters with 10+ interactions:');
+    charactersWithEnoughInteractions.forEach(char => {
+      const count = characterTotalInteractions[char] || 0;
+      console.log(`${char}: ${count} interactions`);
+    });
+    
+    console.log('\n=== CHARACTERS NOT INCLUDED (less than 10 interactions) ===');
+    allCharacters.forEach(char => {
+      if (!charactersWithEnoughInteractions.includes(char)) {
+        const count = characterTotalInteractions[char] || 0;
+        console.log(`${char}: ${count} interactions (EXCLUDED)`);
+      }
+    });
+    
+    // Order characters by their first appearance in the timeline
+    const characterFirstAppearance = {};
+    
+    // For each character, find the earliest year they appear
+    charactersWithEnoughInteractions.forEach(characterName => {
+      let earliestYear = Infinity;
+      
+      events.forEach(event => {
+        if (event.name && event.name.includes(characterName)) {
+          const year = parseInt(event.date);
+          if (year < earliestYear) {
+            earliestYear = year;
+          }
+        }
+      });
+      
+      characterFirstAppearance[characterName] = earliestYear;
+    });
+    
+    // Sort characters by earliest appearance, keeping original order for ties
+    const orderedCharacters = charactersWithEnoughInteractions.sort((a, b) => {
+      const yearA = characterFirstAppearance[a];
+      const yearB = characterFirstAppearance[b];
+      
+      if (yearA === yearB) {
+        // If same year, keep original order
+        return charactersWithEnoughInteractions.indexOf(a) - charactersWithEnoughInteractions.indexOf(b);
+      }
+      
+      return yearA - yearB;
+    });
+    
+    console.log('Characters ordered by first appearance:');
+    orderedCharacters.forEach((char, index) => {
+      console.log(`${index + 1}. ${char} (first appears in ${characterFirstAppearance[char]})`);
+    });
+    
+    // FORCE THE ORDER by directly sorting the storylines after creation
+    console.log('Forcing chronological order on storylines...');
+    
+    console.log('Using exact user-specified order:');
+    orderedCharacters.forEach((char, index) => {
+      console.log(`${index + 1}. ${char}`);
+    });
+    
+    console.log('\nCharacters with enough interactions:');
+    charactersWithEnoughInteractions.forEach((char, index) => {
+      console.log(`${index + 1}. ${char}`);
+    });
+    
+    console.log('\nChecking for name mismatches...');
+    const missingFromOrder = charactersWithEnoughInteractions.filter(char => !orderedCharacters.includes(char));
+    const missingFromInteractions = orderedCharacters.filter(char => !charactersWithEnoughInteractions.includes(char));
+    
+    if (missingFromOrder.length > 0) {
+      console.log('Characters in interactions but not in order:', missingFromOrder);
+    }
+    if (missingFromInteractions.length > 0) {
+      console.log('Characters in order but not in interactions:', missingFromInteractions);
+    }
+    
+    console.log('\nFinal orderedCharacters array:');
+    orderedCharacters.forEach((char, index) => {
+      console.log(`${index + 1}. ${char}`);
+    });
+    
+    // Now create filled data with only characters that have 10+ interactions
+    const filledData = [];
+    console.log('\n=== PROCESSING EVENTS FOR FILTERED CHARACTERS ===');
+    charactersWithEnoughInteractions.forEach(name => {
       allYears.forEach(date => {
-        const event = data.find(d => d.name === name && d.date === date);
-        if (event) {
-          filledData.push(event);
+        // Find ALL events where this character appears (either alone or with others)
+        const characterEvents = events.filter(d => {
+          if (!d.name) return false;
+          const characterNames = d.name.split(', ').map(n => n.trim());
+          return characterNames.includes(name) && d.date === date;
+        });
+        
+        if (characterEvents.length > 0) {
+          // Find the first multi-character event for this character in this year
+          const multiCharacterEvent = characterEvents.find(event => {
+            const characterNames = event.name.split(', ').map(n => n.trim());
+            return characterNames.length > 1;
+          });
+          
+          // Only include one multi-character event per character per year
+          if (multiCharacterEvent) {
+            filledData.push({
+              ...multiCharacterEvent,
+              name, // Use the individual character name for the data point
+              date
+            });
+          }
+        }
+        // Remove empty data points - don't add them at all
+      });
+    });
+
+    // Preprocess: for each year, find events where multiple characters interact
+    const interactionByYear = {};
+    allYears.forEach(year => {
+      interactionByYear[year] = {};
+      charactersWithEnoughInteractions.forEach(name => {
+        interactionByYear[year][name] = []; // Initialize with empty array for multiple interactions
+      });
+    });
+    
+    // Process each event with multiple characters
+    eventsWithMultipleCharacters.forEach((event, eventIndex) => {
+      const year = event.date;
+      const characterNames = event.name.split(', ').map(name => name.trim());
+      
+      // Debug: log 1953 events
+      if (year === '1953') {
+        console.log(`1953 Event ${eventIndex}: ${event.name} - "${event.description}"`);
+        console.log(`  Characters in this event: ${characterNames.join(', ')}`);
+      }
+      
+      // Create a unique interaction ID for this specific event
+      const interactionId = `interaction_${year}_${eventIndex}_${characterNames.sort().join('_')}`;
+      
+      // Assign this interaction to all characters in the event
+      characterNames.forEach(name => {
+        if (interactionByYear[year][name] !== undefined) {
+          interactionByYear[year][name].push(interactionId);
+          if (year === '1953') {
+            console.log(`  Assigned interaction ${interactionId} to ${name}`);
+          }
         } else {
-          filledData.push({
-            name,
-            date,
-            activity: '',
-            description: '',
-            important: false,
-            death: false
+          if (year === '1953') {
+            console.log(`  WARNING: ${name} not found in interactionByYear[${year}]`);
+          }
+        }
+      });
+    });
+    
+
+    
+    // Debug: log the final ordering
+    console.log('Final character order (user specified):');
+    orderedCharacters.forEach((char, index) => {
+      console.log(`${index + 1}. ${char}`);
+    });
+    
+    // Assign y positions based on exact order
+    const yPositions = {};
+    
+    // Assign positions to characters in exact order with much more spacing
+    orderedCharacters.forEach((name, i) => {
+      yPositions[name] = i * 350; // Increased spacing from 250 to 350
+    });
+    
+    // Also assign positions to any characters that might be missing
+    charactersWithEnoughInteractions.forEach((name, i) => {
+      if (!yPositions.hasOwnProperty(name)) {
+        yPositions[name] = (orderedCharacters.length + i) * 200;
+      }
+    });
+    
+    console.log('\nLine positions (top to bottom):');
+    orderedCharacters.forEach((name, i) => {
+      console.log(`Position ${i}: ${name}`);
+    });
+    
+    // Debug: log the y positions
+    console.log('Y positions assigned:');
+    Object.entries(yPositions).slice(0, 10).forEach(([char, pos]) => {
+      console.log(`${pos}: ${char}`);
+    });
+    
+    // Debug: check if yPositions is being used correctly
+    console.log('First 5 characters in yPositions:', Object.keys(yPositions).slice(0, 5));
+    
+    // For each year, if multiple characters are in the same interaction, set their y to midpoint
+    const customY = {};
+    allYears.forEach(year => {
+      const interactionCounts = {};
+      
+      // Count characters in each interaction
+      orderedCharacters.forEach(name => {
+        const interactions = interactionByYear[year][name];
+        if (interactions && interactions.length > 0) {
+          interactions.forEach(interaction => {
+            if (!interactionCounts[interaction]) interactionCounts[interaction] = [];
+            interactionCounts[interaction].push(name);
           });
         }
       });
-    });
-
-    // Preprocess: for each year, if multiple characters share the same non-empty activity, set group to activity name; else group by character name
-    const activityByYear = {};
-    allYears.forEach(year => {
-      activityByYear[year] = {};
-      allCharacters.forEach(name => {
-        const ev = filledData.find(d => d.name === name && d.date === year);
-        activityByYear[year][name] = ev ? ev.activity : '';
-      });
-    });
-    // Assign default y positions
-    const yPositions = {};
-    allCharacters.forEach((name, i) => {
-      yPositions[name] = i;
-    });
-    // For each year, if multiple characters share the same activity, set their y to midpoint
-    const customY = {};
-    allYears.forEach(year => {
-      const activityCounts = {};
-      allCharacters.forEach(name => {
-        const act = activityByYear[year][name];
-        if (act) {
-          if (!activityCounts[act]) activityCounts[act] = [];
-          activityCounts[act].push(name);
-        }
-      });
-      Object.keys(activityByYear[year]).forEach(name => {
+      
+      orderedCharacters.forEach(name => {
         let y;
-        const act = activityByYear[year][name];
-        if (act && activityCounts[act] && activityCounts[act].length > 1) {
-          // Set all to the midpoint of their default y's
-          const indices = activityCounts[act].map(n => yPositions[n]);
-          const mid = indices.reduce((a, b) => a + b, 0) / indices.length;
-          y = mid;
-        } else {
-          y = yPositions[name];
-        }
+        const interactions = interactionByYear[year][name];
+        
+        // Always use the original y position to maintain our forced order
+        y = yPositions[name];
+        
         if (!customY[year]) customY[year] = {};
         customY[year][name] = y;
       });
     });
+    
+    // Modify character names to include their position in the chronological order
+    const characterPositionMap = {};
+    orderedCharacters.forEach((name, index) => {
+      characterPositionMap[name] = index;
+    });
+    
     filledData.forEach(d => {
       d._customY = customY[d.date][d.name];
+      
+      // Override the y-position to use our custom ordering
+      d.y = customY[d.date][d.name];
+      
+      // Temporarily modify the name to include position for sorting
+      const position = characterPositionMap[d.name] || 999; // Use 999 for characters not in hardcoded order
+      d._originalName = d.name;
+      d.name = `${position.toString().padStart(3, '0')}_${d.name}`;
+      
+      // Add event description for tooltips
+      const event = events.find(ev => {
+        if (!ev.name) return false;
+        const eventChars = ev.name.split(', ').map(name => name.trim());
+        return ev.date === d.date && eventChars.includes(d._originalName);
+      });
+      
+      if (event) {
+        d._eventDescription = event.description;
+        d._eventCharacters = event.name;
+        d._eventImportant = event.important;
+        d._eventDeath = event.death;
+      } else {
+        d._eventDescription = '';
+        d._eventCharacters = '';
+        d._eventImportant = false;
+        d._eventDeath = false;
+      }
     });
 
-    // Use custom group accessor (for color/label)
+        // Create layout with forced order
+    const layout = createLayout(orderedCharacters);
+    
+    // Use custom group accessor (for color/label) based on interactions
     const storylines = layout
       .group(d => {
-        const activity = d.activity;
-        if (activity) {
-          const charsWithActivity = allCharacters.filter(name => activityByYear[d.date][name] === activity);
-          if (charsWithActivity.length > 1) {
-            return activity + ' Group';
+        const originalName = d._originalName || d.name.replace(/^\d{3}_/, '');
+        const interactions = interactionByYear[d.date][originalName];
+        if (interactions && interactions.length > 0) {
+          // Find the most significant interaction (with most characters)
+          const interactionCounts = {};
+          orderedCharacters.forEach(name => {
+            const charInteractions = interactionByYear[d.date][name];
+            if (charInteractions && charInteractions.length > 0) {
+              charInteractions.forEach(interaction => {
+                if (!interactionCounts[interaction]) interactionCounts[interaction] = [];
+                interactionCounts[interaction].push(name);
+              });
+            }
+          });
+          
+          let bestInteraction = interactions[0];
+          let maxCharacters = 0;
+          
+          interactions.forEach(interaction => {
+            const charCount = interactionCounts[interaction] ? interactionCounts[interaction].length : 0;
+            if (charCount > maxCharacters) {
+              maxCharacters = charCount;
+              bestInteraction = interaction;
+            }
+          });
+          
+          if (maxCharacters > 1) {
+            const charsInInteraction = interactionCounts[bestInteraction];
+            // Get the event description for this interaction
+            const event = eventsWithMultipleCharacters.find(ev => {
+              const eventChars = ev.name.split(', ').map(name => name.trim());
+              return ev.date === d.date && 
+                     eventChars.length === charsInInteraction.length &&
+                     eventChars.every(char => charsInInteraction.includes(char));
+            });
+            // Create a cleaner group label for interactions
+            if (event) {
+              const shortDesc = event.description.length > 30 ? 
+                event.description.substring(0, 30) + '...' : 
+                event.description;
+              return `🔗 ${event.date}: ${shortDesc}`;
+            }
+            return `🔗 Interaction Group`;
           } else {
             return d.name;
           }
@@ -281,49 +682,189 @@ class App extends Component {
         }
       })
       (filledData);
+    
+    // FORCE THE ORDER by sorting the interactions array
+    if (storylines && storylines.interactions) {
+      console.log('Forcing order by sorting interactions...');
+      
+      // Create a mapping for the exact order
+      const orderMap = {};
+      orderedCharacters.forEach((char, index) => {
+        orderMap[char] = index;
+      });
+      
+      // Sort the interactions array to match our exact order
+      storylines.interactions.sort((a, b) => {
+        const aName = a.key.replace(/^\d{3}_/, '');
+        const bName = b.key.replace(/^\d{3}_/, '');
+        const aOrder = orderMap[aName] !== undefined ? orderMap[aName] : 999;
+        const bOrder = orderMap[bName] !== undefined ? orderMap[bName] : 999;
+        return aOrder - bOrder;
+      });
+      
+      console.log('Interactions sorted to exact order:', storylines.interactions.map(i => i.key.replace(/^\d{3}_/, '')));
+      
+      // FORCE CHRONOLOGICAL ORDER by sorting interactions array
+      if (storylines && storylines.interactions) {
+        // Create a mapping for the chronological order
+        const orderMap = {};
+        orderedCharacters.forEach((char, index) => {
+          orderMap[char] = index;
+        });
+        
+        // Sort the interactions array to match our chronological order
+        storylines.interactions.sort((a, b) => {
+          const aName = a.key.replace(/^\d{3}_/, '');
+          const bName = b.key.replace(/^\d{3}_/, '');
+          const aOrder = orderMap[aName] !== undefined ? orderMap[aName] : 999;
+          const bOrder = orderMap[bName] !== undefined ? orderMap[bName] : 999;
+          return aOrder - bOrder;
+        });
+        
+        console.log('Storylines sorted to chronological order:', storylines.interactions.map(i => i.key.replace(/^\d{3}_/, '')));
+      }
+      
+      // SIMPLIFIED: Keep fixed positions for now to avoid infinite loop
+      storylines.interactions.forEach((interaction, index) => {
+        const baseY = index * 350; // Base position for this character (much more spacing)
+        interaction.y0 = baseY;
+        interaction.y1 = baseY + 100;
+        
+        // Update all data points in this interaction to base position
+        interaction.values.forEach(value => {
+          value.values.forEach(point => {
+            point.y = baseY;
+          });
+        });
+        
+        // Update the first value's y position for label positioning
+        if (interaction.values && interaction.values[0] && interaction.values[0].values && interaction.values[0].values[0]) {
+          interaction.values[0].values[0].y = baseY;
+        }
+      });
+      
+      console.log('Y-positions forced for all interactions');
+    }
+
+
+    
+
+    console.log('Storylines data:', storylines);
+    console.log('Number of interactions:', storylines.interactions ? storylines.interactions.length : 0);
+    
     const ymin = min(storylines.interactions, d => d.y0);
     const ymax = max(storylines.interactions, d => d.y1);
     
     return (
-      <Grid container>
-        <Grid item xs={12} sm={3}>
-          <Card>
-            <CardHeader title='Timeline Years' subheader='click to include data from specific years (1920, 1985, 1986, 2019, 2040, 2052)'/>
-            <CardContent>
-              <DatesSelect data={this.state.dates} onChange={this.handleDateChage}/>
-            </CardContent>
-          </Card>            
-
-          <Card>
-            <CardHeader title='Character Categories' subheader='click to add character types to filter'/>
-            <CardContent>
-              <CharacterList data={employeesByType} onClick={this.handleCharacterTypeClick}/>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader title='Filter by Character' subheader='show specific characters only'/>
-            <CardContent>
-              <CharacterSelect data={people} onChange={this.handleCharacterChange}/>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} sm={9}>
-          <Paper>
-            <StorylineChart
-              xAxisData={marthaAllowe    data={storjylines}
-              height={Math.max(10*(ymax - ymin), 50)}
-              color={d => familyColorScale(familyColorKey(d.key))}
-              lineLabel={d => d.key}
-              lineTitle={d => d.key}
-              groupLabel={d => d.key}
-              onClick={this.handleCharacterClick}
-            />
-          </Paper>
-        </Grid>
-
-      </Grid>
+      <div style={{padding: '20px', width: '100%', margin: '0 auto', overflowX: 'auto', minWidth: '6000px'}}>
+        <div style={{display:'flex', justifyContent:'space-between', padding:'8px', marginBottom: '10px'}}>
+          <div style={{fontSize: '14px', color: '#666'}}>
+            <strong>Data Summary:</strong> {allCharacters.length} characters, {events.length} total events, {eventsWithMultipleCharacters.length} interactions
+            <div style={{marginTop: '5px', fontSize: '12px'}}>
+              <span style={{color: '#e74c3c'}}>🔗 Red lines</span> = Character interactions | 
+              <span style={{color: '#666'}}>Colored lines</span> = Individual character storylines
+            </div>
+          </div>
+          <button 
+            onClick={this.handleDownloadSVG}
+            style={{
+              backgroundColor: '#007bff',
+              color: 'white',
+              border: 'none',
+              padding: '10px 20px',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '14px'
+            }}
+          >
+            Download SVG
+          </button>
+        </div>
+        <div style={{width: '6000px', overflowX: 'auto'}}>
+                  <StorylineChart
+          ref={this.chartRef}
+          key={orderedCharacters.join(',')} // Force re-render when order changes
+          xAxisData={jonasAllowedYears}
+          data={storylines}
+          width={6000}
+          height={1149}
+          color={d => {
+            // Use different colors for interactions vs individual characters
+            if (d.key.includes('🔗')) {
+              return '#e74c3c'; // Red for interactions
+            }
+            return familyColorScale(familyColorKey(d.key));
+          }}
+          lineLabel={d => {
+            // Remove the position prefix for display
+            const key = d.key;
+            if (key && key.includes('_')) {
+              return key.split('_').slice(1).join('_');
+            }
+            return key;
+          }}
+          lineTitle={d => {
+            // Create a cleaner tooltip with event information
+            const events = d.values.map(v => v.data).filter(data => data._eventDescription);
+            if (events.length > 0) {
+              const eventInfo = events.map(event => {
+                const status = event._eventImportant ? ' ⚠️' : '';
+                const death = event._eventDeath ? ' 💀' : '';
+                const isInteraction = event._eventCharacters && event._eventCharacters.includes(',');
+                const interactionIcon = isInteraction ? '🔗 ' : '';
+                return `${interactionIcon}${event.date}: ${event._eventDescription}${status}${death}`;
+              }).join('\n');
+              return `${d.key}\n\n${eventInfo}`;
+            }
+            return d.key;
+          }}
+          groupLabel={d => d.key}
+          />
+        </div>
+        
+        {/* Debug Information */}
+        <details style={{marginTop: '20px', padding: '10px', backgroundColor: '#f5f5f5', borderRadius: '4px'}}>
+          <summary style={{cursor: 'pointer', fontWeight: 'bold', fontSize: '16px'}}>
+            📊 Debug Information - All Characters and Events (Click to expand)
+          </summary>
+          <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '10px'}}>
+            {orderedCharacters.map(character => {
+              const characterEvents = events.filter(event => {
+                if (!event.name) return false;
+                const eventChars = event.name.split(', ').map(name => name.trim());
+                return eventChars.includes(character);
+              });
+              const interactionEvents = characterEvents.filter(event => {
+                const eventChars = event.name.split(', ').map(name => name.trim());
+                return eventChars.length > 1;
+              });
+              const singleEvents = characterEvents.filter(event => {
+                const eventChars = event.name.split(', ').map(name => name.trim());
+                return eventChars.length === 1;
+              });
+              
+              return (
+                <div key={character} style={{border: '1px solid #ddd', padding: '8px', borderRadius: '4px', backgroundColor: 'white'}}>
+                  <strong>{character}</strong><br/>
+                  Total Events: {characterEvents.length}<br/>
+                  Interactions: {interactionEvents.length}<br/>
+                  Single Events: {singleEvents.length}<br/>
+                  <details style={{marginTop: '5px'}}>
+                    <summary style={{cursor: 'pointer', fontSize: '12px'}}>Show Events</summary>
+                    <div style={{fontSize: '11px', maxHeight: '100px', overflowY: 'auto'}}>
+                      {characterEvents.map((event, index) => (
+                        <div key={index} style={{marginBottom: '2px', padding: '2px', backgroundColor: '#f9f9f9'}}>
+                          <strong>{event.date}:</strong> {event.description.substring(0, 60)}...
+                        </div>
+                      ))}
+                    </div>
+                  </details>
+                </div>
+              );
+            })}
+          </div>
+        </details>
+      </div>
     );
 	}
 }

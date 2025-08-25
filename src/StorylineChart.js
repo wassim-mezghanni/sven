@@ -45,10 +45,42 @@ import ChartComponent from './ReactD3Chart';
 
 import './Storyline.css';
 
-import {scaleLinear} from 'd3-scale';
+import {scaleLinear, scalePoint} from 'd3-scale';
 import {min, max, merge} from 'd3-array';
 import {line, curveMonotoneX} from 'd3-shape';
 import {axisBottom} from 'd3-axis';
+
+/**
+ * Calculate minimum spacing needed to prevent overlapping labels
+ * @param {Array} years - Array of year values
+ * @param {Function} xScale - D3 scale function
+ * @returns {number} - Minimum spacing needed in pixels
+ */
+function calculateMinimumSpacing(years, xScale) {
+  if (years.length <= 1) return 0;
+  
+  // Calculate current spacing between consecutive years
+  const spacings = [];
+  for (let i = 1; i < years.length; i++) {
+    const currentX = xScale(years[i]);
+    const prevX = xScale(years[i - 1]);
+    spacings.push(currentX - prevX);
+  }
+  
+  // Find the minimum spacing
+  const minCurrentSpacing = Math.min(...spacings);
+  
+  // We need at least 60px between labels to prevent overlap
+  const requiredSpacing = 60;
+  
+  // If current spacing is already sufficient, return 0
+  if (minCurrentSpacing >= requiredSpacing) {
+    return 0;
+  }
+  
+  // Calculate how much extra spacing we need
+  return requiredSpacing - minCurrentSpacing;
+}
 
 const storylinesInit = ({data={}, width, height, groupLabel, xAxisData: providedXAxisData}) => {
   let {interactions=[], events=[]} = data;
@@ -61,15 +93,54 @@ const storylinesInit = ({data={}, width, height, groupLabel, xAxisData: provided
       ? providedXAxisData.map(d => +d)
       : Set(events.map(d => +d.x)).sort().toArray();
 
-    // Initial (max) padding guess based on overall width
-    let basePadding = width/xAxisData.length/3;
+    // Use original width without extra spacing to fit on screen
+    const adjustedWidth = width;
+
+    // Initial (max) padding guess based on adjusted width - maximum spacing for clear events
+    let basePadding = adjustedWidth/xAxisData.length/0.5;
 
     const minYear = Math.min.apply(null, xAxisData);
     const maxYear = Math.max.apply(null, xAxisData);
 
-    const x = scaleLinear()
-      .domain([minYear, maxYear])
-      .range([basePadding, width - basePadding]);
+    // Create custom spacing: more space for consecutive years, less for big gaps
+    const yearGaps = [];
+    for (let i = 1; i < xAxisData.length; i++) {
+      yearGaps.push(parseInt(xAxisData[i]) - parseInt(xAxisData[i-1]));
+    }
+    
+    // Calculate custom positions based on gaps
+    const customPositions = [0]; // Start at 0
+    let currentPos = 0;
+    
+    for (let i = 0; i < yearGaps.length; i++) {
+      const gap = yearGaps[i];
+      let spacing;
+      
+      if (gap <= 2) {
+        // Consecutive years or small gaps: more spacing
+        spacing = adjustedWidth / xAxisData.length * 0.8;
+      } else if (gap <= 10) {
+        // Medium gaps: moderate spacing
+        spacing = adjustedWidth / xAxisData.length * 0.4;
+      } else {
+        // Large gaps: less spacing
+        spacing = adjustedWidth / xAxisData.length * 0.2;
+      }
+      
+      currentPos += spacing;
+      customPositions.push(currentPos);
+    }
+    
+    // Scale the positions to fit the full width
+    const maxPos = Math.max(...customPositions);
+    const scaledPositions = customPositions.map(pos => 
+      basePadding + (pos / maxPos) * (adjustedWidth - 2 * basePadding)
+    );
+    
+    // Create custom scale
+    const x = scalePoint()
+      .domain(xAxisData)
+      .range(scaledPositions);
 
     // Recalculate padding so that for any consecutive x positions we guarantee
     // (x_i + padding) <= (x_{i+1} - padding). This prevents the generated point
@@ -85,7 +156,7 @@ const storylinesInit = ({data={}, width, height, groupLabel, xAxisData: provided
       const safePadding = Math.max(0, Math.min(basePadding, (minGap/2) - 1));
       if (safePadding !== basePadding) {
         // Update scale range to use the new (possibly smaller) padding
-        x.range([safePadding, width - safePadding]);
+        x.range([safePadding, adjustedWidth - safePadding]);
         basePadding = safePadding;
       }
     }
@@ -97,8 +168,9 @@ const storylinesInit = ({data={}, width, height, groupLabel, xAxisData: provided
 
     const actualHeight = Math.min(height, (ymax - ymin)*20);
 
+    // Force y-scale to match our exact order
     const y = scaleLinear()
-      .domain([ymin, ymax])
+      .domain([0, (interactions.length - 1) * 200]) // Fixed domain based on our order
       .range([actualHeight - height, -height]);
 
     const yAxisData = interactions.map(({values, y0, y1}) => ({
@@ -210,7 +282,7 @@ const storylineLayers = [
           .on('click', d => onClick(d.values.map(d => d.data)));
 
       paths_enter.append('path');
-      paths_enter.append('text');
+      // paths_enter.append('text'); // Removed character names
       paths_enter.append('title')
 
       const paths_merge = paths_enter.merge(paths)
@@ -223,11 +295,17 @@ const storylineLayers = [
         .style('stroke', d => color && color(d))
         .attr('d', d => storyline(getPoints(d)));
 
-      paths_merge.select('text')
-        .style('fill', d => color && color(d))
-        .text(d => lineLabel ? lineLabel(d) : d.key)
-        .attr('x', d => x(d.values[d.values.length - 1].x) + padding)
-        .attr('y', d => y(d.values[d.values.length - 1].y));
+      // Removed character name text labels
+      // paths_merge.select('text')
+      //   .style('fill', d => color && color(d))
+      //   .text(d => lineLabel ? lineLabel(d) : d.key)
+      //   .attr('x', d => x(d.values[0].x) - padding - 200)
+      //   .attr('y', d => y(d.values[0].y) + 25)
+      //   .style('text-anchor', 'end')
+      //   .style('dominant-baseline', 'middle')
+      //   .style('font-size', '14px')
+      //   .style('font-weight', 'bold')
+      //   .style('text-shadow', '1px 1px 2px rgba(255,255,255,0.8)');
 
       paths.exit()
         .remove();
@@ -236,9 +314,38 @@ const storylineLayers = [
   {
     name: 'x-axis',
     callback: (selection, {x, xAxisData}) => {
-      selection.call(axisBottom(x)
+      // Calculate extra spacing needed to prevent overlapping
+      const extraSpacing = calculateMinimumSpacing(xAxisData, x);
+      
+      console.log('Rendering axis with years:', xAxisData);
+      console.log('Axis domain:', x.domain());
+      console.log('Axis range:', x.range());
+      
+      // Create custom axis with all years
+      const axis = axisBottom(x)
         .tickValues(xAxisData)
-        .tickFormat(d => d));
+        .tickFormat(d => d)
+        .tickSize(2)
+        .tickPadding(2);
+      
+      selection.call(axis);
+      
+      // Customize the tick labels to prevent overlapping
+      selection.selectAll('.tick text')
+        .style('text-anchor', 'end')
+        .attr('dx', '-0.3em')
+        .attr('dy', '0.3em')
+        .attr('transform', 'rotate(-45)')
+        .style('font-size', '8px')
+        .style('font-family', 'Arial, sans-serif')
+        .style('font-weight', 'bold');
+      
+      // Adjust the axis position to accommodate rotated labels
+      selection.attr('transform', 'translate(0, 20)');
+      
+      // Log the actual tick elements created
+      const tickElements = selection.selectAll('.tick');
+      console.log('Number of tick elements created:', tickElements.size());
     }
   }      
 ];
@@ -248,7 +355,7 @@ const StorylineChart = props =>
     init={storylinesInit}
     layers={storylineLayers}
     {...props}
-    margin={{top: 30, right: 135, bottom: 25, left: 20}}
+    margin={{top: 15, right: 80, bottom: 40, left: 10}}
     className='storylines-chart'
   />;
 
