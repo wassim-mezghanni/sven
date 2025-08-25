@@ -282,7 +282,7 @@ const storylineLayers = [
           .on('click', d => onClick(d.values.map(d => d.data)));
 
       paths_enter.append('path');
-      // paths_enter.append('text'); // Removed character names
+      paths_enter.append('text');
       paths_enter.append('title')
 
       const paths_merge = paths_enter.merge(paths)
@@ -295,17 +295,8 @@ const storylineLayers = [
         .style('stroke', d => color && color(d))
         .attr('d', d => storyline(getPoints(d)));
 
-      // Removed character name text labels
-      // paths_merge.select('text')
-      //   .style('fill', d => color && color(d))
-      //   .text(d => lineLabel ? lineLabel(d) : d.key)
-      //   .attr('x', d => x(d.values[0].x) - padding - 200)
-      //   .attr('y', d => y(d.values[0].y) + 25)
-      //   .style('text-anchor', 'end')
-      //   .style('dominant-baseline', 'middle')
-      //   .style('font-size', '14px')
-      //   .style('font-weight', 'bold')
-      //   .style('text-shadow', '1px 1px 2px rgba(255,255,255,0.8)');
+      // Remove character names from the graph
+      paths_merge.select('text').remove();
 
       paths.exit()
         .remove();

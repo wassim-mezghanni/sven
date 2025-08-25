@@ -406,30 +406,36 @@ class App extends Component {
       characterFirstAppearance[characterName] = earliestYear;
     });
     
-    // Sort characters by earliest appearance, keeping original order for ties
+    // Define the specific chronological order we want
+    const chronologicalOrder = [1888, 1910, 1920, 1921, 1953, 1986];
+    
+    // Sort characters by the defined chronological order
     const orderedCharacters = charactersWithEnoughInteractions.sort((a, b) => {
       const yearA = characterFirstAppearance[a];
       const yearB = characterFirstAppearance[b];
       
-      if (yearA === yearB) {
-        // If same year, keep original order
-        return charactersWithEnoughInteractions.indexOf(a) - charactersWithEnoughInteractions.indexOf(b);
+      // Find the position of each year in our defined order
+      const orderA = chronologicalOrder.indexOf(yearA);
+      const orderB = chronologicalOrder.indexOf(yearB);
+      
+      // If both years are in our defined order, sort by that order
+      if (orderA !== -1 && orderB !== -1) {
+        return orderA - orderB;
       }
       
+      // If only one is in our defined order, prioritize it
+      if (orderA !== -1) return -1;
+      if (orderB !== -1) return 1;
+      
+      // If neither is in our defined order, sort by year
       return yearA - yearB;
     });
     
-    console.log('Characters ordered by first appearance:');
+
+    
+    console.log('Characters ordered by first appearance (chronological):');
     orderedCharacters.forEach((char, index) => {
       console.log(`${index + 1}. ${char} (first appears in ${characterFirstAppearance[char]})`);
-    });
-    
-    // FORCE THE ORDER by directly sorting the storylines after creation
-    console.log('Forcing chronological order on storylines...');
-    
-    console.log('Using exact user-specified order:');
-    orderedCharacters.forEach((char, index) => {
-      console.log(`${index + 1}. ${char}`);
     });
     
     console.log('\nCharacters with enough interactions:');
@@ -466,20 +472,21 @@ class App extends Component {
         });
         
         if (characterEvents.length > 0) {
-          // Find the first multi-character event for this character in this year
-          const multiCharacterEvent = characterEvents.find(event => {
+          // Process all events for this character in this year
+          characterEvents.forEach(event => {
             const characterNames = event.name.split(', ').map(n => n.trim());
-            return characterNames.length > 1;
+            const isMultiCharacterEvent = characterNames.length > 1;
+            
+            // Only include multi-character events (interactions)
+            if (isMultiCharacterEvent) {
+              filledData.push({
+                ...event,
+                name, // Use the individual character name for the data point
+                date
+              });
+            }
+            // Remove all single-character events - don't include them at all
           });
-          
-          // Only include one multi-character event per character per year
-          if (multiCharacterEvent) {
-            filledData.push({
-              ...multiCharacterEvent,
-              name, // Use the individual character name for the data point
-              date
-            });
-          }
         }
         // Remove empty data points - don't add them at all
       });
@@ -526,17 +533,18 @@ class App extends Component {
 
     
     // Debug: log the final ordering
-    console.log('Final character order (user specified):');
+    console.log('Final character order (chronological):');
     orderedCharacters.forEach((char, index) => {
-      console.log(`${index + 1}. ${char}`);
+      const yPosition = index * 200;
+      console.log(`${index + 1}. ${char} (first appears in ${characterFirstAppearance[char]}) - Y-position: ${yPosition}px`);
     });
     
     // Assign y positions based on exact order
     const yPositions = {};
     
-    // Assign positions to characters in exact order with much more spacing
+    // Assign positions to characters in chronological order (earliest first)
     orderedCharacters.forEach((name, i) => {
-      yPositions[name] = i * 350; // Increased spacing from 250 to 350
+      yPositions[name] = i * 200;
     });
     
     // Also assign positions to any characters that might be missing
@@ -685,15 +693,15 @@ class App extends Component {
     
     // FORCE THE ORDER by sorting the interactions array
     if (storylines && storylines.interactions) {
-      console.log('Forcing order by sorting interactions...');
+      console.log('Forcing chronological order by sorting interactions...');
       
-      // Create a mapping for the exact order
+      // Create a mapping for the chronological order
       const orderMap = {};
       orderedCharacters.forEach((char, index) => {
         orderMap[char] = index;
       });
       
-      // Sort the interactions array to match our exact order
+      // Sort the interactions array to match our chronological order
       storylines.interactions.sort((a, b) => {
         const aName = a.key.replace(/^\d{3}_/, '');
         const bName = b.key.replace(/^\d{3}_/, '');
@@ -702,33 +710,15 @@ class App extends Component {
         return aOrder - bOrder;
       });
       
-      console.log('Interactions sorted to exact order:', storylines.interactions.map(i => i.key.replace(/^\d{3}_/, '')));
-      
-      // FORCE CHRONOLOGICAL ORDER by sorting interactions array
-      if (storylines && storylines.interactions) {
-        // Create a mapping for the chronological order
-        const orderMap = {};
-        orderedCharacters.forEach((char, index) => {
-          orderMap[char] = index;
-        });
-        
-        // Sort the interactions array to match our chronological order
-        storylines.interactions.sort((a, b) => {
-          const aName = a.key.replace(/^\d{3}_/, '');
-          const bName = b.key.replace(/^\d{3}_/, '');
-          const aOrder = orderMap[aName] !== undefined ? orderMap[aName] : 999;
-          const bOrder = orderMap[bName] !== undefined ? orderMap[bName] : 999;
-          return aOrder - bOrder;
-        });
-        
-        console.log('Storylines sorted to chronological order:', storylines.interactions.map(i => i.key.replace(/^\d{3}_/, '')));
-      }
+      console.log('Interactions sorted to chronological order:', storylines.interactions.map(i => i.key.replace(/^\d{3}_/, '')));
       
       // SIMPLIFIED: Keep fixed positions for now to avoid infinite loop
       storylines.interactions.forEach((interaction, index) => {
-        const baseY = index * 350; // Base position for this character (much more spacing)
+        const baseY = index * 200; // Base position for this character
         interaction.y0 = baseY;
         interaction.y1 = baseY + 100;
+        
+        console.log(`Setting ${interaction.key.replace(/^\d{3}_/, '')} to Y-position: ${baseY}px (index: ${index})`);
         
         // Update all data points in this interaction to base position
         interaction.values.forEach(value => {
