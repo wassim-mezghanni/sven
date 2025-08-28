@@ -97,6 +97,65 @@ const familyColorScale = scaleOrdinal()
   .domain([]) // will grow as needed
   .range(schemeCategory10);
 
+  // --- Per-character color variant helpers ---
+// Simple deterministic hash for strings
+const hashCode = (str = '') => {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = ((h << 5) - h) + str.charCodeAt(i);
+    h |= 0;
+  }
+  return Math.abs(h);
+};
+
+// Convert hex color to HSL
+const hexToHsl = (hex) => {
+  // Expand shorthand like #abc
+  const full = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => '#' + r + r + g + g + b + b);
+  const res = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(full);
+  if (!res) return {h: 0, s: 0, l: 0};
+  let r = parseInt(res[1], 16) / 255;
+  let g = parseInt(res[2], 16) / 255;
+  let b = parseInt(res[3], 16) / 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h, s, l = (max + min) / 2;
+  if (max === min) {
+    h = s = 0; // achromatic
+  } else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+      default: h = 0;
+    }
+    h /= 6;
+  }
+  return {h: h * 360, s: s * 100, l: l * 100};
+};
+
+const clamp = (v, minV, maxV) => Math.max(minV, Math.min(maxV, v));
+
+// Given a base family color and a character name, return a slightly varied HSL color string
+const characterVariantColor = (baseHex, name) => {
+  const {h, s, l} = hexToHsl(baseHex);
+  const hsh = hashCode(name);
+  // small deterministic offsets
+  const dh = ((hsh % 21) - 10) * 1.5;    // -15..+15 degrees
+  const dl = ((Math.floor(hsh / 13) % 11) - 5) * 1.0; // -5..+5 lightness
+  const ds = ((Math.floor(hsh / 29) % 9) - 4) * 1.0;  // -4..+4 saturation
+  const nh = (h + dh + 360) % 360;
+  const nl = clamp(l + dl, 25, 80);
+  const ns = clamp(s + ds, 35, 95);
+  return `hsl(${Math.round(nh)}, ${Math.round(ns)}%, ${Math.round(nl)}%)`;
+};
+
+const characterColor = (name) => {
+  const base = familyColorScale(familyColorKey(name));
+  return characterVariantColor(base, name);
+};
+// --- end color helpers ---
 const employees = Map(employeesData);
 
 const employeesByType = Map().withMutations(map =>
@@ -107,7 +166,7 @@ const CharacterList = ({data, onClick}) =>
   <List>
     { data.keySeq().sort().map(k =>
         <ListItem button dense key={k} onClick={e => onClick(k, data.get(k), e.shiftKey)}>
-          <Avatar style={{backgroundColor: familyColorScale(familyColorKey(k))}}>
+          <Avatar style={{backgroundColor: characterColor(k)}}>
             {data.get(k).size}
           </Avatar>
           <ListItemText primary={k}/>
@@ -378,7 +437,7 @@ class App extends Component {
               xAxisData={marthaAllowedYears}
               data={storylines}
               height={Math.max(10*(ymax - ymin), 50)}
-              color={d => familyColorScale(familyColorKey(d.key))}
+              color={d => characterColor(d.key)}
               lineLabel={d => d.key}
               lineTitle={d => d.key}
               groupLabel={d => d.key}
