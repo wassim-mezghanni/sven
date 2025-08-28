@@ -4,7 +4,7 @@
 
   SVEN: Storyline Visualization Library and Demonstration
 
-  Copyright © 2017, Battelle Memorial Institute
+  Copyright ©️ 2017, Battelle Memorial Institute
   All rights reserved.
 
   1. Battelle Memorial Institute (hereinafter Battelle) hereby grants permission
@@ -45,34 +45,132 @@ import ChartComponent from './ReactD3Chart';
 
 import './Storyline.css';
 
-import {scaleLinear} from 'd3-scale';
+import {scaleLinear, scalePoint} from 'd3-scale';
 import {min, max, merge} from 'd3-array';
 import {line, curveMonotoneX} from 'd3-shape';
 import {axisBottom} from 'd3-axis';
 
-const storylinesInit = ({data={}, width, height, groupLabel}) => {
+/**
+ * Calculate minimum spacing needed to prevent overlapping labels
+ * @param {Array} years - Array of year values
+ * @param {Function} xScale - D3 scale function
+ * @returns {number} - Minimum spacing needed in pixels
+ */
+function calculateMinimumSpacing(years, xScale) {
+  if (years.length <= 1) return 0;
+  
+  // Calculate current spacing between consecutive years
+  const spacings = [];
+  for (let i = 1; i < years.length; i++) {
+    const currentX = xScale(years[i]);
+    const prevX = xScale(years[i - 1]);
+    spacings.push(currentX - prevX);
+  }
+  
+  // Find the minimum spacing
+  const minCurrentSpacing = Math.min(...spacings);
+  
+  // We need at least 60px between labels to prevent overlap
+  const requiredSpacing = 60;
+  
+  // If current spacing is already sufficient, return 0
+  if (minCurrentSpacing >= requiredSpacing) {
+    return 0;
+  }
+  
+  // Calculate how much extra spacing we need
+  return requiredSpacing - minCurrentSpacing;
+}
+
+const storylinesInit = ({data={}, width, height, groupLabel, xAxisData: providedXAxisData}) => {
   let {interactions=[], events=[]} = data;
 
   if (interactions.length === 0) {
     return {layers: []};
   } else {
-    const xAxisData = Set(events.map(d => +d.x))
-      .sort()
-      .toArray();
+    // Use provided xAxisData (from props) if available, else derive from events
+    let xAxisData = providedXAxisData && providedXAxisData.length
+      ? providedXAxisData.map(d => +d)
+      : Set(events.map(d => +d.x)).sort().toArray();
 
-    const padding = width/xAxisData.length/3;
+    // Use original width without extra spacing to fit on screen
+    const adjustedWidth = width;
 
-    const x = scaleLinear()
-      .domain([xAxisData[0] || 0, xAxisData[xAxisData.length - 1] || 1])
-      .range([padding, width - padding]);
+    // Initial (max) padding guess based on adjusted width - maximum spacing for clear events
+    let basePadding = adjustedWidth/xAxisData.length/0.5;
+
+    const minYear = Math.min.apply(null, xAxisData);
+    const maxYear = Math.max.apply(null, xAxisData);
+
+    // Create custom spacing: more space for consecutive years, less for big gaps
+    const yearGaps = [];
+    for (let i = 1; i < xAxisData.length; i++) {
+      yearGaps.push(parseInt(xAxisData[i]) - parseInt(xAxisData[i-1]));
+    }
+    
+    // Calculate custom positions based on gaps
+    const customPositions = [0]; // Start at 0
+    let currentPos = 0;
+    
+    for (let i = 0; i < yearGaps.length; i++) {
+      const gap = yearGaps[i];
+      let spacing;
+      
+      if (gap <= 2) {
+        // Consecutive years or small gaps: more spacing
+        spacing = adjustedWidth / xAxisData.length * 0.8;
+      } else if (gap <= 10) {
+        // Medium gaps: moderate spacing
+        spacing = adjustedWidth / xAxisData.length * 0.4;
+      } else {
+        // Large gaps: less spacing
+        spacing = adjustedWidth / xAxisData.length * 0.2;
+      }
+      
+      currentPos += spacing;
+      customPositions.push(currentPos);
+    }
+    
+    // Scale the positions to fit the full width
+    const maxPos = Math.max(...customPositions);
+    const scaledPositions = customPositions.map(pos => 
+      basePadding + (pos / maxPos) * (adjustedWidth - 2 * basePadding)
+    );
+    
+    // Create custom scale
+    const x = scalePoint()
+      .domain(xAxisData)
+      .range(scaledPositions);
+
+    // Recalculate padding so that for any consecutive x positions we guarantee
+    // (x_i + padding) <= (x_{i+1} - padding). This prevents the generated point
+    // sequence (x_i - padding, x_i + padding, x_{i+1} - padding ...) from ever
+    // decreasing in x which caused curves to "bend back" visually.
+    if (xAxisData.length > 1) {
+      let minGap = Infinity;
+      for (let i = 1; i < xAxisData.length; i++) {
+        const gap = x(xAxisData[i]) - x(xAxisData[i-1]);
+        if (gap < minGap) minGap = gap;
+      }
+      // Safe padding: at most half the smallest gap (minus 1 pixel) and no larger than basePadding
+      const safePadding = Math.max(0, Math.min(basePadding, (minGap/2) - 1));
+      if (safePadding !== basePadding) {
+        // Update scale range to use the new (possibly smaller) padding
+        x.range([safePadding, adjustedWidth - safePadding]);
+        basePadding = safePadding;
+      }
+    }
+
+    const padding = basePadding;
 
     const ymax = max(interactions, d => d.y1);
     const ymin = min(interactions, d => d.y0);
 
     const actualHeight = Math.min(height, (ymax - ymin)*20);
 
+    // Force y-scale to match our exact order
     const y = scaleLinear()
-      .domain([ymin, ymax])
+      .domain([0, (interactions.length - 1) * 200]) // Fixed domain based on our order
       .range([actualHeight - height, -height]);
 
     const yAxisData = interactions.map(({values, y0, y1}) => ({
@@ -121,27 +219,59 @@ const storylineLayers = [
   },
   {
     name: 'storylines',
-    callback: (selection, {data, x, y, color, padding, highlights, onClick=Object, lineLabel, lineTitle}) => {
-
+    callback: (selection, {data, x, y, color, padding, highlights, onClick, lineLabel, lineTitle}) => {
+      onClick = onClick || (() => {});
       const storyline = line()
         .curve(curveMonotoneX);
 
       function getPoints (d) {
-        const points = [];
-
-        d.values.forEach(d => {
-          points.push([
-            x(d.x) - padding,
-            y(d.y)
-          ]);
-
-          points.push([
-            x(d.x) + padding,
-            y(d.y)
-          ]);
-        });
-
-        return points;
+        const pts = [];
+        const vals = d.values;
+        const n = vals.length;
+        const eps = 0.25;
+        for (let i=0; i<n; i++) {
+          const cur = vals[i];
+          const xCur = x(cur.x);
+          const yCur = y(cur.y);
+          const xLeft = xCur - padding;
+          let xRight = xCur + padding;
+          if (i < n - 1) {
+            const nxt = vals[i+1];
+            const xNext = x(nxt.x);
+            // Maximum allowed right extension so we don't intrude into next event's left padding
+            const maxRight = xNext - padding - eps;
+            if (xRight > maxRight) {
+              // Clamp to either maxRight or midpoint (whichever is smaller) for smoother shape
+              const mid = (xCur + xNext)/2 - eps;
+              xRight = Math.min(maxRight, mid);
+            }
+          }
+          // Ensure monotonicity vs previous appended point
+            if (pts.length) {
+              const lastX = pts[pts.length - 1][0];
+              if (xLeft <= lastX) {
+                // shift slightly forward
+                const shift = lastX + eps;
+                // keep symmetry if possible
+                const delta = (xRight - xLeft);
+                const newLeft = shift;
+                let newRight = newLeft + delta;
+                if (i < n - 1) {
+                  // Re-apply clamping for newRight
+                  const nxt = vals[i+1];
+                  const xNext = x(nxt.x);
+                  const maxRight2 = xNext - padding - eps;
+                  if (newRight > maxRight2) newRight = maxRight2;
+                }
+                pts.push([newLeft, yCur]);
+                pts.push([Math.max(newRight, newLeft + eps), yCur]);
+                continue;
+              }
+            }
+          pts.push([xLeft, yCur]);
+          pts.push([Math.max(xRight, xLeft + eps), yCur]);
+        }
+        return pts;
       }
 
       const paths = selection.selectAll('g')
@@ -165,11 +295,8 @@ const storylineLayers = [
         .style('stroke', d => color && color(d))
         .attr('d', d => storyline(getPoints(d)));
 
-      paths_merge.select('text')
-        .style('fill', d => color && color(d))
-        .text(d => lineLabel ? lineLabel(d) : d.key)
-        .attr('x', d => x(d.values[d.values.length - 1].x) + padding)
-        .attr('y', d => y(d.values[d.values.length - 1].y));
+      // Remove character names from the graph
+      paths_merge.select('text').remove();
 
       paths.exit()
         .remove();
@@ -177,8 +304,39 @@ const storylineLayers = [
   },
   {
     name: 'x-axis',
-    callback: (selection, {data, x}) => {
-      selection.call(axisBottom(x));
+    callback: (selection, {x, xAxisData}) => {
+      // Calculate extra spacing needed to prevent overlapping
+      const extraSpacing = calculateMinimumSpacing(xAxisData, x);
+      
+      console.log('Rendering axis with years:', xAxisData);
+      console.log('Axis domain:', x.domain());
+      console.log('Axis range:', x.range());
+      
+      // Create custom axis with all years
+      const axis = axisBottom(x)
+        .tickValues(xAxisData)
+        .tickFormat(d => d)
+        .tickSize(2)
+        .tickPadding(2);
+      
+      selection.call(axis);
+      
+      // Customize the tick labels to prevent overlapping
+      selection.selectAll('.tick text')
+        .style('text-anchor', 'end')
+        .attr('dx', '-0.3em')
+        .attr('dy', '0.3em')
+        .attr('transform', 'rotate(-45)')
+        .style('font-size', '8px')
+        .style('font-family', 'Arial, sans-serif')
+        .style('font-weight', 'bold');
+      
+      // Adjust the axis position to accommodate rotated labels
+      selection.attr('transform', 'translate(0, 20)');
+      
+      // Log the actual tick elements created
+      const tickElements = selection.selectAll('.tick');
+      console.log('Number of tick elements created:', tickElements.size());
     }
   }      
 ];
@@ -188,7 +346,7 @@ const StorylineChart = props =>
     init={storylinesInit}
     layers={storylineLayers}
     {...props}
-    margin={{top: 30, right: 135, bottom: 25, left: 20}}
+    margin={{top: 15, right: 80, bottom: 40, left: 10}}
     className='storylines-chart'
   />;
 

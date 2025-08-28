@@ -1,0 +1,154 @@
+[
+    {
+      "date": "1971",
+      "name": "Marek Tannhaus",
+      "activity": "Argument",
+      "description": "Marek argues with his father H.G. Tannhaus because he doesn't pay him enough attention.",
+      "important": false,
+      "death": false
+    },
+    {
+      "date": "1971",
+      "name": "H.G. Tannhaus",
+      "activity": "Argument",
+      "description": "H.G. Tannhaus argues with his son Marek about attention and family matters.",
+      "important": false,
+      "death": false
+    },
+    {
+      "date": "1971",
+      "name": "Sonja Tannhaus",
+      "activity": "",
+      "description": "Sonja is not part of the argument.",
+      "important": false,
+      "death": false
+    },
+    {
+      "date": "1971",
+      "name": "Charlotte Tannhaus",
+      "activity": "",
+      "description": "Charlotte is not part of the argument.",
+      "important": false,
+      "death": false
+    },
+    {
+      "date": "1976",
+      "name": "Marek Tannhaus",
+      "activity": "Accident",
+      "description": "Marek, Sonja and little Charlotte die in a car accident.",
+      "important": false,
+      "death": true
+    },
+    {
+      "date": "1976",
+      "name": "Sonja Tannhaus",
+      "activity": "Accident",
+      "description": "Marek, Sonja and little Charlotte die in a car accident.",
+      "important": false,
+      "death": true
+    },
+    {
+      "date": "1976",
+      "name": "Charlotte Tannhaus",
+      "activity": "Accident",
+      "description": "Marek, Sonja and little Charlotte die in a car accident.",
+      "important": false,
+      "death": true
+    },
+    {
+      "date": "1976",
+      "name": "H.G. Tannhaus",
+      "activity": "",
+      "description": "H.G. is not part of the accident.",
+      "important": false,
+      "death": false
+    },
+    {
+      "date": "1976",
+      "name": "Marek Tannhaus",
+      "activity": "Reunion",
+      "description": "Marek and Charlotte reunite after the accident.",
+      "important": false,
+      "death": false
+    },
+    {
+      "date": "1976",
+      "name": "Charlotte Tannhaus",
+      "activity": "Reunion",
+      "description": "Marek and Charlotte reunite after the accident.",
+      "important": false,
+      "death": false
+    },
+    {
+      "date": "1976",
+      "name": "Sonja Tannhaus",
+      "activity": "",
+      "description": "Sonja is not part of the reunion.",
+      "important": false,
+      "death": false
+    },
+    {
+      "date": "1976",
+      "name": "H.G. Tannhaus",
+      "activity": "Memory",
+      "description": "Adult H.G. Tannhaus remembers his family.",
+      "important": false,
+      "death": false
+    },
+    {
+      "date": "1976",
+      "name": "H.G. Tannhaus",
+      "activity": "Decision",
+      "description": "He wants to create a time machine to undo it all.",
+      "important": true,
+      "death": false
+    },
+    {
+      "date": "1976",
+      "name": "H.G. Tannhaus",
+      "activity": "Construction",
+      "description": "He spends the next years building a time machine in the bunker.",
+      "important": false,
+      "death": false
+    },
+    {
+      "date": "1986",
+      "name": "H.G. Tannhaus",
+      "activity": "Completion",
+      "description": "Old H.G. Tannhaus finishes his machine...",
+      "important": false,
+      "death": false
+    },
+    {
+      "date": "1986",
+      "name": "H.G. Tannhaus",
+      "activity": "Activation",
+      "description": "... and activates it.",
+      "important": true,
+      "death": false
+    },
+    {
+      "date": "1986",
+      "name": "H.G. Tannhaus",
+      "activity": "World Split",
+      "description": "Instead of saving his family, he splits and destroys his world, thus creating both Adam and Eve worlds.",
+      "important": false,
+      "death": false
+    },
+    {
+      "date": "1986",
+      "name": "Marek Tannhaus",
+      "activity": "Reunion",
+      "description": "Marek and H.G. reunite in 1986.",
+      "important": false,
+      "death": false
+    },
+    {
+      "date": "1986",
+      "name": "H.G. Tannhaus",
+      "activity": "Reunion",
+      "description": "H.G. and Marek reunite in 1986.",
+      "important": false,
+      "death": false
+    }
+  ]
